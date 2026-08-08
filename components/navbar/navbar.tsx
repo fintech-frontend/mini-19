@@ -42,7 +42,7 @@ function CatalogButton() {
 
 function SearchBar({ placeholder }: { placeholder: string }) {
   return (
-    <div className="flex flex-1 items-center overflow-hidden rounded-lg border-2 border-blue-600 bg-white">
+    <div className="flex flex-1 items-stretch overflow-hidden rounded-lg border-2 border-blue-600 bg-white">
       <input
         type="text"
         placeholder={placeholder}
@@ -50,7 +50,7 @@ function SearchBar({ placeholder }: { placeholder: string }) {
       />
       <button
         aria-label="Искать"
-        className="flex h-full items-center justify-center bg-blue-600 px-5 text-white transition-colors hover:bg-blue-700"
+        className="flex items-center justify-center bg-blue-600 px-5 text-white transition-colors hover:bg-blue-700 shrink-0"
       >
         <Search size={18} />
       </button>
