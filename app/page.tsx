@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
-function Home() {
+export default function Home() {
   return (
-    <div>Home</div>
-  )
+    <div className="mx-auto max-w-7xl px-4 py-12">
+      <h1 className="text-2xl font-bold">Главная страница</h1>
+    </div>
+  );
 }
-
-export default Home
