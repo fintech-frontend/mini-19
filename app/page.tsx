@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Productmap from "./products/page";
@@ -38,14 +37,3 @@ export default function HomePage() {
     </>
   );
 }
-=======
-import React from "react";
-
-export default function Home() {
-  return (
-    <div className="mx-auto max-w-7xl px-4 py-12">
-      <h1 className="text-2xl font-bold">Главная страница</h1>
-    </div>
-  );
-}
->>>>>>> 79350449f2761e59bd83717106924f9f1620133b
