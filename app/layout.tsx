@@ -3,7 +3,6 @@ import Header from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
 import "./globals.css";
 
-
 export const metadata: Metadata = {
   title: "Стройоптторг",
   description: "Интернет-магазин товаров для строительства и ремонта",
