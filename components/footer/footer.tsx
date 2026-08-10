@@ -125,7 +125,15 @@ function ReadyCodeBadge() {
   );
 }
 
-function AccordionSection({ title, children, defaultOpen = false }) {
+function AccordionSection({
+  title,
+  children,
+  defaultOpen = false,
+}: {
+  title: React.ReactNode;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div className="border-b border-neutral-200">
