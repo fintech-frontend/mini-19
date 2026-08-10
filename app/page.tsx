@@ -1,7 +1,8 @@
 import { staticProducts } from "@/data/staticProducts";
 import ProductCard from "@/components/ui/ProductCard";
 import Productmap from "./products/page";
-
+import Ocompny from "@/oCompny/page";
+import Kontakt from "@/kontakt/page";
 export default function ProductsPage() {
   return (
     <main className="min-w-0 max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
@@ -17,6 +18,8 @@ export default function ProductsPage() {
 
       {/* Grid Ro'yxat (.map qilingan joyi) */}
      <Productmap/>
+     <Kontakt/>
+     <Ocompny/>
     </main>
   );
 }
