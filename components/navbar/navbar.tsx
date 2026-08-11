@@ -10,6 +10,7 @@ const topLinks = [
   { label: "Доставка", href: "/delivery" },
   { label: "Возврат", href: "/return" },
   { label: "Отзывы", href: "/reviews" },
+  { label: "Блог", href: "/blog" },
   { label: "Вопрос-ответ", href: "/faq" },
   { label: "Новости", href: "/news" },
   { label: "Контакты", href: "/contacts" },
@@ -148,10 +149,10 @@ export default function Header() {
             <SearchBar placeholder="Найти среди 50000 товаров. Например: Дрель Bosch" />
 
             <div className="flex shrink-0 items-center gap-6 text-xs font-medium text-neutral-700">
-              <button className="flex flex-col items-center gap-1 hover:text-blue-600">
+              <Link href="/stocks" className="flex flex-col items-center gap-1 hover:text-blue-600">
                 <Gift size={22} />
                 <span>Все акции</span>
-              </button>
+              </Link>
               <button className="flex flex-col items-center gap-1 hover:text-blue-600">
                 <User size={22} />
                 <span>Войти</span>
