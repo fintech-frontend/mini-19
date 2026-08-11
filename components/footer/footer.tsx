@@ -12,6 +12,7 @@ import MirLogo from "@/src/svg/Group 48.svg";
 import VisaLogo from "@/src/svg/Group 49.svg";
 import HalvaText from "@/src/svg/Vector.svg";
 import TinkoffLogo from "@/src/svg/Vector1.svg";
+import { styles } from "@/styles/index.styles";
 
 const infoLinks = [
   ["О компании", "/about"],
@@ -301,7 +302,7 @@ export default function Footer() {
 
       {/* ================= DESKTOP (lg+) ================= */}
       <div className="hidden lg:block">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 border-b border-neutral-200 px-4 py-6">
+        <div className={`${styles.container} flex flex-wrap items-center justify-between gap-6 border-b border-neutral-200 py-6`}>
           <Logo />
 
           <div className="text-xs text-neutral-600">ООО «Стройопттрог»</div>
@@ -331,7 +332,7 @@ export default function Footer() {
           </button>
         </div>
 
-        <div className="mx-auto grid max-w-7xl grid-cols-6 gap-8 px-4 py-8">
+        <div className={`${styles.container} grid grid-cols-6 gap-8 py-8`}>
           <div>
             <h3 className="mb-3 text-sm font-semibold text-neutral-900">Информация</h3>
             <ul className="space-y-2">
@@ -398,7 +399,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 border-t border-neutral-200 px-4 py-6">
+        <div className={`${styles.container} flex flex-wrap items-center justify-between gap-6 border-t border-neutral-200 py-6`}>
           <div className="flex items-center gap-4">
             <span className="text-xs leading-tight text-neutral-500">
               Мы принимаем
@@ -416,7 +417,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 border-t border-neutral-200 px-4 py-4 text-xs text-neutral-500">
+        <div className={`${styles.container} flex flex-wrap items-center justify-between gap-4 border-t border-neutral-200 py-4 text-xs text-neutral-500`}>
           <div>
             <p>© 2003-2023 Интернет-магазин ООО «Стройопттрог» р/с 40702810360000102415</p>
             <p>в Ставропольском отделении №5230 ПАО Сбербанк, БИК 040702615</p>
