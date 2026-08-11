@@ -1,7 +1,7 @@
 import { BlogArchive } from "@/components/blog/BlogArchive";
 
 export const metadata = {
-  title: "Блог - Стройоптторг",
+  title: "Н - Стройоптторг",
 };
 
 interface PageProps {

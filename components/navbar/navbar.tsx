@@ -2,17 +2,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { Search, Gift, User, BarChart3, Heart, ShoppingCart, Menu } from "lucide-react";
 import Logo1 from "@/src/svg/logo1.svg";
+import { styles } from "@/styles/index.styles";
 
 // Ссылки в верхней тонкой строке
 const topLinks = [
   { label: "О компании", href: "/about" },
   { label: "Оплата", href: "/payment" },
-  { label: "Доставка", href: "/delivery" },
+  { label: "Доставка", href: "/dostavka" },
   { label: "Возврат", href: "/return" },
   { label: "Отзывы", href: "/reviews" },
   { label: "Блог", href: "/blog" },
   { label: "Вопрос-ответ", href: "/faq" },
-  { label: "Новости", href: "/news" },
+  { label: "Новости", href: "/blog" },
   { label: "Контакты", href: "/contacts" },
 ];
 
@@ -85,9 +86,9 @@ export default function Header() {
         <div className="flex items-center justify-between gap-2 px-3 py-3">
           <Logo />
           <div className="flex items-center gap-3 text-neutral-700">
-            <button aria-label="Войти">
+            <Link href="/my-account" aria-label="Войти">
               <User size={20} />
-            </button>
+            </Link>
             <button aria-label="Сравнение">
               <BarChart3 size={20} />
             </button>
@@ -112,11 +113,12 @@ export default function Header() {
         </div>
       </div>
 
+
       {/* ================= DESKTOP (md+) ================= */}
       <div className="hidden md:block">
         {/* Верхняя светлая строка с контактами и ссылками */}
         <div className="border-b border-neutral-200 bg-white text-xs text-neutral-600">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2">
+          <div className={`${styles.container} flex items-center justify-between py-2`}>
             <nav className="flex flex-wrap items-center gap-6">
               {topLinks.map((link) => (
                 <Link
@@ -143,7 +145,7 @@ export default function Header() {
 
         {/* Основная плашка с логотипом, каталогом, поиском и иконками */}
         <div className="border-b border-neutral-200 bg-white py-3.5">
-          <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4">
+          <div className={`${styles.container} flex items-center justify-between gap-6`}>
             <Logo />
             <CatalogButton />
             <SearchBar placeholder="Найти среди 50000 товаров. Например: Дрель Bosch" />
@@ -152,11 +154,16 @@ export default function Header() {
               <Link href="/stocks" className="flex flex-col items-center gap-1 hover:text-blue-600">
                 <Gift size={22} />
                 <span>Все акции</span>
+<<<<<<< HEAD
               </Link>
               <button className="flex flex-col items-center gap-1 hover:text-blue-600">
+=======
+              </button>
+              <Link href="/my-account" className="flex flex-col items-center gap-1 hover:text-blue-600">
+>>>>>>> b8b8cff9b3d3e5357af2df6d4913f6945f1358d5
                 <User size={22} />
                 <span>Войти</span>
-              </button>
+              </Link>
               <button className="flex flex-col items-center gap-1 hover:text-blue-600">
                 <BarChart3 size={22} />
                 <span>Сравнение</span>

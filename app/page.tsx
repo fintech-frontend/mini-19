@@ -3,6 +3,7 @@ import Productmap from "./products/page";
 export default function HomePage() {
   return (
     <>
+<<<<<<< HEAD
       <div className="mx-auto flex max-w-7xl flex-col items-start gap-4 px-4 py-24 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-neutral-900 sm:text-4xl">
           Стройоптторг — товары для строительства и ремонта
@@ -11,6 +12,9 @@ export default function HomePage() {
           Доступная цена, скидки постоянным покупателям и быстрая доставка.
         </p>
       </div>
+=======
+   
+>>>>>>> b8b8cff9b3d3e5357af2df6d4913f6945f1358d5
 
       <main className="min-w-0 max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-8 border-b border-gray-200 pb-5">
