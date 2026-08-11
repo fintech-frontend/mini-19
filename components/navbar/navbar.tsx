@@ -111,6 +111,7 @@ export default function Header() {
         </div>
       </div>
 
+
       {/* ================= DESKTOP (md+) ================= */}
       <div className="hidden md:block">
         {/* Верхняя светлая строка с контактами и ссылками */}

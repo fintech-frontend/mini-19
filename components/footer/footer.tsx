@@ -226,6 +226,7 @@ export default function Footer() {
         </div>
       </div>
 
+
       {/* ================= TABLET (md - lg) ================= */}
       <div className="hidden md:block lg:hidden">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-200 px-4 py-6">
@@ -323,6 +324,7 @@ export default function Footer() {
             </a>
             <div>Ежедневно, с 8:00 до 18:00</div>
           </div>
+
 
           <button className="whitespace-nowrap rounded border border-red-500 px-3 py-2 text-xs font-medium text-red-500 transition-colors hover:bg-red-500 hover:text-white">
             ЗАКАЗАТЬ ЗВОНОК
