@@ -25,7 +25,7 @@ const infoLinksSecond = [
   ["Вопрос-ответ", "/faq"],
   ["Новости", "/news"],
   ["Контакты", "/contacts"],
-  ["Вход \\ Регистрация", "/auth"],
+  ["Вход \\ Регистрация", "/my-account"],
   ["Все акции", "/promotions"],
 ];
 
@@ -125,7 +125,16 @@ function ReadyCodeBadge() {
   );
 }
 
-function AccordionSection({ title, children, defaultOpen = false }) {
+
+function AccordionSection({
+  title,
+  children,
+  defaultOpen = false,
+}: {
+  title: React.ReactNode;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div className="border-b border-neutral-200">
@@ -217,6 +226,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
 
       {/* ================= TABLET (md - lg) ================= */}
       <div className="hidden md:block lg:hidden">
@@ -315,6 +325,7 @@ export default function Footer() {
             </a>
             <div>Ежедневно, с 8:00 до 18:00</div>
           </div>
+
 
           <button className="whitespace-nowrap rounded border border-red-500 px-3 py-2 text-xs font-medium text-red-500 transition-colors hover:bg-red-500 hover:text-white">
             ЗАКАЗАТЬ ЗВОНОК

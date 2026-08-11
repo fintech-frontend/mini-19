@@ -84,9 +84,9 @@ export default function Header() {
         <div className="flex items-center justify-between gap-2 px-3 py-3">
           <Logo />
           <div className="flex items-center gap-3 text-neutral-700">
-            <button aria-label="Войти">
+            <Link href="/my-account" aria-label="Войти">
               <User size={20} />
-            </button>
+            </Link>
             <button aria-label="Сравнение">
               <BarChart3 size={20} />
             </button>
@@ -110,6 +110,7 @@ export default function Header() {
           <SearchBar placeholder="Поиск..." />
         </div>
       </div>
+
 
       {/* ================= DESKTOP (md+) ================= */}
       <div className="hidden md:block">
@@ -152,10 +153,10 @@ export default function Header() {
                 <Gift size={22} />
                 <span>Все акции</span>
               </button>
-              <button className="flex flex-col items-center gap-1 hover:text-blue-600">
+              <Link href="/my-account" className="flex flex-col items-center gap-1 hover:text-blue-600">
                 <User size={22} />
                 <span>Войти</span>
-              </button>
+              </Link>
               <button className="flex flex-col items-center gap-1 hover:text-blue-600">
                 <BarChart3 size={22} />
                 <span>Сравнение</span>
