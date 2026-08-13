@@ -11,7 +11,6 @@ const topLinks = [
   { label: "Доставка", href: "/dostavka" },
   { label: "Возврат", href: "/return" },
   { label: "Отзывы", href: "/reviews" },
-  { label: "Блог", href: "/blog" },
   { label: "Вопрос-ответ", href: "/faq" },
   { label: "Новости", href: "/blog" },
   { label: "Контакты", href: "/contacts" },
@@ -154,13 +153,8 @@ export default function Header() {
               <Link href="/stocks" className="flex flex-col items-center gap-1 hover:text-blue-600">
                 <Gift size={22} />
                 <span>Все акции</span>
-<<<<<<< HEAD
               </Link>
-              <button className="flex flex-col items-center gap-1 hover:text-blue-600">
-=======
-              </button>
               <Link href="/my-account" className="flex flex-col items-center gap-1 hover:text-blue-600">
->>>>>>> b8b8cff9b3d3e5357af2df6d4913f6945f1358d5
                 <User size={22} />
                 <span>Войти</span>
               </Link>
