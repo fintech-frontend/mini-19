@@ -96,12 +96,12 @@ export default function Header() {
                 3
               </span>
             </button>
-            <button aria-label="Корзина" className="relative">
+            <Link href="/cart" aria-label="Корзина" className="relative">
               <ShoppingCart size={20} />
               <span className="absolute -right-2 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
                 3
               </span>
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -168,13 +168,13 @@ export default function Header() {
                   3
                 </span>
               </button>
-              <button className="relative flex flex-col items-center gap-1 hover:text-blue-600">
+              <Link href="/cart" className="relative flex flex-col items-center gap-1 hover:text-blue-600">
                 <ShoppingCart size={22} />
                 <span>Корзина</span>
                 <span className="absolute -right-1.5 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
                   3
                 </span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
