@@ -34,10 +34,13 @@ function Logo() {
 
 function CatalogButton() {
   return (
-    <button className="flex shrink-0 items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-blue-700">
+    <Link
+      href="/catalog"
+      className="flex shrink-0 items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-blue-700"
+    >
       <Menu size={18} />
       КАТАЛОГ
-    </button>
+    </Link>
   );
 }
 

@@ -1,0 +1,4819 @@
+{
+  "meta": {
+    "totalTerminalNodes": 600,
+    "generatedAt": "2026-08-20T12:16:08.726Z",
+    "lastUpdated": "2026-08-22T12:19:22.623Z",
+    "categoriesCompleted": [
+      "ventilyaciya"
+    ],
+    "statusCounts": {
+      "partial": 42,
+      "complete": 5,
+      "not_started": 553
+    },
+    "productsCollected": 788
+  },
+  "items": [
+    {
+      "path": "ventilyaciya/ventilyatory",
+      "title": "Вентиляторы",
+      "category": "Вентиляция",
+      "realCount": 164,
+      "status": "partial",
+      "collected": null
+    },
+    {
+      "path": "ventilyaciya/vozdukhovody",
+      "title": "Воздуховоды",
+      "category": "Вентиляция",
+      "realCount": 69,
+      "status": "complete",
+      "collected": 69
+    },
+    {
+      "path": "ventilyaciya/lyuki-i-dvercy",
+      "title": "Люки и дверцы",
+      "category": "Вентиляция",
+      "realCount": 115,
+      "status": "complete",
+      "collected": 115
+    },
+    {
+      "path": "ventilyaciya/perekhody-redukcii-truby",
+      "title": "Переходы, редукции, трубы",
+      "category": "Вентиляция",
+      "realCount": 37,
+      "status": "complete",
+      "collected": 37
+    },
+    {
+      "path": "ventilyaciya/reshetki-flancy-filtry",
+      "title": "Решетки, фланцы, фильтры",
+      "category": "Вентиляция",
+      "realCount": 56,
+      "status": "partial",
+      "collected": 44,
+      "note": "real total 56; site pagination for pages 3-5 was unstable across repeated fetches, collected 44 unique-by-SKU real products; documented, not fabricated"
+    },
+    {
+      "path": "vodo-gazosnabzhenie/baki-dlya-vody",
+      "title": "Баки для воды",
+      "category": "Водо-газоснабжение",
+      "realCount": 34,
+      "status": "partial",
+      "collected": 13
+    },
+    {
+      "path": "vodo-gazosnabzhenie/vodoschetchik",
+      "title": "Водосчетчики",
+      "category": "Водо-газоснабжение",
+      "realCount": 25,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/asbokarton",
+      "title": "Асбокартон",
+      "category": "Водо-газоснабжение",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/ventilya",
+      "title": "Вентиля",
+      "category": "Водо-газоснабжение",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/vstavki-diyelektricheskie",
+      "title": "Вставки диэлектрические",
+      "category": "Водо-газоснабжение",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/gruppa-bezopasnosti-reduktora-dav",
+      "title": "Группа безопасности, редуктора давления",
+      "category": "Водо-газоснабжение",
+      "realCount": 17,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/zaglushki",
+      "title": "Заглушки запорные",
+      "category": "Водо-газоснабжение",
+      "realCount": 25,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/zadvizhkizatvory",
+      "title": "Задвижки, затворы",
+      "category": "Водо-газоснабжение",
+      "realCount": 23,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/zapornaya-armatura-prochie",
+      "title": "Запорная арматура прочие",
+      "category": "Водо-газоснабжение",
+      "realCount": 15,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/klapany-ktz",
+      "title": "Клапаны КТЗ",
+      "category": "Водо-газоснабжение",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/klapany-obratnye",
+      "title": "Клапаны обратные",
+      "category": "Водо-газоснабжение",
+      "realCount": 19,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/klapany-radiatornye",
+      "title": "Клапаны радиаторные",
+      "category": "Водо-газоснабжение",
+      "realCount": 24,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/kompensatory",
+      "title": "Компенсаторы",
+      "category": "Водо-газоснабжение",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/kontrgayki",
+      "title": "Контргайки",
+      "category": "Водо-газоснабжение",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/krany",
+      "title": "Краны",
+      "category": "Водо-газоснабжение",
+      "realCount": 192,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/lyon",
+      "title": "Лён",
+      "category": "Водо-газоснабжение",
+      "realCount": 3,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/lenta-fum",
+      "title": "Лента-фум",
+      "category": "Водо-газоснабжение",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/mufty",
+      "title": "Муфты",
+      "category": "Водо-газоснабжение",
+      "realCount": 22,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/nit",
+      "title": "Нить",
+      "category": "Водо-газоснабжение",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/otvody",
+      "title": "Отводы",
+      "category": "Водо-газоснабжение",
+      "realCount": 35,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/paronit",
+      "title": "Паронит",
+      "category": "Водо-газоснабжение",
+      "realCount": 18,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/perekhody",
+      "title": "Переходы",
+      "category": "Водо-газоснабжение",
+      "realCount": 44,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/podvodka",
+      "title": "Подводка",
+      "category": "Водо-газоснабжение",
+      "realCount": 50,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/prokladki-rez-i-poronit",
+      "title": "Прокладки рез. и поронит",
+      "category": "Водо-газоснабжение",
+      "realCount": 45,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/rezby",
+      "title": "Резьбы",
+      "category": "Водо-газоснабжение",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/santekhgel",
+      "title": "Сантехгель",
+      "category": "Водо-газоснабжение",
+      "realCount": 19,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/sgony",
+      "title": "Сгоны",
+      "category": "Водо-газоснабжение",
+      "realCount": 12,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/troyniki",
+      "title": "Тройники",
+      "category": "Водо-газоснабжение",
+      "realCount": 19,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/udliniteli",
+      "title": "Удлинители",
+      "category": "Водо-газоснабжение",
+      "realCount": 15,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/filtry",
+      "title": "Фильтры чугунные",
+      "category": "Водо-газоснабжение",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/flancy",
+      "title": "Фланцы",
+      "category": "Водо-газоснабжение",
+      "realCount": 29,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/khomuty",
+      "title": "Хомуты",
+      "category": "Водо-газоснабжение",
+      "realCount": 26,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/shtucery",
+      "title": "Штуцеры",
+      "category": "Водо-газоснабжение",
+      "realCount": 31,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/yel-soedinenie",
+      "title": "Эл.соединение",
+      "category": "Водо-газоснабжение",
+      "realCount": 12,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/zapornaya-armatura-i-dobornye-yelement/yenergofleks",
+      "title": "Энергофлекс",
+      "category": "Водо-газоснабжение",
+      "realCount": 45,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/kanalizacionnye-truby-i-fitingi/kanalizacionye-truby",
+      "title": "Канализационные трубы",
+      "category": "Водо-газоснабжение",
+      "realCount": 38,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/kanalizacionnye-truby-i-fitingi/fitingi-dlya-kanalizacionnyh-truby",
+      "title": "Фитинги для канализационных труб",
+      "category": "Водо-газоснабжение",
+      "realCount": 139,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/manometry",
+      "title": "Манометры",
+      "category": "Водо-газоснабжение",
+      "realCount": 26,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/nasosy/bloki-avtomatiki",
+      "title": "Блоки автоматики",
+      "category": "Водо-газоснабжение",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/nasosy/nasosy-vibracionnye",
+      "title": "Насосы вибрационные",
+      "category": "Водо-газоснабжение",
+      "realCount": 15,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/nasosy/nasosy-drenazhnye",
+      "title": "Насосы дренажные",
+      "category": "Водо-газоснабжение",
+      "realCount": 22,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/nasosy/nasosy-kanalizacionnye",
+      "title": "Насосы канализационные",
+      "category": "Водо-газоснабжение",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/nasosy/nasosy-poverkhnostnye",
+      "title": "Насосы поверхностные",
+      "category": "Водо-газоснабжение",
+      "realCount": 20,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/nasosy/nasosy-skvazhinnye",
+      "title": "Насосы скважинные",
+      "category": "Водо-газоснабжение",
+      "realCount": 2,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/nasosy/nasosy-fekalnye",
+      "title": "Насосы фекальные",
+      "category": "Водо-газоснабжение",
+      "realCount": 14,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/nasosy/nasosy-cirkulyacionnye",
+      "title": "Насосы циркуляционные",
+      "category": "Водо-газоснабжение",
+      "realCount": 45,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/nasosy/poplavki-dlya-yomkosti",
+      "title": "Поплавки для ёмкости",
+      "category": "Водо-газоснабжение",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/nasosy/stanciya-vodosnabzheniya",
+      "title": "Станции водоснабжения",
+      "category": "Водо-газоснабжение",
+      "realCount": 39,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/gazovye-schetchiki",
+      "title": "Счетчики газа",
+      "category": "Водо-газоснабжение",
+      "realCount": 30,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/termometr",
+      "title": "Термометры",
+      "category": "Водо-газоснабжение",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/truby-poliyetilenovye-vodagaz",
+      "title": "Трубы полиэтиленовые вода,газ",
+      "category": "Водо-газоснабжение",
+      "realCount": 71,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vodo-gazosnabzhenie/fiting-poliyetilenovyy-vodagaz",
+      "title": "Фитинги полиэтиленовые вода,газ",
+      "category": "Водо-газоснабжение",
+      "realCount": 332,
+      "status": "partial",
+      "collected": 15
+    },
+    {
+      "path": "vsyo-dlya-sauny-i-bani/aksessuary-dlya-bani",
+      "title": "Аксессуары для бани",
+      "category": "Всё для сауны и бани",
+      "realCount": 82,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "vsyo-dlya-sauny-i-bani/dveri-okna-i-bondarnye-izdeliya",
+      "title": "Двери, окна и бондарные изделия",
+      "category": "Всё для сауны и бани",
+      "realCount": 144,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vsyo-dlya-sauny-i-bani/dymokhody-3",
+      "title": "Комплектующие к дымоходам",
+      "category": "Всё для сауны и бани",
+      "realCount": 103,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "vsyo-dlya-sauny-i-bani/pechi-bannye",
+      "title": "Печи банные",
+      "category": "Всё для сауны и бани",
+      "realCount": 25,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/kondicionery-2",
+      "title": "Кондиционеры",
+      "category": "Инструмент",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/bity-nasadki",
+      "title": "Биты, насадки",
+      "category": "Инструмент",
+      "realCount": 87,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/vorotki",
+      "title": "Воротки",
+      "category": "Инструмент",
+      "realCount": 17,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/gvozdoder",
+      "title": "Гвоздодеры",
+      "category": "Инструмент",
+      "realCount": 15,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/domkraty",
+      "title": "Домкраты",
+      "category": "Инструмент",
+      "realCount": 49,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/zaklepochniki",
+      "title": "Заклепочники",
+      "category": "Инструмент",
+      "realCount": 26,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/kirki",
+      "title": "Кирки",
+      "category": "Инструмент",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/kluppy",
+      "title": "Клуппы",
+      "category": "Инструмент",
+      "realCount": 17,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/klyuchi-2",
+      "title": "Ключи",
+      "category": "Инструмент",
+      "realCount": 299,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/krestiki-klinya",
+      "title": "Крестики, клинья",
+      "category": "Инструмент",
+      "realCount": 88,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/kuvaldy",
+      "title": "Кувалды",
+      "category": "Инструмент",
+      "realCount": 33,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/kusachki-po-metallu",
+      "title": "Кусачки по металлу",
+      "category": "Инструмент",
+      "realCount": 75,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/lebedki",
+      "title": "Лебедки",
+      "category": "Инструмент",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/lomy",
+      "title": "Ломы",
+      "category": "Инструмент",
+      "realCount": 15,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/metchiki",
+      "title": "Метчики",
+      "category": "Инструмент",
+      "realCount": 24,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/molotki",
+      "title": "Молотки",
+      "category": "Инструмент",
+      "realCount": 112,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/nabory-instrumentov",
+      "title": "Наборы инструментов",
+      "category": "Инструмент",
+      "realCount": 98,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/nabory-metchikov-i-plashek",
+      "title": "Наборы метчиков и плашек",
+      "category": "Инструмент",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/napilniki",
+      "title": "Напильники",
+      "category": "Инструмент",
+      "realCount": 33,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/nozhi-stroitelnye/lezviya",
+      "title": "Лезвия",
+      "category": "Инструмент",
+      "realCount": 31,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/nozhi-stroitelnye/stameski",
+      "title": "Стамески",
+      "category": "Инструмент",
+      "realCount": 43,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/nozhnicy-po-metallu/nozhnicy-dlya-pvkh-pp-trub",
+      "title": "Ножницы для ПВХ ,ПП труб",
+      "category": "Инструмент",
+      "realCount": 12,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/nozhovki",
+      "title": "Ножовки",
+      "category": "Инструмент",
+      "realCount": 77,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/otvertki",
+      "title": "Отвертки",
+      "category": "Инструмент",
+      "realCount": 125,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/passatizhi",
+      "title": "Пассатижи",
+      "category": "Инструмент",
+      "realCount": 14,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/payalniki",
+      "title": "Паяльники",
+      "category": "Инструмент",
+      "realCount": 34,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/plashki",
+      "title": "Плашки",
+      "category": "Инструмент",
+      "realCount": 29,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/plitkorezy/steklorez",
+      "title": "Стеклорез",
+      "category": "Инструмент",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/plitkorezy/stuslo",
+      "title": "Стусло",
+      "category": "Инструмент",
+      "realCount": 18,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/ploskogubcy",
+      "title": "Плоскогубцы",
+      "category": "Инструмент",
+      "realCount": 45,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/rashpili",
+      "title": "Рашпили",
+      "category": "Инструмент",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/pily",
+      "title": "Ручные пилы",
+      "category": "Инструмент",
+      "realCount": 96,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/rubanki",
+      "title": "Ручные рубанки",
+      "category": "Инструмент",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/steplery",
+      "title": "Степлеры",
+      "category": "Инструмент",
+      "realCount": 24,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/strubciny",
+      "title": "Струбцины",
+      "category": "Инструмент",
+      "realCount": 23,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/tali",
+      "title": "Тали",
+      "category": "Инструмент",
+      "realCount": 32,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/testery-i-detektory",
+      "title": "Тестеры и детекторы",
+      "category": "Инструмент",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/tiski",
+      "title": "Тиски",
+      "category": "Инструмент",
+      "realCount": 7,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/topory",
+      "title": "Топоры",
+      "category": "Инструмент",
+      "realCount": 54,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/torcevye-golovki",
+      "title": "Торцевые головки",
+      "category": "Инструмент",
+      "realCount": 49,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/shnury-shpagaty-leski",
+      "title": "Шнуры, шпагаты, лески",
+      "category": "Инструмент",
+      "realCount": 39,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/ruchnoy-instrument/yashhiki-dlya-instrumentov",
+      "title": "Ящики для инструментов",
+      "category": "Инструмент",
+      "realCount": 62,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/stroitelnoe-oborudovanie/betonosmesiteli",
+      "title": "Бетоносмесители",
+      "category": "Инструмент",
+      "realCount": 45,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/stroitelnoe-oborudovanie/lestnicy-stroitelnye/kolesa",
+      "title": "Колеса",
+      "category": "Инструмент",
+      "realCount": 88,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/stroitelnoe-oborudovanie/lestnicy-stroitelnye/lesa-stroitelnye",
+      "title": "Леса строительные",
+      "category": "Инструмент",
+      "realCount": 50,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/stroitelnoe-oborudovanie/tachki-stroitelnye",
+      "title": "Тачки строительные",
+      "category": "Инструмент",
+      "realCount": 15,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/shtukaturno-otdelochnye-materialy/valiki",
+      "title": "Валики",
+      "category": "Инструмент",
+      "realCount": 175,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/shtukaturno-otdelochnye-materialy/kisti",
+      "title": "Кисти",
+      "category": "Инструмент",
+      "realCount": 100,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/shtukaturno-otdelochnye-materialy/valiki-kisti-maklovicy",
+      "title": "Макловицы",
+      "category": "Инструмент",
+      "realCount": 45,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/shtukaturno-otdelochnye-materialy/masterkikelmyrasshivki",
+      "title": "Мастерки,кельмы,расшивки",
+      "category": "Инструмент",
+      "realCount": 37,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/shtukaturno-otdelochnye-materialy/pistolety-dlya-germetika-i-peny",
+      "title": "Пистолеты для герметика и пены",
+      "category": "Инструмент",
+      "realCount": 80,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/shtukaturno-otdelochnye-materialy/pravilo-stroitelnye",
+      "title": "Правило строительные",
+      "category": "Инструмент",
+      "realCount": 23,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/shtukaturno-otdelochnye-materialy/skotch",
+      "title": "Скотч",
+      "category": "Инструмент",
+      "realCount": 189,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/shtukaturno-otdelochnye-materialy/stroitelnye-tazy-i-emkosti",
+      "title": "Строительные тазы и емкости",
+      "category": "Инструмент",
+      "realCount": 40,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/shtukaturno-otdelochnye-materialy/terki-dlya-shtukaturki",
+      "title": "Терки для штукатурки",
+      "category": "Инструмент",
+      "realCount": 54,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/shtukaturno-otdelochnye-materialy/shpateli",
+      "title": "Шпатели",
+      "category": "Инструмент",
+      "realCount": 125,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/vibrotekhnika-i-komplektuyushhie/bulavy-i-gibkie-valy",
+      "title": "Булавы и гибкие валы",
+      "category": "Инструмент",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/vibrotekhnika-i-komplektuyushhie/vibratory",
+      "title": "Вибраторы",
+      "category": "Инструмент",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/vibrotekhnika-i-komplektuyushhie/vibroplity",
+      "title": "Виброплиты",
+      "category": "Инструмент",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/vibrotekhnika-i-komplektuyushhie/jelektroprivody",
+      "title": "Электроприводы",
+      "category": "Инструмент",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/generatory-i-komplektuyushhie/generatory",
+      "title": "Генераторы",
+      "category": "Инструмент",
+      "realCount": 43,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/generatory-i-komplektuyushhie/komplektuyushhie-dlya-generatorov",
+      "title": "Комплектующие для генераторов",
+      "category": "Инструмент",
+      "realCount": 26,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/gravery",
+      "title": "Граверы",
+      "category": "Инструмент",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/dreli-shurupoverty-i-gaykoverty/akkumulyatornye-dreli-shurupoverty",
+      "title": "Аккумуляторные дрели-шуруповерты",
+      "category": "Инструмент",
+      "realCount": 87,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/dreli-shurupoverty-i-gaykoverty/akkumulyatory-i-zaryadnye-ustroystva",
+      "title": "Аккумуляторы и зарядные устройства",
+      "category": "Инструмент",
+      "realCount": 13,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/dreli-shurupoverty-i-gaykoverty/bezudarnye-dreli",
+      "title": "Безударные дрели",
+      "category": "Инструмент",
+      "realCount": 7,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/dreli-shurupoverty-i-gaykoverty/gaykoverty",
+      "title": "Гайковерты",
+      "category": "Инструмент",
+      "realCount": 22,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/dreli-shurupoverty-i-gaykoverty/setevye-shurupoverty",
+      "title": "Сетевые шуруповерты",
+      "category": "Инструмент",
+      "realCount": 15,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/dreli-shurupoverty-i-gaykoverty/udarnye-dreli",
+      "title": "Ударные дрели",
+      "category": "Инструмент",
+      "realCount": 39,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/izmeritelno-razmetochnyy-instrumen/lazernye-niveliry-i-dalnomery",
+      "title": "Лазерные нивелиры и дальномеры",
+      "category": "Инструмент",
+      "realCount": 88,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/izmeritelno-razmetochnyy-instrumen/ruletki-izmeritelnye",
+      "title": "Рулетки измерительные",
+      "category": "Инструмент",
+      "realCount": 149,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/izmeritelno-razmetochnyy-instrumen/ruchnye-izmeritelnye-instrumenty",
+      "title": "Ручные измерительные инструменты",
+      "category": "Инструмент",
+      "realCount": 41,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/izmeritelno-razmetochnyy-instrumen/stroitelnye-urovni",
+      "title": "Строительные уровни",
+      "category": "Инструмент",
+      "realCount": 111,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/motopompy-i-komplektuyushhie/komplektuyushhie-dlya-motopomp",
+      "title": "Комплектующие для мотопомп",
+      "category": "Инструмент",
+      "realCount": 15,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/motopompy-i-komplektuyushhie/motopompy",
+      "title": "Мотопомпы",
+      "category": "Инструмент",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/multimetry",
+      "title": "Мультиметры",
+      "category": "Инструмент",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/otboynye-molotki",
+      "title": "Отбойные молотки",
+      "category": "Инструмент",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/perforatory",
+      "title": "Перфораторы",
+      "category": "Инструмент",
+      "realCount": 66,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/pily-2/pily-montazhnye",
+      "title": "Пилы монтажные",
+      "category": "Инструмент",
+      "realCount": 12,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/pily-2/pily-torcovochnye",
+      "title": "Пилы торцовочные",
+      "category": "Инструмент",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/pily-2/sabelnye-pily",
+      "title": "Сабельные пилы",
+      "category": "Инструмент",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/pily-2/cirkulyarnye-pily",
+      "title": "Циркулярные пилы",
+      "category": "Инструмент",
+      "realCount": 35,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/plitkorez",
+      "title": "Плиткорезы",
+      "category": "Инструмент",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/pnevmoinstrumenty-kompressory-i-kom/gvozdi-i-shtifty-dlya-steplerov",
+      "title": "Гвозди и штифты для степлеров",
+      "category": "Инструмент",
+      "realCount": 45,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/pnevmoinstrumenty-kompressory-i-kom/kompressory",
+      "title": "Компрессоры",
+      "category": "Инструмент",
+      "realCount": 48,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/pnevmoinstrumenty-kompressory-i-kom/kraskopulty",
+      "title": "Краскопульты",
+      "category": "Инструмент",
+      "realCount": 47,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/pnevmoinstrumenty-kompressory-i-kom/pnevmoinstrument",
+      "title": "Пневмоинструмент",
+      "category": "Инструмент",
+      "realCount": 51,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/pnevmoinstrumenty-kompressory-i-kom/pnevmoinstrumentalnye-nabory",
+      "title": "Пневмоинструментальные наборы",
+      "category": "Инструмент",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/pnevmoinstrumenty-kompressory-i-kom/pnevmofitingi",
+      "title": "Пневмофитинги",
+      "category": "Инструмент",
+      "realCount": 24,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/pnevmoinstrumenty-kompressory-i-kom/raskhodnye-materialy-dlya-kompressoro",
+      "title": "Расходные материалы для компрессоров и пневмоинструмента",
+      "category": "Инструмент",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/pnevmoinstrumenty-kompressory-i-kom/shlangi",
+      "title": "Шланги пневматические",
+      "category": "Инструмент",
+      "realCount": 24,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/bury-i-sverla/bury",
+      "title": "Буры",
+      "category": "Инструмент",
+      "realCount": 230,
+      "status": "partial",
+      "collected": 14
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/bury-i-sverla/nabory-burov",
+      "title": "Наборы буров",
+      "category": "Инструмент",
+      "realCount": 1,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/bury-i-sverla/nabory-sverl",
+      "title": "Наборы сверл",
+      "category": "Инструмент",
+      "realCount": 18,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/bury-i-sverla/sverla-po-betonu",
+      "title": "Сверла по бетону",
+      "category": "Инструмент",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/bury-i-sverla/sverla-po-derevu",
+      "title": "Сверла по дереву",
+      "category": "Инструмент",
+      "realCount": 97,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/bury-i-sverla/sverla-po-metallu",
+      "title": "Сверла по металлу",
+      "category": "Инструмент",
+      "realCount": 170,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/bury-i-sverla/sverla-po-steklu-kafelyu-i-keramike",
+      "title": "Сверла по стеклу, кафелю и керамике",
+      "category": "Инструмент",
+      "realCount": 113,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/bury-i-sverla/smazka-dlya-burov",
+      "title": "Смазка для буров",
+      "category": "Инструмент",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/grafitovye-shhetki",
+      "title": "Графитовые щетки",
+      "category": "Инструмент",
+      "realCount": 22,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/zubila-i-doloto",
+      "title": "Зубила и долото",
+      "category": "Инструмент",
+      "realCount": 62,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/koronki/koronki-po-betonu-i-kirpichu",
+      "title": "Коронки по бетону и кирпичу",
+      "category": "Инструмент",
+      "realCount": 31,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/koronki/koronki-po-derevu",
+      "title": "Коронки по дереву",
+      "category": "Инструмент",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/koronki/koronki-po-kafelyu-steklu",
+      "title": "Коронки по кафелю, стеклу",
+      "category": "Инструмент",
+      "realCount": 83,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/koronki/koronki-po-metallu",
+      "title": "Коронки по металлу",
+      "category": "Инструмент",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/koronki/koronki-universalnye",
+      "title": "Коронки универсальные",
+      "category": "Инструмент",
+      "realCount": 50,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/koronki/khvostoviki-dlya-koronok",
+      "title": "Хвостовики для коронок",
+      "category": "Инструмент",
+      "realCount": 20,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/korshhetki-i-sharoshki/korshhetki",
+      "title": "Корщетки",
+      "category": "Инструмент",
+      "realCount": 55,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/korshhetki-i-sharoshki/nabor-korshhetok-i-sharoshek",
+      "title": "Набор корщеток и шарошек",
+      "category": "Инструмент",
+      "realCount": 1,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/krugi-i-diski-dlya-yelektroinstrumenta/almaznye-gibkie-shlifovalnye-diski",
+      "title": "Алмазные гибкие шлифовальные диски",
+      "category": "Инструмент",
+      "realCount": 26,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/krugi-i-diski-dlya-yelektroinstrumenta/almaznye-chashki",
+      "title": "Алмазные чашки",
+      "category": "Инструмент",
+      "realCount": 20,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/krugi-i-diski-dlya-yelektroinstrumenta/diski-almaznye",
+      "title": "Диски алмазные",
+      "category": "Инструмент",
+      "realCount": 199,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/krugi-i-diski-dlya-yelektroinstrumenta/diski-otreznye-abrazivnye",
+      "title": "Диски отрезные абразивные",
+      "category": "Инструмент",
+      "realCount": 130,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/krugi-i-diski-dlya-yelektroinstrumenta/diski-pilnye/kolca-perekhodnye",
+      "title": "Кольца переходные",
+      "category": "Инструмент",
+      "realCount": 3,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/krugi-i-diski-dlya-yelektroinstrumenta/diski-shlifovalnye",
+      "title": "Диски шлифовальные",
+      "category": "Инструмент",
+      "realCount": 32,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/krugi-i-diski-dlya-yelektroinstrumenta/krugi-lepestkovye-veernye",
+      "title": "Круги лепестковые веерные",
+      "category": "Инструмент",
+      "realCount": 21,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/krugi-i-diski-dlya-yelektroinstrumenta/krugi-shlifovalnye",
+      "title": "Круги шлифовальные",
+      "category": "Инструмент",
+      "realCount": 20,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/krugi-i-diski-dlya-yelektroinstrumenta/lepestkovye-shlifovalnye-krugi-i-dis",
+      "title": "Лепестковые шлифовальные круги и диски",
+      "category": "Инструмент",
+      "realCount": 174,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/meshalki",
+      "title": "Мешалки",
+      "category": "Инструмент",
+      "realCount": 41,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/nozhi-dlya-trimmerov",
+      "title": "Ножи для триммеров",
+      "category": "Инструмент",
+      "realCount": 18,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/patrony-bystrozazhimnye",
+      "title": "Патроны быстрозажимные",
+      "category": "Инструмент",
+      "realCount": 15,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/rezcy",
+      "title": "Резцы",
+      "category": "Инструмент",
+      "realCount": 7,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/frezy/nabory-frez-po-derevu",
+      "title": "Наборы фрез по дереву",
+      "category": "Инструмент",
+      "realCount": 7,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/frezy/podshipniki-dlya-frezerov",
+      "title": "Подшипники для фрезеров",
+      "category": "Инструмент",
+      "realCount": 8,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/frezy/frezy-po-derevu",
+      "title": "Фрезы по дереву",
+      "category": "Инструмент",
+      "realCount": 125,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/raskhodnye-materialy-i-osnastka-dlya-yel/shlifovalnye-listy-shkurki-setki",
+      "title": "Шлифовальные листы, шкурки, сетки",
+      "category": "Инструмент",
+      "realCount": 118,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/stabilizatory-napryazheniya",
+      "title": "Стабилизаторы напряжения",
+      "category": "Инструмент",
+      "realCount": 36,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/stanki/sverlilnye-stanki",
+      "title": "Сверлильные станки",
+      "category": "Инструмент",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/stanki/stanki-zatochnye",
+      "title": "Станки заточные",
+      "category": "Инструмент",
+      "realCount": 13,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/stanki/stanki-po-derevu-i-metallu",
+      "title": "Станки по дереву и металлу",
+      "category": "Инструмент",
+      "realCount": 3,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/miksery-stroitelnye",
+      "title": "Строительные миксеры",
+      "category": "Инструмент",
+      "realCount": 20,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/frezery",
+      "title": "Фрезеры",
+      "category": "Инструмент",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/shlifovalnye-mashiny-i-mnogofunkcion/mnogofunkcionalnyy-instrument",
+      "title": "Многофункциональный инструмент",
+      "category": "Инструмент",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/shlifovalnye-mashiny-i-mnogofunkcion/akkumuljatornye-bolgarki",
+      "title": "Углошлифмашины аккумуляторные",
+      "category": "Инструмент",
+      "realCount": 12,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/shlifovalnye-mashiny-i-mnogofunkcion/bolgarki-ushm/osnastka-i-prisposobleniya",
+      "title": "Оснастка и приспособления",
+      "category": "Инструмент",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/shlifovalnye-mashiny-i-mnogofunkcion/shlifovalnye-mashiny",
+      "title": "Шлифовальные машины",
+      "category": "Инструмент",
+      "realCount": 36,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/shlifovalnye-mashiny-i-mnogofunkcion/shlicevye-nozhnicy",
+      "title": "Шлицевые ножницы",
+      "category": "Инструмент",
+      "realCount": 8,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/shtroborezy-i-prisposobleniya/osnastka-i-prisposobleniya-2",
+      "title": "Приспособления и оснастка",
+      "category": "Инструмент",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/shtroborezy-i-prisposobleniya/shtroborezy",
+      "title": "Штроборезы",
+      "category": "Инструмент",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/yelektrolobziki-i-rubanki/rubanki-2",
+      "title": "Рубанки",
+      "category": "Инструмент",
+      "realCount": 8,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "instrument/yelektroinstrument/yelektrolobziki-i-rubanki/yelektrolobziki",
+      "title": "Электролобзики",
+      "category": "Инструмент",
+      "realCount": 27,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "listovoy-material/gipsokarton",
+      "title": "Гипсокартон",
+      "category": "Листовой материал",
+      "realCount": 27,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "listovoy-material/komplektuyushhie-k-gkl",
+      "title": "Комплектующие к ГКЛ",
+      "category": "Листовой материал",
+      "realCount": 141,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/zamki-i-ruchki/mekhanizmy-dveri",
+      "title": "Дверные механизмы",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 192,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/zamki-i-ruchki/dovodchiki-roliki-dvernyesharik-fiks",
+      "title": "Доводчики, ролики дверные, шарик.фикс",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 144,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/zamki-i-ruchki/zamki",
+      "title": "Замки",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 216,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/zamki-i-ruchki/zamki-visyachie",
+      "title": "Замки висячие",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 109,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/zamki-i-ruchki/prochie-komplektuyshchie",
+      "title": "Комплектующие для замков и ручек",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 32,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/zamki-i-ruchki/nakladki-zavyortki-ruchki-povorotnye",
+      "title": "Накладки, завёртки, ручки поворотные",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 395,
+      "status": "partial",
+      "collected": 15
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/zamki-i-ruchki/petli",
+      "title": "Петли",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 207,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/zamki-i-ruchki/ruchki-ruchki-zashhyolki",
+      "title": "Ручки, ручки-защёлки",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 746,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/zamki-i-ruchki/cilindry-lichinka",
+      "title": "Цилиндры, личинки",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 134,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/zamki-i-ruchki/cifry",
+      "title": "Цифры",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 40,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/zamki-i-ruchki/shpingalety",
+      "title": "Шпингалеты",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 23,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/ankera/anker-khimicheskiy",
+      "title": "Анкер химический",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 14,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/bolty",
+      "title": "Болты",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 395,
+      "status": "partial",
+      "collected": 14
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/gayki",
+      "title": "Гайки",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 110,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/gvozdi",
+      "title": "Гвозди",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 72,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/dyubelya",
+      "title": "Дюбеля",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 266,
+      "status": "partial",
+      "collected": 13
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/zaglushki-dekorativnye",
+      "title": "Заглушки декоративные",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 53,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/zaklepki",
+      "title": "Заклепки",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 57,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/samorezyshurupy/vinty",
+      "title": "Винты",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 35,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/samorezyshurupy/samorezy-zheltyy-cink",
+      "title": "Саморезы желтый цинк",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 91,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/samorezyshurupy/samorezy-po-derevu",
+      "title": "Саморезы по дереву",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 91,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/samorezyshurupy/samorezy-po-metallu",
+      "title": "Саморезы по металлу",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 66,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/samorezyshurupy/samorezy-s-pressshayboy-ostrye",
+      "title": "Саморезы с прессшайбой острые",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 44,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/samorezyshurupy/samorezy-s-pressshayboy-so-sverlom",
+      "title": "Саморезы с прессшайбой со сверлом",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 39,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/samorezyshurupy/samorezy-cvetnye",
+      "title": "Саморезы цветные",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 67,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/samorezyshurupy/shurup-glukhar",
+      "title": "Шуруп глухарь",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 35,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/samorezyshurupy/shurupy-po-betonu",
+      "title": "Шурупы по бетону",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/shayby",
+      "title": "Шайбы",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 86,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/krepezhnye-izdeliya/shpilki",
+      "title": "Шпильки",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 37,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/stroitelnyy-krepezh/klyaymer",
+      "title": "Кляймеры",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/stroitelnyy-krepezh/plastina-krepezhnaya",
+      "title": "Крепежные пластины",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 30,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/stroitelnyy-krepezh/kreplenie-d-balok",
+      "title": "Крепления для балок",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 14,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/stroitelnyy-krepezh/skoby-d-balok",
+      "title": "Скобы для балок",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/stroitelnyy-krepezh/skoby-stroitelnye",
+      "title": "Скобы строительные",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 28,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/stroitelnyy-krepezh/ugolki-krepezhnye",
+      "title": "Уголки крепежные",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 89,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/stroitelnyy-krepezh/khomuty-ocinkovanye",
+      "title": "Хомуты оцинкованые",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 57,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/takelazh/verevki-trosy-cepi",
+      "title": "Веревки, тросы, цепи",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 106,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/takelazh/zazhimy-karabiny-koush",
+      "title": "Зажимы, карабины, коуш",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 120,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/takelazh/talrepy-vertlyugi",
+      "title": "Талрепы, вертлюги",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 19,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "metiznyetakelazhnye-i-skobyanye-izdel/takelazh/fiksatory-armatury",
+      "title": "Фиксаторы арматуры",
+      "category": "Метизные, такелажные и скобяные изделия",
+      "realCount": 41,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/asbestocementnye-izdeliya/asbestocementnye-truby",
+      "title": "Асбестоцементные трубы",
+      "category": "Общестроительные материалы",
+      "realCount": 24,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/asbestocementnye-izdeliya/shifer",
+      "title": "Шифер",
+      "category": "Общестроительные материалы",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/zhbi/kcd",
+      "title": "Днища колодца",
+      "category": "Общестроительные материалы",
+      "realCount": 3,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/zhbi/kc",
+      "title": "Кольца",
+      "category": "Общестроительные материалы",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/zhbi/kcp",
+      "title": "Крышки колодца",
+      "category": "Общестроительные материалы",
+      "realCount": 7,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/kirpich-i-bloki/bloki-gazosilikatnye",
+      "title": "Блоки газосиликатные",
+      "category": "Общестроительные материалы",
+      "realCount": 19,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/kirpich-i-bloki/bloki-cementno-peschannye",
+      "title": "Блоки цементно-песчанные",
+      "category": "Общестроительные материалы",
+      "realCount": 1,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/kirpich-i-bloki/kirpich",
+      "title": "Кирпич",
+      "category": "Общестроительные материалы",
+      "realCount": 35,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/vodostochnaya-sistema",
+      "title": "Водосточная система",
+      "category": "Общестроительные материалы",
+      "realCount": 209,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/geotekstil",
+      "title": "Геотекстиль",
+      "category": "Общестроительные материалы",
+      "realCount": 1,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/gidro-paroizolyacionnye-materialy/kolpak-dlya-zabora",
+      "title": "Колпак для забора",
+      "category": "Общестроительные материалы",
+      "realCount": 793,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/gidro-paroizolyacionnye-materialy/list-ploskij-zakaznoj",
+      "title": "Лист плоский заказной",
+      "category": "Общестроительные материалы",
+      "realCount": 355,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/gidro-paroizolyacionnye-materialy/ograzhdenija-zakaznoj",
+      "title": "Ограждения заказной",
+      "category": "Общестроительные материалы",
+      "realCount": 96,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/dobornye-yelementy/lestnicy-yelementy-bezopasnosti",
+      "title": "Лестницы, элементы безопасности",
+      "category": "Общестроительные материалы",
+      "realCount": 99,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/dobornye-yelementy/okna",
+      "title": "окна",
+      "category": "Общестроительные материалы",
+      "realCount": 99,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/dobornye-yelementy/podkanstrukciya-i-fasonka-dlya-fasada",
+      "title": "Подконструкция и фасонка для фасада",
+      "category": "Общестроительные материалы",
+      "realCount": 252,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/dobornye-yelementy/uplotniteli",
+      "title": "Уплотнители",
+      "category": "Общестроительные материалы",
+      "realCount": 36,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/list-ploskiy",
+      "title": "Лист плоский",
+      "category": "Общестроительные материалы",
+      "realCount": 20,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/metallicheskiy-sayding",
+      "title": "Металлический сайдинг",
+      "category": "Общестроительные материалы",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/metallocherepica-pod-zakaz",
+      "title": "Металлочерепица (под заказ)",
+      "category": "Общестроительные материалы",
+      "realCount": 36,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/myagkaya-krovlya",
+      "title": "Мягкая кровля",
+      "category": "Общестроительные материалы",
+      "realCount": 71,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/ograzhdeniya",
+      "title": "Ограждения",
+      "category": "Общестроительные материалы",
+      "realCount": 44,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/ondeks",
+      "title": "Ондекс",
+      "category": "Общестроительные материалы",
+      "realCount": 29,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/podkonstrukciya-dlya-fasadov",
+      "title": "Подконструкция для фасадов",
+      "category": "Общестроительные материалы",
+      "realCount": 29,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/profnastil-standart",
+      "title": "Профнастил стандарт",
+      "category": "Общестроительные материалы",
+      "realCount": 58,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/krovlya-vodostochnye-sistemy/rulonnaya-naplavlyaemaya-krovlya",
+      "title": "Рулонная наплавляемая кровля",
+      "category": "Общестроительные материалы",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/metalloprokat/armatura-krug-kvadrat-polosa",
+      "title": "Арматура, круг, квадрат, полоса",
+      "category": "Общестроительные материалы",
+      "realCount": 31,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/metalloprokat/balki-shvellera-ugolki",
+      "title": "Балки, швеллера, уголки",
+      "category": "Общестроительные материалы",
+      "realCount": 38,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/metalloprokat/listy-g-k",
+      "title": "Листы г/к",
+      "category": "Общестроительные материалы",
+      "realCount": 15,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/metalloprokat/listy-kh-k",
+      "title": "Листы х/к",
+      "category": "Общестроительные материалы",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/metalloprokat/provoloka",
+      "title": "Проволока",
+      "category": "Общестроительные материалы",
+      "realCount": 17,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/metalloprokat/setka-dlya-ograzhdeniya",
+      "title": "Сетка для ограждения",
+      "category": "Общестроительные материалы",
+      "realCount": 7,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/metalloprokat/setka-stroitelnaya",
+      "title": "Сетка строительная",
+      "category": "Общестроительные материалы",
+      "realCount": 38,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/metalloprokat/truby-profilnye-kruglye",
+      "title": "Трубы профильные, круглые",
+      "category": "Общестроительные материалы",
+      "realCount": 69,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/plitka-trotuarnaya/dorozhnye-yelementy",
+      "title": "Дорожные элементы",
+      "category": "Общестроительные материалы",
+      "realCount": 23,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/plitka-trotuarnaya/plitka-trotuarnaya-2",
+      "title": "Тротуарная плитка",
+      "category": "Общестроительные материалы",
+      "realCount": 63,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/polikarbonat/komplektuyushhie-dlya-polikarbonata",
+      "title": "Комплектующие для поликарбоната",
+      "category": "Общестроительные материалы",
+      "realCount": 34,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "obshhestroitelnye-materialy/polikarbonat/sotovyy",
+      "title": "Сотовый",
+      "category": "Общестроительные материалы",
+      "realCount": 14,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/dveri/dveri-mezhkomnatnye",
+      "title": "Двери межкомнатные",
+      "category": "Отделочные материалы",
+      "realCount": 916,
+      "status": "partial",
+      "collected": 16
+    },
+    {
+      "path": "otdelochnye-materialy/dveri/dveri-mezhkomnatnye-zakaz",
+      "title": "Двери межкомнатные ЗАКАЗ",
+      "category": "Отделочные материалы",
+      "realCount": 102,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/dveri/dveri-metallicheskie",
+      "title": "Двери металлические",
+      "category": "Отделочные материалы",
+      "realCount": 228,
+      "status": "partial",
+      "collected": 14
+    },
+    {
+      "path": "otdelochnye-materialy/dveri/dobornye-yelementy-k-dveryam",
+      "title": "Доборные элементы к дверям",
+      "category": "Отделочные материалы",
+      "realCount": 817,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "otdelochnye-materialy/dveri/protivopozharnye-dveri",
+      "title": "Противопожарные двери",
+      "category": "Отделочные материалы",
+      "realCount": 53,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/karnizy/karniz-kovannyy",
+      "title": "Карнизы кованные",
+      "category": "Отделочные материалы",
+      "realCount": 138,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/karnizy/karnizy-potolochnye-plastikovye",
+      "title": "Карнизы потолочные пластиковые",
+      "category": "Отделочные материалы",
+      "realCount": 60,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/betonokontakt",
+      "title": "Бетоноконтакт",
+      "category": "Отделочные материалы",
+      "realCount": 21,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/germetiki",
+      "title": "Герметики",
+      "category": "Отделочные материалы",
+      "realCount": 46,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/gruntovka-akril",
+      "title": "Грунтовка Акрил",
+      "category": "Отделочные материалы",
+      "realCount": 36,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/gruntovka-gf-021",
+      "title": "Грунтовка ГФ-021",
+      "category": "Отделочные материалы",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/dobavki-v-beton",
+      "title": "Добавки в бетон",
+      "category": "Отделочные материалы",
+      "realCount": 30,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/zhidkie-gvozdi",
+      "title": "Жидкие гвозди",
+      "category": "Отделочные материалы",
+      "realCount": 30,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/kleya",
+      "title": "Клея",
+      "category": "Отделочные материалы",
+      "realCount": 81,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/kraska-vd",
+      "title": "Краска ВД",
+      "category": "Отделочные материалы",
+      "realCount": 205,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/kraska-yemal",
+      "title": "Краска эмаль",
+      "category": "Отделочные материалы",
+      "realCount": 302,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/kraska-ayerozolnaya",
+      "title": "Краски аэрозольные",
+      "category": "Отделочные материалы",
+      "realCount": 37,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/laki",
+      "title": "Лаки",
+      "category": "Отделочные материалы",
+      "realCount": 70,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/mastika",
+      "title": "Мастики",
+      "category": "Отделочные материалы",
+      "realCount": 28,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/pasta-pigmenty-i-krasiteli-kolerovoch",
+      "title": "Паста, пигменты и красители колеровочные",
+      "category": "Отделочные материалы",
+      "realCount": 19,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/pena-montazhnaya",
+      "title": "Пена монтажная",
+      "category": "Отделочные материалы",
+      "realCount": 48,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/polimernye-shpatlevki",
+      "title": "Полимерные шпатлевки",
+      "category": "Отделочные материалы",
+      "realCount": 39,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/propitki-dlya-dereva",
+      "title": "Пропитки для дерева",
+      "category": "Отделочные материалы",
+      "realCount": 113,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/rastvoriteli",
+      "title": "Растворители",
+      "category": "Отделочные материалы",
+      "realCount": 37,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/lakokrasochnye-materialy/stroitelnaya-khimiya",
+      "title": "Строительная химия",
+      "category": "Отделочные материалы",
+      "realCount": 59,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/napolnye-pokrytiya/art-vinil",
+      "title": "Арт винил",
+      "category": "Отделочные материалы",
+      "realCount": 173,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/napolnye-pokrytiya/kovriki-pridvernye",
+      "title": "Коврики придверные",
+      "category": "Отделочные материалы",
+      "realCount": 291,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "otdelochnye-materialy/napolnye-pokrytiya/kovrovye-dorozhki",
+      "title": "Ковровые дорожки",
+      "category": "Отделочные материалы",
+      "realCount": 509,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "otdelochnye-materialy/napolnye-pokrytiya/kovrolin/kovrolin-osnova-rezina",
+      "title": "Ковролин (основа резина)",
+      "category": "Отделочные материалы",
+      "realCount": 54,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/napolnye-pokrytiya/kovrolin/kovrolin-ostatki",
+      "title": "Ковролин (остатки)",
+      "category": "Отделочные материалы",
+      "realCount": 112,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/napolnye-pokrytiya/kovrolin/kovrolin-trava",
+      "title": "Ковролин (трава)",
+      "category": "Отделочные материалы",
+      "realCount": 58,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/napolnye-pokrytiya/komplektuyshchie-dlya-napolnyh-pokriti",
+      "title": "Комплектующие для напольных покрытий",
+      "category": "Отделочные материалы",
+      "realCount": 948,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "otdelochnye-materialy/napolnye-pokrytiya/laminat",
+      "title": "Ламинат",
+      "category": "Отделочные материалы",
+      "realCount": 502,
+      "status": "partial",
+      "collected": 26
+    },
+    {
+      "path": "otdelochnye-materialy/napolnye-pokrytiya/linoleum",
+      "title": "Линолеум",
+      "category": "Отделочные материалы",
+      "realCount": 1029,
+      "status": "partial",
+      "collected": 17
+    },
+    {
+      "path": "otdelochnye-materialy/napolnye-pokrytiya/parketnaay-doska",
+      "title": "Паркетная доска",
+      "category": "Отделочные материалы",
+      "realCount": 3,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/napolnye-pokrytiya/podlozhka-pod-laminat",
+      "title": "Подложка под ламинат",
+      "category": "Отделочные материалы",
+      "realCount": 34,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/napolnye-pokrytiya/porogi",
+      "title": "Пороги",
+      "category": "Отделочные материалы",
+      "realCount": 717,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "otdelochnye-materialy/oboi/kley-oboynyy",
+      "title": "Клей обойный",
+      "category": "Отделочные материалы",
+      "realCount": 17,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/oboi/oboi-vinilovye",
+      "title": "Обои виниловые",
+      "category": "Отделочные материалы",
+      "realCount": 1058,
+      "status": "partial",
+      "collected": 13
+    },
+    {
+      "path": "otdelochnye-materialy/oboi/oboi-zhidkie",
+      "title": "Обои жидкие",
+      "category": "Отделочные материалы",
+      "realCount": 22,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/oboi/oboi-pod-pokrasku",
+      "title": "Обои под покраску",
+      "category": "Отделочные материалы",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/plitka/bordjury-vstavki",
+      "title": "Бордюры, вставки",
+      "category": "Отделочные материалы",
+      "realCount": 33,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/plitka/keramicheskaya-plitka",
+      "title": "Керамическая плитка",
+      "category": "Отделочные материалы",
+      "realCount": 95,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/plitka/keramogranit",
+      "title": "Керамогранит",
+      "category": "Отделочные материалы",
+      "realCount": 163,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/potolochnyy-plintus/dekorativnye-pvkh-ugolki",
+      "title": "Декоративные ПВХ уголки",
+      "category": "Отделочные материалы",
+      "realCount": 88,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/potolochnyy-plintus/plintus-potolochnyy",
+      "title": "Плинтус потолочный",
+      "category": "Отделочные материалы",
+      "realCount": 321,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "otdelochnye-materialy/stenovaya-panel/paneli-mdf",
+      "title": "Панели МДФ",
+      "category": "Отделочные материалы",
+      "realCount": 91,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/stenovaya-panel/paneli-pvkh/paneli-pvkh-mozayka",
+      "title": "Панели ПВХ Мозайка",
+      "category": "Отделочные материалы",
+      "realCount": 40,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otdelochnye-materialy/stenovaya-panel/paneli-pvkh/ugol-plastikovyj",
+      "title": "Угол пластиковый",
+      "category": "Отделочные материалы",
+      "realCount": 66,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/vodonagrevateli-kolonki/boylery-kosvennogo-nagreva",
+      "title": "Бойлеры косвенного нагрева",
+      "category": "Отопление",
+      "realCount": 1,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/vodonagrevateli-kolonki/dymokhody",
+      "title": "Дымоходы",
+      "category": "Отопление",
+      "realCount": 1,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/vodonagrevateli-kolonki/kolonki-gazovye",
+      "title": "Колонки газовые",
+      "category": "Отопление",
+      "realCount": 53,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/vodonagrevateli-kolonki/yelektrovodonagrevateli",
+      "title": "Электроводонагреватели",
+      "category": "Отопление",
+      "realCount": 123,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektuyushhie-k-kotlam/baki-rasshiritelnye",
+      "title": "Баки расширительные",
+      "category": "Отопление",
+      "realCount": 39,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektuyushhie-k-kotlam/dymokhody-2",
+      "title": "Дымоходы для котлов",
+      "category": "Отопление",
+      "realCount": 14,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektuyushhie-k-kotlam/zaglushki-2",
+      "title": "Заглушки",
+      "category": "Отопление",
+      "realCount": 8,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektuyushhie-k-kotlam/zonty",
+      "title": "Зонты",
+      "category": "Отопление",
+      "realCount": 7,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektuyushhie-k-kotlam/koleno",
+      "title": "Колено",
+      "category": "Отопление",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektuyushhie-k-kotlam/komplekty-dymokhodov",
+      "title": "Комплекты дымоходов",
+      "category": "Отопление",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektuyushhie-k-kotlam/kronshteyny",
+      "title": "Кронштейны",
+      "category": "Отопление",
+      "realCount": 2,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektuyushhie-k-kotlam/prochie",
+      "title": "Прочие",
+      "category": "Отопление",
+      "realCount": 3,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektuyushhie-k-kotlam/troyniki-2",
+      "title": "Тройники к котлам",
+      "category": "Отопление",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektujushhie-k-radiatoram/vozdukhootvodchiki-krany-maevskogo",
+      "title": "Воздухоотводчики, краны маевского",
+      "category": "Отопление",
+      "realCount": 7,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektujushhie-k-radiatoram/komplekty-dlya-montazha-radiatorov",
+      "title": "Комплекты для монтажа радиаторов",
+      "category": "Отопление",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektujushhie-k-radiatoram/kronshteyny-dlya-radiatorov",
+      "title": "Кронштейны для радиаторов",
+      "category": "Отопление",
+      "realCount": 14,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektujushhie-k-radiatoram/nippelya-2",
+      "title": "Ниппеля для радиаторов",
+      "category": "Отопление",
+      "realCount": 2,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektujushhie-k-radiatoram/probki-radiatornye",
+      "title": "Пробки радиаторные",
+      "category": "Отопление",
+      "realCount": 8,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/komplektujushhie-k-radiatoram/prokladki",
+      "title": "Прокладки",
+      "category": "Отопление",
+      "realCount": 1,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/kotly",
+      "title": "Котлы",
+      "category": "Отопление",
+      "realCount": 61,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/ventilya-klapany-termostat",
+      "title": "Вентиля, клапаны термостат.",
+      "category": "Отопление",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/kollektory",
+      "title": "Коллекторы",
+      "category": "Отопление",
+      "realCount": 31,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/mufty-2",
+      "title": "Муфты",
+      "category": "Отопление",
+      "realCount": 30,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/nippelya",
+      "title": "Ниппеля",
+      "category": "Отопление",
+      "realCount": 20,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/perekhodniki",
+      "title": "Переходники",
+      "category": "Отопление",
+      "realCount": 13,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/podlozhka",
+      "title": "Подложка",
+      "category": "Отопление",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/prochee",
+      "title": "Прочее",
+      "category": "Отопление",
+      "realCount": 14,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/sgony-univ",
+      "title": "Сгоны унив.",
+      "category": "Отопление",
+      "realCount": 15,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/smesitelnye-uzly",
+      "title": "Смесительные узлы",
+      "category": "Отопление",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/troyniki-3",
+      "title": "Тройники для труб",
+      "category": "Отопление",
+      "realCount": 28,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/truby",
+      "title": "Трубы м/п",
+      "category": "Отопление",
+      "realCount": 22,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/ugolki-2",
+      "title": "Уголки м/п",
+      "category": "Отопление",
+      "realCount": 32,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/fitingi-dlja-metalloplastikovyh-trub",
+      "title": "Фитинги для металлопластиковых труб",
+      "category": "Отопление",
+      "realCount": 7,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/futorki",
+      "title": "Футорки",
+      "category": "Отопление",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/metalloplastikovye-truby-i-fitingi-v/shkafy-kollektornye",
+      "title": "Шкафы коллекторные",
+      "category": "Отопление",
+      "realCount": 13,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/truby-2",
+      "title": "Трубы",
+      "category": "Отопление",
+      "realCount": 58,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/truby-pp-2-metra",
+      "title": "Трубы пп (2 метра)",
+      "category": "Отопление",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/burty-pod-flanec",
+      "title": "Бурты под фланец",
+      "category": "Отопление",
+      "realCount": 7,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/ventilya-2",
+      "title": "Вентиля ПП",
+      "category": "Отопление",
+      "realCount": 2,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/zaglushki-3",
+      "title": "Заглушки ПП",
+      "category": "Отопление",
+      "realCount": 20,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/zachistki",
+      "title": "Зачистки",
+      "category": "Отопление",
+      "realCount": 0,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/klapany-obratnye-2",
+      "title": "Клапаны обратные ПП",
+      "category": "Отопление",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/klipsy",
+      "title": "Клипсы",
+      "category": "Отопление",
+      "realCount": 17,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/kollektory-2",
+      "title": "Коллекторы ПП",
+      "category": "Отопление",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/kompensacionnye-petli",
+      "title": "Компенсационные петли",
+      "category": "Отопление",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/krany-2",
+      "title": "Краны ПП",
+      "category": "Отопление",
+      "realCount": 49,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/krestoviny",
+      "title": "Крестовины",
+      "category": "Отопление",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/mufty-3",
+      "title": "Муфты ПП",
+      "category": "Отопление",
+      "realCount": 184,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/nasadki-dlya-svarki",
+      "title": "Насадки для сварки",
+      "category": "Отопление",
+      "realCount": 8,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/obvody-korotkie-obvody",
+      "title": "Обводы, короткие обводы",
+      "category": "Отопление",
+      "realCount": 13,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/planki-pod-smesitel",
+      "title": "Планки под смеситель",
+      "category": "Отопление",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/troyniki-4",
+      "title": "Тройники ПП",
+      "category": "Отопление",
+      "realCount": 101,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/ugolki-3",
+      "title": "Уголки ПП",
+      "category": "Отопление",
+      "realCount": 80,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/filtry-2",
+      "title": "Фильтры",
+      "category": "Отопление",
+      "realCount": 7,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/polipropilenovye-truby/polipropilenovye-truby-i-fitingi/flancy-2",
+      "title": "Фланцы ПП",
+      "category": "Отопление",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/radiatory/klyuchi",
+      "title": "Ключи",
+      "category": "Отопление",
+      "realCount": 0,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/radiatory/radiatory-panelnye",
+      "title": "Радиаторы панельные",
+      "category": "Отопление",
+      "realCount": 45,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/radiatory/radiatory-sekcionnye",
+      "title": "Радиаторы секционные",
+      "category": "Отопление",
+      "realCount": 73,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "otoplenie/truby-pp-akcija",
+      "title": "Трубы ПП(АКЦИЯ)",
+      "category": "Отопление",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "prochie-hoz-strojmaterialy/tovary",
+      "title": "Товары",
+      "category": "Прочие хоз.стройматериалы",
+      "realCount": 80,
+      "status": "partial",
+      "collected": null
+    },
+    {
+      "path": "santekhnika/aksessuary-dlja-vannoj/armatura-dlja-bachka",
+      "title": "Арматура для бачка",
+      "category": "Сантехника",
+      "realCount": 28,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/aksessuary-dlja-vannoj/bumagoderzhateli",
+      "title": "Бумагодержатели",
+      "category": "Сантехника",
+      "realCount": 32,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/aksessuary-dlja-vannoj/vedro",
+      "title": "Ведро",
+      "category": "Сантехника",
+      "realCount": 49,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/aksessuary-dlja-vannoj/garnitury-dushevye",
+      "title": "Гарнитуры душевые",
+      "category": "Сантехника",
+      "realCount": 96,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/aksessuary-dlja-vannoj/derzhateli-d-zubnyh-shhetok",
+      "title": "Держатели д/зубных щеток",
+      "category": "Сантехника",
+      "realCount": 12,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/aksessuary-dlja-vannoj/dispenser",
+      "title": "Диспенсер",
+      "category": "Сантехника",
+      "realCount": 8,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/aksessuary-dlja-vannoj/dozatory",
+      "title": "Дозаторы",
+      "category": "Сантехника",
+      "realCount": 27,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/aksessuary-dlja-vannoj/jorshiki",
+      "title": "Ёршики",
+      "category": "Сантехника",
+      "realCount": 50,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/aksessuary-dlja-vannoj/karniz-v-vannu",
+      "title": "Карниз в ванну",
+      "category": "Сантехника",
+      "realCount": 8,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/aksessuary-dlja-vannoj/kartridzh",
+      "title": "Картридж",
+      "category": "Сантехника",
+      "realCount": 32,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/aksessuary-dlja-vannoj/mylnicy",
+      "title": "Мыльницы",
+      "category": "Сантехника",
+      "realCount": 39,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/aksessuary-dlja-vannoj/nabor-dlja-vanny-tualeta",
+      "title": "Набор для ванны,туалета",
+      "category": "Сантехника",
+      "realCount": 19,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/aksessuary-dlja-vannoj/stakany-podstakannik",
+      "title": "Стаканы,подстаканник",
+      "category": "Сантехника",
+      "realCount": 32,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/aksessuary-dlja-vannoj/filtr",
+      "title": "Фильтр",
+      "category": "Сантехника",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/bide",
+      "title": "Биде",
+      "category": "Сантехника",
+      "realCount": 2,
+      "status": "complete",
+      "collected": 2
+    },
+    {
+      "path": "santekhnika/vanny/vanny-akrilovye",
+      "title": "Акриловые ванны",
+      "category": "Сантехника",
+      "realCount": 174,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/vanny/vanny-iz-iskusstvennogo-kamnya",
+      "title": "Ванны из искусственного камня",
+      "category": "Сантехника",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/vanny/vanny-stalnye",
+      "title": "Ванны стальные",
+      "category": "Сантехника",
+      "realCount": 26,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/dushevye-kabiny/dushevye-kabiny-2",
+      "title": "Душевые кабины",
+      "category": "Сантехника",
+      "realCount": 197,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/dushevye-kabiny/dushevye-ugolki",
+      "title": "Душевые уголки",
+      "category": "Сантехника",
+      "realCount": 96,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/kukhonnye-moyki/moyki-iz-iskusstvennogo-kamnya",
+      "title": "Мойки из искусственного камня",
+      "category": "Сантехника",
+      "realCount": 86,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/kukhonnye-moyki/moyki-stalnye",
+      "title": "Мойки стальные",
+      "category": "Сантехника",
+      "realCount": 134,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/kukhonnye-moyki/fartuk-kuhonnyj",
+      "title": "Фартук кухонный",
+      "category": "Сантехника",
+      "realCount": 45,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/mebel-dlya-vannoy-komnaty/zerkala",
+      "title": "Зеркала",
+      "category": "Сантехника",
+      "realCount": 383,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "santekhnika/mebel-dlya-vannoy-komnaty/penaly",
+      "title": "Пеналы",
+      "category": "Сантехника",
+      "realCount": 111,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/mebel-dlya-vannoy-komnaty/tumby",
+      "title": "Тумбы",
+      "category": "Сантехника",
+      "realCount": 389,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "santekhnika/smesiteli/kran-buksa",
+      "title": "Кран-букса",
+      "category": "Сантехника",
+      "realCount": 21,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/smesiteli/krany-na-vodu",
+      "title": "Краны на воду",
+      "category": "Сантехника",
+      "realCount": 17,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/smesiteli/smesiteli-dlya-vann",
+      "title": "Смесители для ванны с душем",
+      "category": "Сантехника",
+      "realCount": 230,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "santekhnika/smesiteli/smesiteli-dlya-kukhni",
+      "title": "Смесители для кухни",
+      "category": "Сантехника",
+      "realCount": 215,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/smesiteli/smesiteli-dlya-umyvalnika",
+      "title": "Смесители для умывальника",
+      "category": "Сантехника",
+      "realCount": 231,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "santekhnika/umyvalniki-dlya-vannoy-komnaty/umyvalniki",
+      "title": "Умывальники",
+      "category": "Сантехника",
+      "realCount": 154,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/unitazy-dlya-vannoy-komnaty/monolit",
+      "title": "Монолит",
+      "category": "Сантехника",
+      "realCount": 59,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "santekhnika/unitazy-dlya-vannoy-komnaty/podvesnoj",
+      "title": "Подвесной",
+      "category": "Сантехника",
+      "realCount": 124,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "svarochnoe-oborudovanie/aksessuary-dlya-svarki",
+      "title": "Аксессуары для сварки",
+      "category": "Сварочное оборудование",
+      "realCount": 55,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "svarochnoe-oborudovanie/apparaty-dlya-svarki",
+      "title": "Аппараты для сварки",
+      "category": "Сварочное оборудование",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "svarochnoe-oborudovanie/gorelki-gazovye-rezaki-ballony/ballony",
+      "title": "Баллоны",
+      "category": "Сварочное оборудование",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "svarochnoe-oborudovanie/gorelki-gazovye-rezaki-ballony/mushtuki",
+      "title": "Муштуки",
+      "category": "Сварочное оборудование",
+      "realCount": 14,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "svarochnoe-oborudovanie/gorelki-gazovye-rezaki-ballony/prochie-3",
+      "title": "Прочие",
+      "category": "Сварочное оборудование",
+      "realCount": 2,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "svarochnoe-oborudovanie/gorelki-gazovye-rezaki-ballony/reduktory-ventilja-reguljatory-klapany",
+      "title": "Редукторы,вентиля,регуляторы,клапаны",
+      "category": "Сварочное оборудование",
+      "realCount": 27,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "svarochnoe-oborudovanie/gorelki-gazovye-rezaki-ballony/rezaki-gorelki",
+      "title": "Резаки,горелки",
+      "category": "Сварочное оборудование",
+      "realCount": 34,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "svarochnoe-oborudovanie/svarochnye-apparaty",
+      "title": "Сварочные аппараты",
+      "category": "Сварочное оборудование",
+      "realCount": 24,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "svarochnoe-oborudovanie/feny-i-lampy-payalnye",
+      "title": "Фены и лампы паяльные",
+      "category": "Сварочное оборудование",
+      "realCount": 22,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "svarochnoe-oborudovanie/yelektrody-i-provolka-dlya-svarki/provolka-svarochnaja-na-porluavtomat",
+      "title": "Проволка сварочная на полуавтомат",
+      "category": "Сварочное оборудование",
+      "realCount": 21,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/zhilety",
+      "title": "Жилеты",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 31,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/kostyumy",
+      "title": "Костюмы",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 129,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/obuv-rabochaja/sapogi-botinki-galoshi",
+      "title": "Сапоги, ботинки, галоши",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 197,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/odezhda/beisbolki",
+      "title": "Бейсболки",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 15,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/odezhda/kurtki-bryuki-remni",
+      "title": "Куртки, брюки",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 46,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/odezhda/plashhi",
+      "title": "Плащи",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/odezhda/futbolki-beysbolki",
+      "title": "Футболки",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 48,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/pozharnyy-inventar/bagor-vedro-lopaty",
+      "title": "Багор, ведро, лопаты",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/pozharnyy-inventar/gidranty-podstavki",
+      "title": "Гидранты, подставки",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 28,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/pozharnyy-inventar/ognetushiteli",
+      "title": "Огнетушители",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 23,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/pozharnyy-inventar/rukova-stvoly-golovki",
+      "title": "Рукава, стволы, головки",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 18,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/pozharnyy-inventar/shkafy-krany",
+      "title": "Шкафы, краны",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 28,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/sredstva-zashhity/kaski",
+      "title": "Каски",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/sredstva-zashhity/nakolenniki",
+      "title": "Наколенники",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/sredstva-zashhity/perchatki",
+      "title": "Перчатки",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 81,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/sredstva-zashhity/poyasa-predokhranitelnye",
+      "title": "Пояса предохранительные",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 8,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/sredstva-zashhity/sredstva-indidvidualnoi-zashchity-organov-dyhaniya/zashhitnye-maski",
+      "title": "Защитные маски",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/sredstva-zashhity/sredstva-indidvidualnoi-zashchity-organov-dyhaniya/respiratory-2",
+      "title": "Респираторы",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/sredstva-zashhity/organov-zreniya",
+      "title": "Средства индивидуальной защиты органов зрения",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 94,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "specodezhda-i-sredstva-individualno/sredstva-zashhity/sredstva-individualnoi-zashchity-organov-sluha",
+      "title": "Средства индивидуальной защиты органов слуха",
+      "category": "Спецодежда и средства индивидуальной и пожарной защиты",
+      "realCount": 3,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/drevesno-plitnye-materialy/dvp",
+      "title": "ДВП",
+      "category": "Столярные изделия",
+      "realCount": 8,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/drevesno-plitnye-materialy/dsp",
+      "title": "ДСП",
+      "category": "Столярные изделия",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/drevesno-plitnye-materialy/plita-osb",
+      "title": "Плита OSB",
+      "category": "Столярные изделия",
+      "realCount": 15,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/drevesno-plitnye-materialy/fanera",
+      "title": "Фанера",
+      "category": "Столярные изделия",
+      "realCount": 78,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/pilomaterialy/pilomaterial-obreznoy",
+      "title": "Пиломатериал обрезной",
+      "category": "Столярные изделия",
+      "realCount": 7,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/pilomaterialy/reyka-stroitelnaya",
+      "title": "Рейка строительная",
+      "category": "Столярные изделия",
+      "realCount": 27,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/pogonazhnye-izdeliya-iz-massiva-dereva/nalichniki",
+      "title": "Наличники",
+      "category": "Столярные изделия",
+      "realCount": 32,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/pogonazhnye-izdeliya-iz-massiva-dereva/plintusa",
+      "title": "Плинтуса",
+      "category": "Столярные изделия",
+      "realCount": 37,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/pogonazhnye-izdeliya-iz-massiva-dereva/raskladka",
+      "title": "Раскладка",
+      "category": "Столярные изделия",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/pogonazhnye-izdeliya-iz-massiva-dereva/ugolki",
+      "title": "Уголки",
+      "category": "Столярные изделия",
+      "realCount": 36,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/pogonazhnye-izdeliya-iz-massiva-dereva/shtapik",
+      "title": "Штапик",
+      "category": "Столярные изделия",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/yelementy-lestnic-iz-massiva-dereva/balyasiny",
+      "title": "Балясины",
+      "category": "Столярные изделия",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/yelementy-lestnic-iz-massiva-dereva/ploshhadki",
+      "title": "Площадки",
+      "category": "Столярные изделия",
+      "realCount": 31,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/yelementy-lestnic-iz-massiva-dereva/poruchni",
+      "title": "Поручни",
+      "category": "Столярные изделия",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/yelementy-lestnic-iz-massiva-dereva/stolby",
+      "title": "Столбы",
+      "category": "Столярные изделия",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/yelementy-lestnic-iz-massiva-dereva/stupeni",
+      "title": "Ступени",
+      "category": "Столярные изделия",
+      "realCount": 38,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "stolyarnye-izdeliya/yelementy-lestnic-iz-massiva-dereva/shhity-mebelnye",
+      "title": "Щиты мебельные",
+      "category": "Столярные изделия",
+      "realCount": 83,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "sukhie-smesi/gips-izvestpesokotsev",
+      "title": "Гипс, известь,песок,отсев",
+      "category": "Сухие смеси",
+      "realCount": 9,
+      "status": "complete",
+      "collected": 9
+    },
+    {
+      "path": "sukhie-smesi/zatirki",
+      "title": "Затирки",
+      "category": "Сухие смеси",
+      "realCount": 114,
+      "status": "partial",
+      "collected": 13
+    },
+    {
+      "path": "sukhie-smesi/kleevye-smesi",
+      "title": "Клеевые смеси",
+      "category": "Сухие смеси",
+      "realCount": 59,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "sukhie-smesi/remontnye-i-gidroizolchyacionnye-sost",
+      "title": "Ремонтные и гидроизоляционные составы",
+      "category": "Сухие смеси",
+      "realCount": 45,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "sukhie-smesi/smesi-dlya-pola",
+      "title": "Смеси для пола",
+      "category": "Сухие смеси",
+      "realCount": 20,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "sukhie-smesi/sukhie-smesi-knauf",
+      "title": "Сухие смеси Кнауф",
+      "category": "Сухие смеси",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "sukhie-smesi/cement",
+      "title": "Цемент",
+      "category": "Сухие смеси",
+      "realCount": 12,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "sukhie-smesi/shpatlevka",
+      "title": "Шпатлевка",
+      "category": "Сухие смеси",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "sukhie-smesi/shtukaturka",
+      "title": "Штукатурка",
+      "category": "Сухие смеси",
+      "realCount": 38,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/oborudovanie-dlya-moyki-mashin/aksessuary-dlya-moek",
+      "title": "Аксессуары для моек",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 48,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/oborudovanie-dlya-moyki-mashin/moyki-vysokogo-davleniya",
+      "title": "Мойки высокого давления",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 31,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/oborudovanie-dlya-moyki-mashin/pylesosy",
+      "title": "Пылесосы",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/oborudovanie-dlya-moyki-mashin/khimiya-dlya-moyki-mashin",
+      "title": "Химия для мойки машин",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 25,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/benzopily-i-yelektropily-cepnye/benzopily",
+      "title": "Бензопилы",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 30,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/benzopily-i-yelektropily-cepnye/masla",
+      "title": "Масла",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 34,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/benzopily-i-yelektropily-cepnye/napilniki-2",
+      "title": "Напильники для бензопилы",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/benzopily-i-yelektropily-cepnye/pily-cepnye-akkumulyatornye",
+      "title": "Пилы цепные аккумуляторные",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/benzopily-i-yelektropily-cepnye/pily-cepnye-yelektricheskie",
+      "title": "Пилы цепные электрические",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/benzopily-i-yelektropily-cepnye/cepi",
+      "title": "Цепи",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 33,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/benzopily-i-yelektropily-cepnye/shiny",
+      "title": "Шины",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 8,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/vedra-kanistry-vazony-kashpo/vedra",
+      "title": "Ведра",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 19,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/vedra-kanistry-vazony-kashpo/kanistry",
+      "title": "Канистры",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 14,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/vedra-kanistry-vazony-kashpo/kashpovazony",
+      "title": "Кашпо, вазоны",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 3,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/vedra-kanistry-vazony-kashpo/tazy",
+      "title": "Тазы",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 13,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/vedra-kanistry-vazony-kashpo/flyagibaki",
+      "title": "Фляги, баки",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/veniki-metlashhyotkisovki/veniki",
+      "title": "Веники",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 12,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/veniki-metlashhyotkisovki/komplekt-d-uborki",
+      "title": "Комплект д/уборки",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/veniki-metlashhyotkisovki/sovki",
+      "title": "Совки",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/veniki-metlashhyotkisovki/shhyotki",
+      "title": "Щётки",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 36,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/gazonokosilki-i-trimmery/gazonokosilki-benzinovye",
+      "title": "Газонокосилки бензиновые",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/gazonokosilki-i-trimmery/gazonokosilki-yelektricheskie",
+      "title": "Газонокосилки электрические",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/gazonokosilki-i-trimmery/golovki-s-leskoy",
+      "title": "Головки с леской",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/gazonokosilki-i-trimmery/komplektuyushhie-dlya-trimmera",
+      "title": "Комплектующие для триммера",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 3,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/gazonokosilki-i-trimmery/leski-dlya-trimmera",
+      "title": "Лески для триммера",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 94,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/gazonokosilki-i-trimmery/remni-dlya-trimmera",
+      "title": "Ремни для триммера",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 12,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/gazonokosilki-i-trimmery/trimmery-benzinovye",
+      "title": "Триммеры бензиновые",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 33,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/gazonokosilki-i-trimmery/trimmery-yelektricheskie",
+      "title": "Триммеры электрические",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/grunty-udobreniya",
+      "title": "Грунты, удобрения",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 14,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/kosy-kustorezyserpysekatory/kosy",
+      "title": "Косы",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 3,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/kosy-kustorezyserpysekatory/kustorezysuchkorezy",
+      "title": "Кусторезы, сучкорезы",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 14,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/kosy-kustorezyserpysekatory/sekatory",
+      "title": "Секаторы",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 27,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/kosy-kustorezyserpysekatory/serpy",
+      "title": "Серпы",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/lopaty-cherenki-vily-tyapki-motygi/vily",
+      "title": "Вилы",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/lopaty-cherenki-vily-tyapki-motygi/grabli",
+      "title": "Грабли",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 31,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/lopaty-cherenki-vily-tyapki-motygi/lopaty",
+      "title": "Лопаты",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 53,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/lopaty-cherenki-vily-tyapki-motygi/motygi",
+      "title": "Мотыги",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/lopaty-cherenki-vily-tyapki-motygi/tyapki",
+      "title": "Тяпки",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 19,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/lopaty-cherenki-vily-tyapki-motygi/cherenki",
+      "title": "Черенки",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/lyuki-polimernye-i-chugunnye",
+      "title": "Люки полимерные и чугунные",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 39,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/meshki-i-pakety-dlya-musora-pakety-fasov",
+      "title": "Мешки и пакеты для мусора, пакеты фасовочные",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 40,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/motobloki-zernodrobilki-osnastka-k-m/zernodrobilki",
+      "title": "Зернодробилки",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 3,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/motobloki-zernodrobilki-osnastka-k-m/motobloki",
+      "title": "Мотоблоки",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 25,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/motobloki-zernodrobilki-osnastka-k-m/osnastka-k-motoblokam",
+      "title": "Оснастка к мотоблокам",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 37,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/nozhy-nozhnicy",
+      "title": "Ножи, ножницы",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/opryskivateli-raspyliteli-leyki/komplektuyushhie-k-opryskivatelyam",
+      "title": "Комплектующие к опрыскивателям",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 0,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/opryskivateli-raspyliteli-leyki/leyki-dlya-letnego-dusha",
+      "title": "Лейки для летнего душа",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 2,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/opryskivateli-raspyliteli-leyki/leyki-sadovye",
+      "title": "Лейки садовые",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 8,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/opryskivateli-raspyliteli-leyki/opryskivateli-akkumulyatornye",
+      "title": "Опрыскиватели аккумуляторные",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 7,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/opryskivateli-raspyliteli-leyki/opryskivateli-benzinovye",
+      "title": "Опрыскиватели бензиновые",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 1,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/opryskivateli-raspyliteli-leyki/opryskivateli-ruchnye",
+      "title": "Опрыскиватели ручные",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/opryskivateli-raspyliteli-leyki/raspyliteli",
+      "title": "Распылители",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/prochie-tovary",
+      "title": "Прочие товары",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 55,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/razbryzgivatelipistolety-dlya-poliv/nabory-dlya-poliva",
+      "title": "Наборы для полива",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/razbryzgivatelipistolety-dlya-poliv/pistolety-dlya-poliva",
+      "title": "Пистолеты для полива",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 5,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/razbryzgivatelipistolety-dlya-poliv/razbryzgivateli",
+      "title": "Разбрызгиватели",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 13,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/urny",
+      "title": "Урны",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 19,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/shlangikutushki-d-shlanga-soediniteli/katushki-dlya-shlanga",
+      "title": "Катушки для шланга",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 2,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/shlangikutushki-d-shlanga-soediniteli/soediniteli",
+      "title": "Соединители",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 86,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/sadovyy-inventar/shlangikutushki-d-shlanga-soediniteli/shlangi-2",
+      "title": "Шланги",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 67,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/tovary-dlya-bezopastnosti/seyfy",
+      "title": "Сейфы",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 120,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/tovary-dlya-doma",
+      "title": "Товары для дома",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 46,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/tovary-dlja-otdyha/gazovye-plity-gorelki",
+      "title": "Газовые плиты, горелки",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 31,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/tovary-dlja-otdyha/mangaly-shampury-drova",
+      "title": "Мангалы, шампуры, дрова",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/tovary-dlja-otdyha/plenka-pye-rukavnaya",
+      "title": "Полиэтиленовая пленка рукавная",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/tovary-dlja-otdyha/skameyki",
+      "title": "Скамейки",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "tovary-dlya-doma-sada-i-ogoroda/tovary-dlja-otdyha/tenty",
+      "title": "Тенты",
+      "category": "Товары для дома, сада и огорода",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "utepliteli-i-shumoizoljacija/bazaltovyj-uteplitel",
+      "title": "Базальтовый утеплитель",
+      "category": "Утеплители и шумоизоляция",
+      "realCount": 31,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "utepliteli-i-shumoizoljacija/mineralnovatnyj-uteplitel",
+      "title": "Минеральноватный утеплитель",
+      "category": "Утеплители и шумоизоляция",
+      "realCount": 20,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "utepliteli-i-shumoizoljacija/penopolistirol",
+      "title": "Пенополистирол",
+      "category": "Утеплители и шумоизоляция",
+      "realCount": 44,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "utepliteli-i-shumoizoljacija/porolon",
+      "title": "Поролон",
+      "category": "Утеплители и шумоизоляция",
+      "realCount": 11,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "utepliteli-i-shumoizoljacija/teploizoljacija",
+      "title": "Теплоизоляция",
+      "category": "Утеплители и шумоизоляция",
+      "realCount": 9,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "utepliteli-i-shumoizoljacija/shumoizoljacija",
+      "title": "Шумоизоляция",
+      "category": "Утеплители и шумоизоляция",
+      "realCount": 13,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/izolyacionnye-i-montazhnye-materialy/izolenta",
+      "title": "Изолента",
+      "category": "Электротовары",
+      "realCount": 55,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/izolyacionnye-i-montazhnye-materialy/nakonechniki-mednye-i-alyuminievye",
+      "title": "Наконечники медные и алюминиевые",
+      "category": "Электротовары",
+      "realCount": 58,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/izolyacionnye-i-montazhnye-materialy/skoby-dlya-kabelya",
+      "title": "Скобы для кабеля",
+      "category": "Электротовары",
+      "realCount": 15,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/izolyacionnye-i-montazhnye-materialy/khomuty-dlya-kabelya",
+      "title": "Хомуты кабельные",
+      "category": "Электротовары",
+      "realCount": 53,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/kabelprovod/kabeli-i-provoda-ustanovochnye",
+      "title": "Кабели и провода установочные",
+      "category": "Электротовары",
+      "realCount": 240,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "yelektrotovary/kabelprovod/kabel-tvrgutp",
+      "title": "Кабель TV,RG,UTP",
+      "category": "Электротовары",
+      "realCount": 19,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/kabelprovod/kabel-kg",
+      "title": "Кабель КГ",
+      "category": "Электротовары",
+      "realCount": 18,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/kabelprovod/kabel-kanalytrubki-pvkh",
+      "title": "Кабель-каналы,трубки ПВХ",
+      "category": "Электротовары",
+      "realCount": 98,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/kabelprovod/provod-sip",
+      "title": "Провод СИП",
+      "category": "Электротовары",
+      "realCount": 7,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/lampy-i-fonariki/lampy-gazorazrjadnye",
+      "title": "Лампы газоразрядные",
+      "category": "Электротовары",
+      "realCount": 3,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/lampy-i-fonariki/lampy-zerkalnye",
+      "title": "Лампы зеркальные",
+      "category": "Электротовары",
+      "realCount": 2,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/lampy-i-fonariki/lampy-lyuminiscentnye",
+      "title": "Лампы люминисцентные",
+      "category": "Электротовары",
+      "realCount": 2,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/lampy-i-fonariki/lampy-nakalivaniya",
+      "title": "Лампы накаливания",
+      "category": "Электротовары",
+      "realCount": 17,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/lampy-i-fonariki/lampy-svetodiodnye",
+      "title": "Лампы светодиодные",
+      "category": "Электротовары",
+      "realCount": 192,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/lampy-i-fonariki/fonariki",
+      "title": "Фонарики",
+      "category": "Электротовары",
+      "realCount": 41,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/lenty-cvetodiodnye-i-komplektuyoshchie",
+      "title": "Ленты светодиодные и комплектующие",
+      "category": "Электротовары",
+      "realCount": 72,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/svetilniki/prozhektory-svetodiodnye",
+      "title": "Прожекторы светодиодные",
+      "category": "Электротовары",
+      "realCount": 21,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/svetilniki/svetilniki-lyuminiscentnye",
+      "title": "Светильники люминисцентные",
+      "category": "Электротовары",
+      "realCount": 22,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/svetilniki/svetilniki-na-solnechnykh-batareyakh",
+      "title": "Светильники на солнечных батареях",
+      "category": "Электротовары",
+      "realCount": 23,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/svetilniki/svetilniki-nastenno-potolochnye",
+      "title": "Светильники настенно-потолочные",
+      "category": "Электротовары",
+      "realCount": 114,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/svetilniki/svetilniki-nastolnye",
+      "title": "Светильники настольные",
+      "category": "Электротовары",
+      "realCount": 40,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/svetilniki/svetilniki-prochie",
+      "title": "Светильники прочие",
+      "category": "Электротовары",
+      "realCount": 34,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/svetilniki/svetilniki-rku",
+      "title": "Светильники РКУ",
+      "category": "Электротовары",
+      "realCount": 28,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/svetilniki/svetilniki-sadovo-parkovye",
+      "title": "Светильники садово-парковые",
+      "category": "Электротовары",
+      "realCount": 52,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/svetilniki/svetilniki-svetodiodnye",
+      "title": "Светильники светодиодные",
+      "category": "Электротовары",
+      "realCount": 236,
+      "status": "partial",
+      "collected": 17
+    },
+    {
+      "path": "yelektrotovary/svetilniki/svetilniki-tochechnye",
+      "title": "Светильники точечные",
+      "category": "Электротовары",
+      "realCount": 142,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/svetilniki/svetilniki-trekovye",
+      "title": "Светильники трековые",
+      "category": "Электротовары",
+      "realCount": 39,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektricheskiy-teplyy-pol/termomaty",
+      "title": "Термоматы",
+      "category": "Электротовары",
+      "realCount": 20,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektricheskiy-teplyy-pol/termoregulyatory",
+      "title": "Терморегуляторы",
+      "category": "Электротовары",
+      "realCount": 6,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/avtomaticheskie-vyklyuchateli-din-reyk",
+      "title": "Автоматические выключатели, дин-рейки, шины",
+      "category": "Электротовары",
+      "realCount": 204,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/boksy-shhity-yashhiki",
+      "title": "Боксы, щиты, ящики",
+      "category": "Электротовары",
+      "realCount": 79,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/datchiki-dvizheniya",
+      "title": "Датчики движения",
+      "category": "Электротовары",
+      "realCount": 10,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/zazhimy-vintovye-klemma",
+      "title": "Зажимы винтовые, клемма",
+      "category": "Электротовары",
+      "realCount": 124,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/zvonki-dvernye",
+      "title": "Звонки дверные",
+      "category": "Электротовары",
+      "realCount": 16,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/kontaktory-puskateli-vstavki-starte",
+      "title": "Контакторы, пускатели, вставки, стартеры",
+      "category": "Электротовары",
+      "realCount": 56,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/korobki-montazhnye-patrony/korobki-montazhnye",
+      "title": "Коробки монтажные",
+      "category": "Электротовары",
+      "realCount": 41,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/korobki-montazhnye-patrony/patrony",
+      "title": "Патроны",
+      "category": "Электротовары",
+      "realCount": 8,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/rozetki-vyklyuchateli-ramki-vilki/vilki",
+      "title": "Вилки",
+      "category": "Электротовары",
+      "realCount": 4,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/rozetki-vyklyuchateli-ramki-vilki/vyklyuchateli",
+      "title": "Выключатели",
+      "category": "Электротовары",
+      "realCount": 182,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/rozetki-vyklyuchateli-ramki-vilki/knopki",
+      "title": "Кнопки",
+      "category": "Электротовары",
+      "realCount": 19,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/rozetki-vyklyuchateli-ramki-vilki/ramki",
+      "title": "Рамки",
+      "category": "Электротовары",
+      "realCount": 102,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/rozetki-vyklyuchateli-ramki-vilki/rozetki-perenosnye",
+      "title": "Розетки",
+      "category": "Электротовары",
+      "realCount": 229,
+      "status": "partial",
+      "collected": 12
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/schetchiki-yelektricheskie",
+      "title": "Счетчики электрические",
+      "category": "Электротовары",
+      "realCount": 28,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/teplovye-pushki-konvektory-maslyanye-r",
+      "title": "Тепловые пушки, конвекторы, масляные радиаторы",
+      "category": "Электротовары",
+      "realCount": 174,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/udliniteli-kolodki",
+      "title": "Удлинители, колодки",
+      "category": "Электротовары",
+      "realCount": 91,
+      "status": "not_started",
+      "collected": 0
+    },
+    {
+      "path": "yelektrotovary/yelektroustanovochnye-tovary/yelementy-pitaniya",
+      "title": "Элементы питания",
+      "category": "Электротовары",
+      "realCount": 23,
+      "status": "not_started",
+      "collected": 0
+    }
+  ]
+}

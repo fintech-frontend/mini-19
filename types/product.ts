@@ -13,4 +13,5 @@ export interface Product {
   description: string;
   inStock: boolean;
   specs: ProductSpec[];
+  articul?: string;
 }
