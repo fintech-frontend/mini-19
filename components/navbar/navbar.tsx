@@ -1,8 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Search, Gift, User, BarChart3, Heart, ShoppingCart, Menu } from "lucide-react";
 import Logo1 from "@/src/svg/logo1.svg";
 import { styles } from "@/styles/index.styles";
+import { useShop } from "@/context/ShopContext";
 
 // Ссылки в верхней тонкой строке
 const topLinks = [
@@ -59,6 +62,15 @@ function SearchBar({ placeholder }: { placeholder: string }) {
   );
 }
 
+function CountBadge({ count }: { count: number }) {
+  if (count === 0) return null;
+  return (
+    <span className="absolute -right-2 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+      {count > 9 ? "9+" : count}
+    </span>
+  );
+}
+
 function OrderCallButton() {
   return (
     <button className="whitespace-nowrap rounded border border-transparent bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-600 transition-colors hover:bg-blue-100">
@@ -68,6 +80,8 @@ function OrderCallButton() {
 }
 
 export default function Header() {
+  const { cartCount, favoritesCount, compareCount } = useShop();
+
   return (
     <header className="w-full font-sans">
       {/* ================= MOBILE (< md) ================= */}
@@ -88,21 +102,18 @@ export default function Header() {
             <Link href="/my-account" aria-label="Войти">
               <User size={20} />
             </Link>
-            <button aria-label="Сравнение">
+            <Link href="/compare" aria-label="Сравнение" className="relative">
               <BarChart3 size={20} />
-            </button>
-            <button aria-label="Избранное" className="relative">
+              <CountBadge count={compareCount} />
+            </Link>
+            <Link href="/favorites" aria-label="Избранное" className="relative">
               <Heart size={20} />
-              <span className="absolute -right-2 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
-                3
-              </span>
-            </button>
-            <button aria-label="Корзина" className="relative">
+              <CountBadge count={favoritesCount} />
+            </Link>
+            <Link href="/cart" aria-label="Корзина" className="relative">
               <ShoppingCart size={20} />
-              <span className="absolute -right-2 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
-                3
-              </span>
-            </button>
+              <CountBadge count={cartCount} />
+            </Link>
           </div>
         </div>
 
@@ -158,24 +169,21 @@ export default function Header() {
                 <User size={22} />
                 <span>Войти</span>
               </Link>
-              <button className="flex flex-col items-center gap-1 hover:text-blue-600">
+              <Link href="/compare" className="relative flex flex-col items-center gap-1 hover:text-blue-600">
                 <BarChart3 size={22} />
                 <span>Сравнение</span>
-              </button>
-              <button className="relative flex flex-col items-center gap-1 hover:text-blue-600">
+                <CountBadge count={compareCount} />
+              </Link>
+              <Link href="/favorites" className="relative flex flex-col items-center gap-1 hover:text-blue-600">
                 <Heart size={22} />
                 <span>Избранное</span>
-                <span className="absolute -right-1.5 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
-                  3
-                </span>
-              </button>
-              <button className="relative flex flex-col items-center gap-1 hover:text-blue-600">
+                <CountBadge count={favoritesCount} />
+              </Link>
+              <Link href="/cart" className="relative flex flex-col items-center gap-1 hover:text-blue-600">
                 <ShoppingCart size={22} />
                 <span>Корзина</span>
-                <span className="absolute -right-1.5 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
-                  3
-                </span>
-              </button>
+                <CountBadge count={cartCount} />
+              </Link>
             </div>
           </div>
         </div>
