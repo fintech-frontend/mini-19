@@ -1,59 +1,42 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Minus, Plus, Trash2, ShoppingCart, Package } from "lucide-react";
+import { staticProducts } from "@/data/staticProducts";
+import { useShop } from "@/context/ShopContext";
 
-type CartItem = {
+/**
+ * Вёрстка корзины (шаги количества, удаление, блок "Ваш заказ", пустое состояние)
+ * пришла из ветки Create-Blog, но работала на захардкоженном демо-списке. Данные
+ * теперь берутся из ShopContext — того же, что считает бейджи в шапке, — поэтому
+ * "добавить в корзину" на карточке товара реально доходит до этой страницы.
+ */
+
+type CartLine = {
   id: string;
   name: string;
-  unit: string;
   price: number;
   oldPrice?: number;
+  image?: string;
   qty: number;
 };
-
-const initialItems: CartItem[] = [
-  {
-    id: "1",
-    name: "Дрель ударная Bosch GSB 13 RE, 600 Вт",
-    unit: "шт.",
-    price: 4890,
-    oldPrice: 5490,
-    qty: 1,
-  },
-  {
-    id: "2",
-    name: "Перфоратор Makita HR2470, SDS-Plus, 780 Вт",
-    unit: "шт.",
-    price: 12990,
-    qty: 1,
-  },
-  {
-    id: "3",
-    name: "Саморезы по дереву 3.5x35 мм, 200 шт.",
-    unit: "уп.",
-    price: 320,
-    qty: 3,
-  },
-  {
-    id: "4",
-    name: "Респиратор РПГ-67 с угольным фильтром",
-    unit: "шт.",
-    price: 590,
-    oldPrice: 690,
-    qty: 2,
-  },
-];
 
 function formatPrice(value: number) {
   return `${value.toLocaleString("ru-RU")} ₽`;
 }
 
-function ItemImage() {
+function ItemImage({ src, alt }: { src?: string; alt: string }) {
+  if (!src) {
+    return (
+      <div className="flex size-20 shrink-0 items-center justify-center rounded-lg bg-neutral-100 text-neutral-300 sm:size-24">
+        <Package size={32} />
+      </div>
+    );
+  }
   return (
-    <div className="flex size-20 shrink-0 items-center justify-center rounded-lg bg-neutral-100 text-neutral-300 sm:size-24">
-      <Package size={32} />
+    <div className="relative size-20 shrink-0 overflow-hidden rounded-lg bg-neutral-100 sm:size-24">
+      <Image src={src} alt={alt} fill sizes="96px" className="object-contain p-2" />
     </div>
   );
 }
@@ -78,9 +61,7 @@ function QuantityStepper({
       >
         <Minus size={14} />
       </button>
-      <span className="w-8 text-center text-sm font-semibold text-neutral-900">
-        {qty}
-      </span>
+      <span className="w-8 text-center text-sm font-semibold text-neutral-900">{qty}</span>
       <button
         type="button"
         aria-label="Увеличить количество"
@@ -99,31 +80,23 @@ function CartRow({
   onIncrease,
   onRemove,
 }: {
-  item: CartItem;
+  item: CartLine;
   onDecrease: () => void;
   onIncrease: () => void;
   onRemove: () => void;
 }) {
   return (
     <div className="flex gap-4 border-b border-neutral-200 py-5 last:border-b-0">
-      <ItemImage />
+      <ItemImage src={item.image} alt={item.name} />
 
       <div className="flex min-w-0 flex-1 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <div className="min-w-0">
-          <p className="text-sm font-medium text-neutral-900 sm:text-[15px]">
-            {item.name}
-          </p>
-          <p className="mt-1 text-xs text-neutral-500">
-            {formatPrice(item.price)} / {item.unit}
-          </p>
+          <p className="text-sm font-medium text-neutral-900 sm:text-[15px]">{item.name}</p>
+          <p className="mt-1 text-xs text-neutral-500">{formatPrice(item.price)} / шт.</p>
         </div>
 
         <div className="flex items-center justify-between gap-4 sm:justify-end">
-          <QuantityStepper
-            qty={item.qty}
-            onDecrease={onDecrease}
-            onIncrease={onIncrease}
-          />
+          <QuantityStepper qty={item.qty} onDecrease={onDecrease} onIncrease={onIncrease} />
 
           <div className="text-right">
             <p className="whitespace-nowrap text-sm font-bold text-neutral-900 sm:text-base">
@@ -156,15 +129,13 @@ function EmptyCart() {
       <div className="flex size-16 items-center justify-center rounded-full bg-neutral-100 text-neutral-400">
         <ShoppingCart size={28} />
       </div>
-      <h2 className="mt-5 text-lg font-bold text-neutral-900 sm:text-xl">
-        Ваша корзина пуста
-      </h2>
+      <h2 className="mt-5 text-lg font-bold text-neutral-900 sm:text-xl">Ваша корзина пуста</h2>
       <p className="mt-2 max-w-sm text-sm text-neutral-500">
-        Добавьте товары из каталога, чтобы оформить заказ. Здесь появятся все
-        выбранные вами позиции.
+        Добавьте товары из каталога, чтобы оформить заказ. Здесь появятся все выбранные вами
+        позиции.
       </p>
       <Link
-        href="/"
+        href="/catalog"
         className="mt-6 whitespace-nowrap rounded-lg bg-blue-600 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-blue-700"
       >
         Перейти в каталог
@@ -174,21 +145,22 @@ function EmptyCart() {
 }
 
 export default function CartPage() {
-  const [items, setItems] = useState<CartItem[]>(initialItems);
+  const { cart, setCartQty, removeFromCart } = useShop();
 
-  const changeQty = (id: string, delta: number) => {
-    setItems((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? { ...item, qty: Math.max(1, item.qty + delta) }
-          : item
-      )
-    );
-  };
-
-  const removeItem = (id: string) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
-  };
+  const items: CartLine[] = Object.entries(cart).flatMap(([id, qty]) => {
+    const product = staticProducts.find((p) => p.id === id);
+    if (!product) return [];
+    return [
+      {
+        id,
+        name: product.title,
+        price: product.price,
+        oldPrice: product.oldPrice,
+        image: product.image,
+        qty,
+      },
+    ];
+  });
 
   const totalQty = items.reduce((sum, item) => sum + item.qty, 0);
   const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0);
@@ -199,9 +171,7 @@ export default function CartPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:py-12">
-      <h1 className="text-2xl font-bold text-neutral-900 sm:text-3xl">
-        Корзина
-      </h1>
+      <h1 className="text-2xl font-bold text-neutral-900 sm:text-3xl">Корзина</h1>
 
       {items.length === 0 ? (
         <div className="mt-6">
@@ -214,18 +184,16 @@ export default function CartPage() {
               <CartRow
                 key={item.id}
                 item={item}
-                onDecrease={() => changeQty(item.id, -1)}
-                onIncrease={() => changeQty(item.id, 1)}
-                onRemove={() => removeItem(item.id)}
+                onDecrease={() => setCartQty(item.id, item.qty - 1)}
+                onIncrease={() => setCartQty(item.id, item.qty + 1)}
+                onRemove={() => removeFromCart(item.id)}
               />
             ))}
           </div>
 
           <div className="lg:col-span-1">
             <div className="sticky top-24 rounded-lg border border-neutral-200 p-5 sm:p-6">
-              <h2 className="text-lg font-bold text-neutral-900">
-                Ваш заказ
-              </h2>
+              <h2 className="text-lg font-bold text-neutral-900">Ваш заказ</h2>
 
               <dl className="mt-4 space-y-2 text-sm">
                 <div className="flex items-center justify-between text-neutral-600">
@@ -241,12 +209,8 @@ export default function CartPage() {
               </dl>
 
               <div className="mt-4 flex items-center justify-between border-t border-neutral-200 pt-4">
-                <span className="text-base font-bold text-neutral-900">
-                  Итого
-                </span>
-                <span className="text-xl font-bold text-neutral-900">
-                  {formatPrice(subtotal)}
-                </span>
+                <span className="text-base font-bold text-neutral-900">Итого</span>
+                <span className="text-xl font-bold text-neutral-900">{formatPrice(subtotal)}</span>
               </div>
 
               <Link
@@ -257,7 +221,7 @@ export default function CartPage() {
               </Link>
 
               <Link
-                href="/"
+                href="/catalog"
                 className="mt-3 flex w-full items-center justify-center text-xs font-medium text-neutral-500 transition-colors hover:text-blue-600"
               >
                 Продолжить покупки

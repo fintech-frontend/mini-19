@@ -5,7 +5,12 @@ function fanImage(text: string, bg: string = "f4f4f5"): string {
   return `https://placehold.co/700x700/${bg}/71717a.png?text=${encodeURIComponent(text)}`;
 }
 
-export interface FanProduct extends Product {
+/**
+ * Товары каталога идентифицируются полем `articul` (как на эталонном сайте), а
+ * `article` из Product генерируется только для демо-данных staticProducts — поэтому
+ * оно здесь исключается, а не заполняется заглушкой.
+ */
+export interface FanProduct extends Omit<Product, "article"> {
   /** true — карточка использует кнопку "Купить" (быстрое добавление), false — "Подробнее" */
   quickBuy: boolean;
   /** Структурированные поля для фильтрации каталога */

@@ -6,10 +6,13 @@ interface PaginationProps {
   totalPages: number;
   /** Base path without trailing slash, e.g. "/blog" or "/novosti" */
   basePath: string;
+  /** Query string without "?", добавляется ко всем ссылкам. Напр. "sort=old" */
+  query?: string;
 }
 
-function pageHref(basePath: string, page: number) {
-  return page === 1 ? basePath : `${basePath}/page/${page}`;
+function pageHref(basePath: string, page: number, query?: string) {
+  const path = page === 1 ? basePath : `${basePath}/page/${page}`;
+  return query ? `${path}?${query}` : path;
 }
 
 function getVisiblePages(current: number, total: number): (number | "ellipsis")[] {
@@ -24,7 +27,7 @@ function getVisiblePages(current: number, total: number): (number | "ellipsis")[
   return result;
 }
 
-export function Pagination({ currentPage, totalPages, basePath }: PaginationProps) {
+export function Pagination({ currentPage, totalPages, basePath, query }: PaginationProps) {
   if (totalPages <= 1) return null;
 
   const pages = getVisiblePages(currentPage, totalPages);
@@ -32,7 +35,7 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
   return (
     <nav className="flex items-center justify-center gap-2 pt-4" aria-label="Пагинация">
       <Link
-        href={pageHref(basePath, Math.max(1, currentPage - 1))}
+        href={pageHref(basePath, Math.max(1, currentPage - 1), query)}
         className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-neutral-500 hover:text-neutral-900"
       >
         Назад
@@ -46,7 +49,7 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
         ) : (
           <Link
             key={page}
-            href={pageHref(basePath, page)}
+            href={pageHref(basePath, page, query)}
             className={cn(
               "flex h-14 min-w-14 items-center justify-center rounded-lg px-2 text-sm",
               page === currentPage ? "bg-black font-medium text-white" : "text-neutral-600 hover:bg-neutral-100"
@@ -58,7 +61,7 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
       )}
 
       <Link
-        href={pageHref(basePath, Math.min(totalPages, currentPage + 1))}
+        href={pageHref(basePath, Math.min(totalPages, currentPage + 1), query)}
         className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-neutral-500 hover:text-neutral-900"
       >
         Далее

@@ -5,6 +5,7 @@ import ProductCard from "@/components/ui/ProductCard";
 import ProductTabs from "@/components/ui/ProductTabs";
 import BuyOneClickButton from "@/components/ui/BuyOneClickButton";
 import ProductGallery from "@/components/ui/ProductGallery";
+import ProductFavoriteCompareButtons from "@/components/ui/ProductFavoriteCompareButtons";
 
 interface ProductDetailProps {
   params: Promise<{ id: string }>;
@@ -18,7 +19,9 @@ export default async function ProductDetailPage({ params }: ProductDetailProps) 
     notFound();
   }
 
-  const otherProducts = staticProducts.filter((p) => p.id !== id);
+  const otherProducts = staticProducts
+    .filter((p) => p.id !== id && p.category === product.category)
+    .slice(0, 4);
 
   return (
     <div className="min-w-0 max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 bg-white font-sans text-gray-900">
@@ -117,14 +120,7 @@ export default async function ProductDetailPage({ params }: ProductDetailProps) 
             <BuyOneClickButton product={product} disabled={!product.inStock} />
           </div>
 
-          <div className="flex justify-around border-t border-gray-100 mt-5 pt-4 text-xs font-medium text-gray-600">
-            <button className="hover:text-blue-600 flex items-center gap-1.5">
-              <span>♡</span> В избранное
-            </button>
-            <button className="hover:text-blue-600 flex items-center gap-1.5">
-              <span>📊</span> Сравнить
-            </button>
-          </div>
+          <ProductFavoriteCompareButtons productId={product.id} />
         </div>
 
       </div>
