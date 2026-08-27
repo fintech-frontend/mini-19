@@ -1,65 +1,133 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { BarChart3, Check, Heart, ShoppingCart } from "lucide-react";
 import { Product } from "@/types/product";
+import { useShop } from "@/context/ShopContext";
 
 interface ProductCardProps {
   product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const formatPrice = (price: number) => {
-    return price.toLocaleString("ru-RU") + " ₽";
+  const { addToCart, isFavorite, toggleFavorite, isInCompare, toggleCompare } = useShop();
+  const [justAdded, setJustAdded] = useState(false);
+
+  const favorite = isFavorite(product.id);
+  const compared = isInCompare(product.id);
+  const hasDiscount = product.oldPrice && product.oldPrice > product.price;
+
+  const formatPrice = (price: number) => price.toLocaleString("ru-RU") + " ₽";
+
+  const handleAddToCart = () => {
+    addToCart(product.id);
+    setJustAdded(true);
+    setTimeout(() => setJustAdded(false), 1500);
   };
 
   return (
     <div className="group flex flex-col bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden h-full">
-      <Link href={`/products/${product.id}`} className="relative block aspect-square w-full bg-gray-50 overflow-hidden">
+      <Link
+        href={`/products/${product.id}`}
+        className="relative block aspect-square w-full bg-gray-50 overflow-hidden"
+      >
+        {product.isBestSeller && (
+          <span className="absolute top-2 left-2 z-10 rounded-md border border-orange-400 bg-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-orange-500">
+            Хит
+          </span>
+        )}
+        {!product.inStock && (
+          <span className="absolute top-2 right-2 z-10 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
+            Нет в наличии
+          </span>
+        )}
         <Image
           src={product.image}
           alt={product.title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
+          className="object-contain p-6 group-hover:scale-105 transition-transform duration-300"
         />
-        {!product.inStock && (
-          <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
-            Нет в наличии
-          </span>
-        )}
       </Link>
 
-      <div className="p-4 flex flex-col flex-grow">
-        <span className="text-xs font-medium text-gray-400 mb-1 uppercase tracking-wider">
-          {product.category}
-        </span>
+      <div className="p-4 flex flex-col grow">
+        <span className="text-xs text-gray-400 mb-1">Артикул: {product.article}</span>
 
-        <Link href={`/products/${product.id}`} className="flex-grow">
-          <h3 className="text-sm font-semibold text-gray-800 line-clamp-2 hover:text-blue-600 transition-colors duration-150 mb-2 min-h-[40px]">
+        <Link href={`/products/${product.id}`} className="grow">
+          <h3 className="text-sm font-semibold text-gray-800 line-clamp-2 hover:text-blue-600 transition-colors duration-150 mb-2 min-h-10">
             {product.title}
           </h3>
         </Link>
 
-        <div className="mt-auto pt-3 border-t border-gray-50">
-          <div className="flex items-center justify-between gap-2">
-            <div>
-              <p className="text-xs text-gray-400 font-medium">Цена</p>
-              <p className="text-base font-bold text-gray-900">{formatPrice(product.price)}</p>
-            </div>
+        <div className="mt-2 flex items-baseline gap-2">
+          {hasDiscount && (
+            <span className="text-sm text-gray-400 line-through">{formatPrice(product.oldPrice!)}</span>
+          )}
+          <span className="text-lg font-bold text-gray-900">{formatPrice(product.price)}</span>
+          {hasDiscount && (
+            <span className="bg-green-500 text-white text-xs font-bold px-1.5 py-0.5 rounded">
+              -{Math.round(100 - (product.price / product.oldPrice!) * 100)}%
+            </span>
+          )}
+        </div>
 
-            <button
-              disabled={!product.inStock}
-              className={`p-2.5 rounded-lg transition-all duration-150 ${
-                product.inStock
-                  ? "bg-blue-600 text-white hover:bg-blue-700 active:scale-95"
-                  : "bg-gray-100 text-gray-400 cursor-not-allowed"
-              }`}
-              title="Добавить в корзину"
-            >
-              <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-              </svg>
-            </button>
-          </div>
+        <div className="mt-3 flex items-center gap-2">
+          <button
+            type="button"
+            disabled={!product.inStock}
+            onClick={handleAddToCart}
+            className={`flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-semibold transition-all duration-150 ${
+              !product.inStock
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                : justAdded
+                ? "bg-green-600 text-white"
+                : "bg-blue-600 text-white hover:bg-blue-700 active:scale-[0.98]"
+            }`}
+          >
+            {!product.inStock ? (
+              "Нет в наличии"
+            ) : justAdded ? (
+              <>
+                <Check size={16} />
+                Добавлено
+              </>
+            ) : (
+              <>
+                <ShoppingCart size={16} />
+                Купить
+              </>
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => toggleFavorite(product.id)}
+            aria-label={favorite ? "Убрать из избранного" : "Добавить в избранное"}
+            aria-pressed={favorite}
+            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition-colors ${
+              favorite
+                ? "border-red-300 bg-red-50 text-red-500"
+                : "border-gray-200 text-gray-500 hover:border-gray-300 hover:text-red-500"
+            }`}
+          >
+            <Heart size={17} className={favorite ? "fill-red-500" : ""} />
+          </button>
+
+          <button
+            type="button"
+            onClick={() => toggleCompare(product.id)}
+            aria-label={compared ? "Убрать из сравнения" : "Добавить к сравнению"}
+            aria-pressed={compared}
+            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition-colors ${
+              compared
+                ? "border-blue-300 bg-blue-50 text-blue-600"
+                : "border-gray-200 text-gray-500 hover:border-gray-300 hover:text-blue-600"
+            }`}
+          >
+            <BarChart3 size={17} />
+          </button>
         </div>
       </div>
     </div>
