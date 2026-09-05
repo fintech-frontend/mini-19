@@ -15,8 +15,6 @@ export const deliveryAddress: DeliveryAddress = {
   email: "example@email.com",
 };
 
-export const favoriteProductIds = ["1", "2", "3"];
-
 export const orders: Order[] = [
   { number: "#2365341-11", date: "16 Августа 2023", status: "processing", total: 36829 },
   { number: "#2356576-13", date: "1 Августа 2023", status: "completed", total: 11299 },

@@ -19,6 +19,12 @@ export default function BuyOneClickButton({ product, disabled }: BuyOneClickButt
     setSubmitted(false);
   };
 
+  // Намеренно не вызываем createOrder (lib/api/orders.ts) отсюда: в документации
+  // Postman нет отдельного эндпоинта "быстрый заказ в 1 клик", который принимал бы
+  // имя/email/телефон одного товара, а придумывать несуществующий API мы не должны.
+  // POST /orders/ тоже не подходит один в один — он создаёт сводку по subtotal/total
+  // без знания о заказчике "в 1 клик", так что тут заведомо остаётся локальная
+  // имитация "спасибо, менеджер свяжется с вами".
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted(true);

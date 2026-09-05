@@ -1,10 +1,11 @@
 "use client";
 
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Minus, Plus, Trash2, ShoppingCart, Package } from "lucide-react";
-import { staticProducts } from "@/data/staticProducts";
 import { useShop } from "@/context/ShopContext";
+import { resolveProductsByIds, type ResolvedProduct } from "@/lib/resolveProduct";
 
 /**
  * Вёрстка корзины (шаги количества, удаление, блок "Ваш заказ", пустое состояние)
@@ -123,6 +124,18 @@ function CartRow({
   );
 }
 
+function CartStateMessage({ tone = "neutral", children }: { tone?: "neutral" | "error"; children: ReactNode }) {
+  return (
+    <div
+      className={`flex flex-col items-center justify-center rounded-lg border px-4 py-20 text-center text-sm ${
+        tone === "error" ? "border-red-200 bg-red-50 text-red-600" : "border-neutral-200 text-neutral-500"
+      }`}
+    >
+      {children}
+    </div>
+  );
+}
+
 function EmptyCart() {
   return (
     <div className="flex flex-col items-center justify-center rounded-lg border border-neutral-200 px-4 py-20 text-center">
@@ -145,10 +158,54 @@ function EmptyCart() {
 }
 
 export default function CartPage() {
-  const { cart, setCartQty, removeFromCart } = useShop();
+  const { cart, cartLoading, setCartQty, removeFromCart } = useShop();
+
+  // /products/:id/ отдаёт цену/название и т.п., но не количество — количество
+  // берём из cart (ShopContext). Ключуем эффект по отсортированному списку id,
+  // а не по самому cart, чтобы смена количества не вызывала повторный запрос.
+  const idsKey = useMemo(() => Object.keys(cart).sort().join(","), [cart]);
+
+  // Результат и ошибка хранятся вместе со "своим" ключом (списком id, для
+  // которого они получены), а loading/error для текущего рендера выводятся
+  // сравнением этого ключа с idsKey — так эффект не должен синхронно вызывать
+  // setState в начале (только внутри .then/.catch), что требует react-compiler
+  // eslint-правило react-hooks/set-state-in-effect.
+  const [result, setResult] = useState<{ key: string; products: ResolvedProduct[] } | null>(null);
+  const [fetchError, setFetchError] = useState<{ key: string; message: string } | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const ids = idsKey ? idsKey.split(",") : [];
+
+    resolveProductsByIds(ids)
+      .then((resolved) => {
+        if (cancelled) return;
+        setResult({ key: idsKey, products: resolved });
+        setFetchError(null);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setFetchError({ key: idsKey, message: "Не удалось загрузить товары корзины. Попробуйте обновить страницу." });
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [idsKey]);
+
+  const productMap = useMemo(() => {
+    if (!result || result.key !== idsKey) return {};
+    const map: Record<string, ResolvedProduct> = {};
+    for (const product of result.products) map[product.id] = product;
+    return map;
+  }, [result, idsKey]);
+
+  const productsError = fetchError?.key === idsKey ? fetchError.message : null;
+  const productsLoading = !productsError && result?.key !== idsKey;
 
   const items: CartLine[] = Object.entries(cart).flatMap(([id, qty]) => {
-    const product = staticProducts.find((p) => p.id === id);
+    const product = productMap[id];
     if (!product) return [];
     return [
       {
@@ -156,12 +213,13 @@ export default function CartPage() {
         name: product.title,
         price: product.price,
         oldPrice: product.oldPrice,
-        image: product.image,
+        image: product.image ?? undefined,
         qty,
       },
     ];
   });
 
+  const loading = cartLoading || productsLoading;
   const totalQty = items.reduce((sum, item) => sum + item.qty, 0);
   const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0);
   const savings = items.reduce(
@@ -173,7 +231,15 @@ export default function CartPage() {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:py-12">
       <h1 className="text-2xl font-bold text-neutral-900 sm:text-3xl">Корзина</h1>
 
-      {items.length === 0 ? (
+      {loading ? (
+        <div className="mt-6">
+          <CartStateMessage>Загрузка корзины...</CartStateMessage>
+        </div>
+      ) : productsError ? (
+        <div className="mt-6">
+          <CartStateMessage tone="error">{productsError}</CartStateMessage>
+        </div>
+      ) : items.length === 0 ? (
         <div className="mt-6">
           <EmptyCart />
         </div>

@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AccountTab } from "@/types/account";
-import { currentUser, deliveryAddress, favoriteProductIds, orders } from "@/data/account-data";
+import { currentUser, deliveryAddress, orders } from "@/data/account-data";
 import { AccountSidebar } from "@/components/account/AccountSidebar";
 import { OverviewPanel } from "@/components/account/OverviewPanel";
 import { OrdersPanel } from "@/components/account/OrdersPanel";
@@ -11,13 +11,20 @@ import { ProfileForm } from "@/components/account/ProfileForm";
 import { AddressPanel } from "@/components/account/AddressPanel";
 import { ChangePasswordForm } from "@/components/account/ChangePasswordForm";
 import { FavoritesPanel } from "@/components/account/FavoritesPanel";
+import { clearAuthTokens, isAuthenticated } from "@/lib/api/token";
 
 export function AccountDashboard() {
   const [tab, setTab] = useState<AccountTab>("overview");
   const router = useRouter();
 
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      router.replace("/my-account");
+    }
+  }, [router]);
+
   function handleLogout() {
-    // TODO: clear auth session once real authentication is wired up
+    clearAuthTokens();
     router.push("/my-account");
   }
 
@@ -37,7 +44,7 @@ export function AccountDashboard() {
         {tab === "orders" && <OrdersPanel orders={orders} onSelect={setTab} onLogout={handleLogout} />}
         {tab === "profile" && <ProfileForm user={currentUser} />}
         {tab === "address" && <AddressPanel address={deliveryAddress} />}
-        {tab === "favorites" && <FavoritesPanel productIds={favoriteProductIds} />}
+        {tab === "favorites" && <FavoritesPanel />}
         {tab === "password" && <ChangePasswordForm />}
       </div>
     </div>

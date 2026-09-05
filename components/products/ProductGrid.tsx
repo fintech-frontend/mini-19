@@ -1,15 +1,16 @@
 import ProductCard from "@/components/ui/ProductCard";
-import { Product } from "@/types/product";
+import { ResolvedProduct } from "@/lib/resolveProduct";
 
 interface ProductGridProps {
-  products: Product[];
+  products: ResolvedProduct[];
+  emptyMessage?: string;
 }
 
-export default function ProductGrid({ products }: ProductGridProps) {
+export default function ProductGrid({ products, emptyMessage }: ProductGridProps) {
   if (products.length === 0) {
     return (
       <p className="py-16 text-center text-sm text-gray-400">
-        В этой категории пока нет товаров.
+        {emptyMessage ?? "В этой категории пока нет товаров."}
       </p>
     );
   }

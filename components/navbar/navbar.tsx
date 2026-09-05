@@ -1,7 +1,9 @@
 "use client";
 
+import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Search, Gift, User, BarChart3, Heart, ShoppingCart, Menu } from "lucide-react";
 import Logo1 from "@/src/svg/logo1.svg";
 import { styles } from "@/styles/index.styles";
@@ -47,21 +49,42 @@ function CatalogButton() {
   );
 }
 
+/**
+ * Поиск по каталогу. У бэкенда нет параметра `?search=` (проверено живыми запросами —
+ * ответ не меняется), поэтому строка поиска ведёт на /products?q=..., а сам отбор
+ * идёт по реальным товарам из API на стороне сервера страницы.
+ */
 function SearchBar({ placeholder }: { placeholder: string }) {
+  const router = useRouter();
+  const [query, setQuery] = useState("");
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const trimmed = query.trim();
+    router.push(trimmed ? `/products?q=${encodeURIComponent(trimmed)}` : "/products");
+  }
+
   return (
-    <div className="flex flex-1 items-stretch overflow-hidden rounded-lg border-2 border-blue-600 bg-white">
+    <form
+      onSubmit={handleSubmit}
+      role="search"
+      className="flex flex-1 items-stretch overflow-hidden rounded-lg border-2 border-blue-600 bg-white"
+    >
       <input
         type="text"
         placeholder={placeholder}
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
         className="w-full bg-transparent px-4 py-2 text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none"
       />
       <button
+        type="submit"
         aria-label="Искать"
         className="flex items-center justify-center bg-blue-600 px-5 text-white transition-colors hover:bg-blue-700 shrink-0"
       >
         <Search size={18} />
       </button>
-    </div>
+    </form>
   );
 }
 

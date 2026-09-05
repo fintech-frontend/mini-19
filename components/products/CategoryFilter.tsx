@@ -1,20 +1,28 @@
 import Link from "next/link";
-import { categories } from "@/data/categories";
-import { Product } from "@/types/product";
+import type { ApiCategory } from "@/types/api";
+import { ResolvedProduct } from "@/lib/resolveProduct";
+import { collectDescendantCategoryIds } from "@/lib/api/categoryTree";
 
 interface CategoryFilterProps {
-  products: Product[];
+  products: ResolvedProduct[];
+  /** Полный плоский список категорий — нужен, чтобы посчитать товары раздела вместе с подразделами. */
+  categories: ApiCategory[];
   activeSlug?: string;
 }
 
-export default function CategoryFilter({ products, activeSlug }: CategoryFilterProps) {
+export default function CategoryFilter({ products, categories, activeSlug }: CategoryFilterProps) {
+  const topLevel = categories.filter((category) => category.parent === null);
+
   const items = [
     { slug: undefined, name: "Все товары", count: products.length },
-    ...categories.map((category) => ({
-      slug: category.slug,
-      name: category.name,
-      count: products.filter((p) => p.category === category.name).length,
-    })),
+    ...topLevel.map((category) => {
+      const descendantIds = new Set(collectDescendantCategoryIds(categories, category.id));
+      return {
+        slug: category.slug,
+        name: category.name,
+        count: products.filter((p) => p.categoryId != null && descendantIds.has(p.categoryId)).length,
+      };
+    }),
   ];
 
   return (

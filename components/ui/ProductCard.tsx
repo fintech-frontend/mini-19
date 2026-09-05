@@ -3,12 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { BarChart3, Check, Heart, ShoppingCart } from "lucide-react";
-import { Product } from "@/types/product";
+import { BarChart3, Check, Heart, ImageOff, ShoppingCart } from "lucide-react";
+import { ResolvedProduct } from "@/lib/resolveProduct";
 import { useShop } from "@/context/ShopContext";
 
 interface ProductCardProps {
-  product: Product;
+  product: ResolvedProduct;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
@@ -20,6 +20,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const hasDiscount = product.oldPrice && product.oldPrice > product.price;
 
   const formatPrice = (price: number) => price.toLocaleString("ru-RU") + " ₽";
+  const href = product.href ?? `/products/${product.id}`;
 
   const handleAddToCart = () => {
     addToCart(product.id);
@@ -30,7 +31,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="group flex flex-col bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden h-full">
       <Link
-        href={`/products/${product.id}`}
+        href={href}
         className="relative block aspect-square w-full bg-gray-50 overflow-hidden"
       >
         {product.isBestSeller && (
@@ -43,19 +44,25 @@ export default function ProductCard({ product }: ProductCardProps) {
             Нет в наличии
           </span>
         )}
-        <Image
-          src={product.image}
-          alt={product.title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-contain p-6 group-hover:scale-105 transition-transform duration-300"
-        />
+        {product.image ? (
+          <Image
+            src={product.image}
+            alt={product.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-contain p-6 group-hover:scale-105 transition-transform duration-300"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center text-gray-300">
+            <ImageOff className="h-10 w-10" />
+          </div>
+        )}
       </Link>
 
       <div className="p-4 flex flex-col grow">
         <span className="text-xs text-gray-400 mb-1">Артикул: {product.article}</span>
 
-        <Link href={`/products/${product.id}`} className="grow">
+        <Link href={href} className="grow">
           <h3 className="text-sm font-semibold text-gray-800 line-clamp-2 hover:text-blue-600 transition-colors duration-150 mb-2 min-h-10">
             {product.title}
           </h3>

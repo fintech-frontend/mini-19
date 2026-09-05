@@ -1,10 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
-import { CatalogNode } from "@/data/catalog-tree";
+import { ImageOff } from "lucide-react";
+import { CategoryTreeNode } from "@/lib/api/categoryTree";
 import styles from "@/app/catalog/catalog.module.css";
 
 const VISIBLE_BY_DEFAULT = 4;
-const PLACEHOLDER_IMAGE = "https://www.stroiopttorg.ru/wp-content/uploads/woocommerce-placeholder-300x300.webp";
 
 /** Иконка-стрелка перед ссылкой подкатегории — та же, что и на эталонном сайте. */
 function ChevronBullet() {
@@ -27,31 +26,24 @@ function ChevronBullet() {
 
 /**
  * Карточка узла верхнего уровня каталога (используется только на /catalog): картинка,
- * заголовок-ссылка и превью первых подпунктов. Работает с любым узлом дерева
- * (data/catalog-tree.ts), а не только с "категорией" — это то же дерево, просто
- * карточка сама решает, куда вести ссылки, через переданный basePath.
+ * заголовок-ссылка и превью первых подпунктов. Backend не отдаёт изображений категорий
+ * (см. types/api.ts — у ApiCategory их нет), поэтому вместо картинки — тот же
+ * ImageOff-плейсхолдер, что и у карточки товара без фото.
  */
-export default function CategoryCard({ node, basePath }: { node: CatalogNode; basePath: string }) {
+export default function CategoryCard({ node, basePath }: { node: CategoryTreeNode; basePath: string }) {
   const href = `${basePath}/${node.slug}`;
-  // На эталонном сайте карточка показывает только первые 4 подкатегории — остальные
-  // присутствуют в разметке, но кнопка "Показать ещё" отключена (display: none всегда,
-  // клик по ней ни на что не влияет), поэтому список подкатегорий здесь статичный.
   const visibleChildren = node.children.slice(0, VISIBLE_BY_DEFAULT);
 
   return (
     <div className={styles.card}>
       <Link href={href} className={styles.cardImageLink}>
-        <Image
-          src={node.image ?? PLACEHOLDER_IMAGE}
-          alt={node.title}
-          width={228}
-          height={128}
-          className={styles.cardImage}
-        />
+        <div className="flex h-32 w-full items-center justify-center text-neutral-300">
+          <ImageOff className="h-10 w-10" />
+        </div>
       </Link>
 
       <Link href={href} className={styles.cardTitle}>
-        {node.title}
+        {node.name}
       </Link>
 
       {visibleChildren.length > 0 && (
@@ -60,7 +52,7 @@ export default function CategoryCard({ node, basePath }: { node: CatalogNode; ba
             <li key={child.slug} className={styles.subItem}>
               <ChevronBullet />
               <Link href={`${href}/${child.slug}`} className={styles.subLink}>
-                {child.title}
+                {child.name}
               </Link>
             </li>
           ))}

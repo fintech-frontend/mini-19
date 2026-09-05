@@ -1,13 +1,10 @@
 import Link from "next/link";
-import Image from "next/image";
-import { CatalogNode } from "@/data/catalog-tree";
-
-const PLACEHOLDER_IMAGE = "https://www.stroiopttorg.ru/wp-content/uploads/woocommerce-placeholder-300x300.webp";
+import { ImageOff } from "lucide-react";
+import { CategoryTreeNode } from "@/lib/api/categoryTree";
 
 /**
- * "Другие разделы категории «X»" — показывается под товарами/описанием терминального
- * узла, ссылки на родные братья текущего узла в дереве. Общий для листинга с товарами
- * и для fallback-заглушки без товаров.
+ * "Другие разделы категории «X»" — показывается под товарами/сеткой подкатегорий
+ * текущего узла, ссылки на родные братья текущего узла в дереве категорий.
  */
 export default function CatalogSiblingsSection({
   parentTitle,
@@ -15,7 +12,7 @@ export default function CatalogSiblingsSection({
   basePath,
 }: {
   parentTitle: string;
-  siblings: CatalogNode[];
+  siblings: CategoryTreeNode[];
   basePath: string;
 }) {
   if (siblings.length === 0) return null;
@@ -32,17 +29,11 @@ export default function CatalogSiblingsSection({
             href={`${basePath}/${sibling.slug}`}
             className="group flex flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white transition-shadow duration-300 hover:shadow-lg"
           >
-            <div className="relative aspect-square w-full bg-neutral-50">
-              <Image
-                src={sibling.image ?? PLACEHOLDER_IMAGE}
-                alt={sibling.title}
-                fill
-                sizes="(max-width: 768px) 50vw, 25vw"
-                className="object-contain p-8 transition-transform duration-300 group-hover:scale-105"
-              />
+            <div className="relative flex aspect-square w-full items-center justify-center bg-neutral-50 text-neutral-300">
+              <ImageOff className="h-10 w-10" />
             </div>
             <div className="p-4">
-              <h3 className="font-semibold text-neutral-900 group-hover:text-blue-600">{sibling.title}</h3>
+              <h3 className="font-semibold text-neutral-900 group-hover:text-blue-600">{sibling.name}</h3>
             </div>
           </Link>
         ))}
