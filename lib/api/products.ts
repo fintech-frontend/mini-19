@@ -25,18 +25,64 @@ export async function listProducts(params: ListProductsParams = {}): Promise<Api
     items = items.filter((product) => product.category != null && allowed.has(product.category.id));
   }
 
-  const query = params.query?.trim().toLowerCase();
-  if (query) {
-    items = items.filter((product) => {
-      const haystack = [product.name, product.article, product.brand?.name, product.category?.name]
-        .filter((value): value is string => typeof value === "string")
-        .join(" ")
-        .toLowerCase();
-      return haystack.includes(query);
-    });
+  if (params.query) {
+    items = filterProductsByQuery(items, params.query);
   }
 
   return items;
+}
+
+/**
+ * Текст товара, по которому идёт поиск: название, артикул, бренд и категория.
+ * Собран в одном месте, чтобы правила совпадения были одинаковыми везде
+ * (поиск в навбаре, страница /search, список /products).
+ */
+function productHaystack(product: ApiProduct): string {
+  return [product.name, product.article, product.brand?.name, product.category?.name]
+    .filter((value): value is string => typeof value === "string")
+    .join(" ")
+    .toLowerCase();
+}
+
+/**
+ * Отбор товаров по строке запроса.
+ *
+ * Регистр не важен (обе стороны приводятся к нижнему), совпадение — по части слова,
+ * поэтому «дрел» находит «Дрель-шуруповёрт». Запрос из нескольких слов требует
+ * присутствия каждого слова, но в любом порядке: «bosch перфоратор» и
+ * «перфоратор bosch» дают одинаковый результат.
+ */
+export function filterProductsByQuery(products: ApiProduct[], query: string): ApiProduct[] {
+  const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if (terms.length === 0) return products;
+
+  return products.filter((product) => {
+    const haystack = productHaystack(product);
+    return terms.every((term) => haystack.includes(term));
+  });
+}
+
+/**
+ * Поиск товаров по всему каталогу.
+ *
+ * ─── Почему поиск на клиенте, а не на бэкенде ───────────────────────────────
+ * У API нет серверного поиска: `?search=`, `?q=`, `?name=`, `?name__icontains=`,
+ * `?ordering=`, `?category=`, `?is_active=` — все возвращают один и тот же полный
+ * список из 47 товаров (проверено живыми запросами к http://16.170.163.62/api).
+ * Работают только `?page=` и `?page_size=`. Выдумывать несуществующий параметр
+ * нельзя, поэтому забираем каталог одним запросом (см. lib/api/paginate.ts) и
+ * фильтруем его здесь.
+ *
+ * Когда на бэкенде появится настоящий поиск, менять нужно будет только тело этой
+ * функции — на что-то вроде
+ *
+ *     return fetchAllPages<ApiProduct>(`/products/?search=${encodeURIComponent(query)}`);
+ *
+ * UI и хук useProductSearch останутся прежними.
+ */
+export async function searchProducts(query: string): Promise<ApiProduct[]> {
+  const products = await listProducts();
+  return filterProductsByQuery(products, query);
 }
 
 /**

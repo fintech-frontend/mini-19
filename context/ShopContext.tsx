@@ -33,6 +33,16 @@ import { ApiError } from "@/lib/api/errors";
 
 const CART_ID_STORAGE_KEY = "mini19:cart_id";
 
+/**
+ * Избранное и сравнение хранятся в localStorage: у backend нет ни одного
+ * документированного эндпоинта для wishlist/сравнения (в API есть только
+ * categories / brands / products / carts / cart-items / orders + auth), поэтому
+ * серверного места для них просто нет. Без этого списки терялись при каждой
+ * перезагрузке страницы.
+ */
+const FAVORITES_STORAGE_KEY = "mini19:favorites";
+const COMPARE_STORAGE_KEY = "mini19:compare";
+
 interface CartItemState {
   cartItemId: number;
   quantity: number;
@@ -93,6 +103,34 @@ function persistCartId(id: number | null) {
   }
 }
 
+/** Читает сохранённый список id товаров (избранное / сравнение). */
+function readStoredIds(key: string): Set<string> {
+  if (typeof window === "undefined") return new Set();
+  try {
+    const raw = window.localStorage.getItem(key);
+    if (!raw) return new Set();
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return new Set();
+    return new Set(parsed.filter((id): id is string => typeof id === "string"));
+  } catch {
+    // Битые данные или недоступный localStorage — начинаем с пустого списка.
+    return new Set();
+  }
+}
+
+function persistIds(key: string, ids: Set<string>) {
+  if (typeof window === "undefined") return;
+  try {
+    if (ids.size === 0) {
+      window.localStorage.removeItem(key);
+    } else {
+      window.localStorage.setItem(key, JSON.stringify(Array.from(ids)));
+    }
+  } catch {
+    // localStorage может быть недоступен (приватный режим и т.п.) — не критично.
+  }
+}
+
 export function ShopProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItemsState>({});
   const [cartLoading, setCartLoading] = useState(true);
@@ -105,6 +143,39 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   const cartIdRef = useRef<number | null>(null);
   const cartItemsRef = useRef<CartItemsState>({});
   const hydrationRef = useRef<Promise<void> | null>(null);
+  /** Пока избранное/сравнение не поднято из localStorage, записывать туда нельзя. */
+  const prefsHydratedRef = useRef(false);
+
+  /*
+   * Избранное и сравнение поднимаем из localStorage после монтирования, а не в
+   * инициализаторе useState: на сервере localStorage нет, и рендер с уже
+   * заполненными списками разошёлся бы с серверной разметкой (hydration mismatch).
+   * setState вызываем внутри промиса — синхронный вызов в теле эффекта запрещён
+   * правилом react-hooks/set-state-in-effect.
+   */
+  useEffect(() => {
+    let cancelled = false;
+    void Promise.resolve().then(() => {
+      if (cancelled) return;
+      setFavorites(readStoredIds(FAVORITES_STORAGE_KEY));
+      setCompare(readStoredIds(COMPARE_STORAGE_KEY));
+      prefsHydratedRef.current = true;
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // Сохраняем только после гидратации, иначе первый рендер стёр бы сохранённое.
+  useEffect(() => {
+    if (!prefsHydratedRef.current) return;
+    persistIds(FAVORITES_STORAGE_KEY, favorites);
+  }, [favorites]);
+
+  useEffect(() => {
+    if (!prefsHydratedRef.current) return;
+    persistIds(COMPARE_STORAGE_KEY, compare);
+  }, [compare]);
 
   const applyCartId = useCallback((next: number | null) => {
     cartIdRef.current = next;

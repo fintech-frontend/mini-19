@@ -1,0 +1,246 @@
+/*
+ * Страница «Вопрос-ответ» — точный порт вёрстки
+ * https://www.stroiopttorg.ru/vopros-otvet/ (тема Astra95).
+ *
+ * Шаблон страницы тот же, что у /oplata (`.blog` → `.container` → H1 →
+ * `.blog__grid` из контента и сайдбара), поэтому вся общая обвязка берётся из
+ * одного места — styles/reference-page.module.css — через `composes`. Здесь
+ * остаётся только уникальный для страницы аккордеон `.qa`.
+ */
+
+.fluidRoot {
+  composes: fluidRoot from "../../styles/reference-page.module.css";
+  font-family: HelveticaNeueCyr, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  color: #000;
+}
+
+/*
+ * Сброс из оригинала. Обёрнут в :where(), чтобы у правила была нулевая
+ * специфичность — как у сброса по тегам в оригинале.
+ */
+:where(.fluidRoot) :where(h1, h2, h3, h4, h5, h6, p, ul, li, div, a, form, fieldset, label, button) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  line-height: 1;
+}
+:where(.fluidRoot) :where(ul) {
+  list-style: none;
+}
+:where(.fluidRoot) :where(h1, h2, h3, h4, h5, h6) {
+  font-weight: 400;
+}
+
+/* ── общая обвязка шаблона: одно определение на весь проект ── */
+
+.container {
+  composes: container from "../../styles/reference-page.module.css";
+}
+.blog {
+  composes: blog from "../../styles/reference-page.module.css";
+}
+.blogTitle {
+  composes: blogTitle from "../../styles/reference-page.module.css";
+}
+.grid {
+  composes: grid from "../../styles/reference-page.module.css";
+}
+.sidebar {
+  composes: sidebar from "../../styles/reference-page.module.css";
+}
+.breadcrumbs {
+  composes: breadcrumbs from "../../styles/reference-page.module.css";
+}
+.breadcrumbItem {
+  composes: breadcrumbItem from "../../styles/reference-page.module.css";
+}
+.text48 {
+  composes: text48 from "../../styles/reference-page.module.css";
+}
+.text18 {
+  composes: text18 from "../../styles/reference-page.module.css";
+}
+.text16Tablet {
+  composes: text16Tablet from "../../styles/reference-page.module.css";
+}
+.bold {
+  composes: bold from "../../styles/reference-page.module.css";
+}
+.medium {
+  composes: medium from "../../styles/reference-page.module.css";
+}
+.black2 {
+  composes: black2 from "../../styles/reference-page.module.css";
+}
+.btnBlue {
+  composes: btnBlue from "../../styles/reference-page.module.css";
+}
+.catalogPromo {
+  composes: catalogPromo from "../../styles/reference-page.module.css";
+}
+.promoCard {
+  composes: promoCard from "../../styles/reference-page.module.css";
+}
+.promoCardImg {
+  composes: promoCardImg from "../../styles/reference-page.module.css";
+}
+.subscribe {
+  composes: subscribe from "../../styles/reference-page.module.css";
+}
+.subscribeTop {
+  composes: subscribeTop from "../../styles/reference-page.module.css";
+}
+.subscribeWrap {
+  composes: subscribeWrap from "../../styles/reference-page.module.css";
+}
+.stateBox {
+  composes: stateBox from "../../styles/reference-page.module.css";
+}
+.stateError {
+  composes: stateError from "../../styles/reference-page.module.css";
+}
+.skeleton {
+  composes: skeleton from "../../styles/reference-page.module.css";
+}
+
+/* ─────────────────────────── аккордеон «Вопрос-ответ» ─────────────────────────── */
+
+/* В оригинале отступ задан и у `.qa`, и у `.qa__items`; сохраняем оба уровня. */
+.qa {
+  margin-top: 1.25em;
+}
+.qaItems {
+  margin-top: 1.25em;
+}
+
+.qaCard {
+  /* Каждая карточка открывается независимо — как в оригинале. */
+  position: relative;
+}
+
+/*
+ * Строка вопроса. В оригинале это `div.qa-card__show` с вложенной кнопкой-иконкой;
+ * здесь вся строка — один <button>, чтобы вопрос открывался с клавиатуры и по
+ * тапу в любом месте строки (вложенная кнопка внутри кнопки — невалидная разметка).
+ * Стили кнопки сброшены, поэтому визуально строка не отличается от оригинала.
+ */
+.qaShow {
+  border-bottom: 1px solid #edf0f2;
+  padding: 0.625em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 100%;
+  background: none;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.qaShow:focus-visible {
+  outline: 2px solid #186fd4;
+  outline-offset: -2px;
+}
+
+.qaQuestion {
+  color: #2c333d;
+  font-weight: 500;
+}
+
+/* Круглая кнопка-иконка справа. */
+.qaBtn {
+  width: 2.75em;
+  height: 2.75em;
+  background-color: #ebf7ff;
+  border-radius: 50%;
+  margin-left: 1em;
+  flex-shrink: 0;
+  position: relative;
+  display: block;
+}
+/*
+ * Оригинал задаёт иконкам только ширину, высота остаётся из атрибута SVG
+ * (16px у плюса, 2px у минуса) — повторяем это один в один.
+ */
+.qaBtn svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1em;
+  transition: opacity 0.25s;
+}
+/* Плюс виден в закрытом состоянии, минус — в открытом. */
+.qaBtn .viewPlus {
+  opacity: 1;
+}
+.qaBtn .viewMinus {
+  opacity: 0;
+}
+.qaCardActive .qaBtn .viewPlus {
+  opacity: 0;
+}
+.qaCardActive .qaBtn .viewMinus {
+  opacity: 1;
+}
+
+/*
+ * Раскрытие ответа. Оригинал использует jQuery slideToggle (анимация высоты);
+ * тот же эффект без JS-измерений даёт анимация grid-template-rows 0fr → 1fr,
+ * которая корректно работает с текстом любой длины и не ломает раскладку.
+ */
+.qaHidden {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease;
+}
+.qaCardActive .qaHidden {
+  grid-template-rows: 1fr;
+}
+.qaHiddenInner {
+  overflow: hidden;
+  /* Закрытый ответ убираем из фокуса и из дерева доступности. */
+  visibility: hidden;
+  transition: visibility 0s 0.4s;
+}
+.qaCardActive .qaHiddenInner {
+  visibility: visible;
+  transition: visibility 0s 0s;
+}
+/* Внутренний блок несёт паддинги, поэтому в закрытом состоянии высота ровно 0. */
+.qaHiddenBody {
+  padding: 1.25em;
+}
+@media screen and (max-width: 992px) {
+  .qaHiddenBody {
+    padding: 0.625em 1.25em;
+  }
+}
+
+/* Текст ответа (`.qa-card .text` оригинала). */
+.qaText {
+  color: #64676a;
+}
+.qaText p {
+  font-size: 1em;
+  line-height: 169%;
+}
+.qaText p:not(:last-child) {
+  margin: 0 0 1em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qaHidden,
+  .qaHiddenInner,
+  .qaBtn svg {
+    transition: none !important;
+  }
+}

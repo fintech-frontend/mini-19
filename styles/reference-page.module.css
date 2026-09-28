@@ -1,0 +1,574 @@
+/*
+ * ЕДИНСТВЕННОЕ место, где объявлены контейнер и «плавающий» em-масштаб страниц,
+ * свёрстанных 1:1 по https://www.stroiopttorg.ru (тема Astra95).
+ *
+ * Раньше `.fluidRoot` и `.container` дублировались в каждом маршруте
+ * (catalog / about / contacts / oplata). Теперь определение одно, а модули
+ * страниц подключают его через `composes` — поэтому в разметке по-прежнему
+ * пишется привычный `styles.container`, менять JSX не нужно:
+ *
+ *     .container { composes: container from "../../styles/reference-page.module.css"; }
+ *
+ * Здесь же живёт общая «обвязка» шаблона `.blog` оригинала (заголовок, сетка
+ * «контент + сайдбар», промо-карточки, форма подписки, кнопка, состояния) —
+ * она одинакова на /oplata и /vopros-otvet, поэтому лежит в одном месте.
+ *
+ * ВАЖНО: это Tailwind-независимый слой, полностью заскопленный CSS-модулем.
+ * Общий Tailwind-контейнер навбара и футера (styles/index.styles.ts) он не
+ * трогает — там своя сетка (`lg:max-w-[1620px] mx-auto w-[90%]`).
+ */
+
+/* ─────────────────────────── масштаб и контейнер ─────────────────────────── */
+
+/*
+ * Оригинал задаёт `.m-page { font-size }` во vw со ступенями 1700 / 992 / 576px,
+ * а все внутренние размеры пишет в em. Повторяем ту же лестницу.
+ */
+.fluidRoot {
+  font-size: 16px;
+}
+@media screen and (max-width: 1700px) {
+  .fluidRoot {
+    font-size: 0.941176vw;
+  }
+}
+@media screen and (max-width: 992px) {
+  .fluidRoot {
+    font-size: 2.08333vw;
+  }
+}
+@media screen and (max-width: 576px) {
+  .fluidRoot {
+    font-size: 4.44444vw;
+  }
+}
+
+.container {
+  max-width: 1700px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2.5em;
+}
+@media screen and (max-width: 992px) {
+  .container {
+    padding: 0 1.5625em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .container {
+    padding: 0 0.9375em;
+  }
+}
+
+/* ─────────────────────────── типографика ─────────────────────────── */
+
+.text48 {
+  font-size: 3em;
+  line-height: 112.5%;
+}
+.text22 {
+  font-size: 1.375em;
+  line-height: 118%;
+}
+.text18 {
+  font-size: 1.125em;
+  line-height: 144%;
+}
+.text14 {
+  font-size: 0.875em;
+  line-height: 120%;
+}
+@media screen and (max-width: 992px) {
+  .text48 {
+    font-size: 2.375em;
+    line-height: 126%;
+  }
+  /* `.text16-tablet` оригинала — на планшете вопрос FAQ становится 1em. */
+  .text16Tablet {
+    font-size: 1em;
+    line-height: 138%;
+  }
+}
+@media screen and (max-width: 576px) {
+  .text48 {
+    font-size: 1.7em;
+    line-height: 110%;
+  }
+}
+
+.bold {
+  font-weight: 700;
+}
+.medium {
+  font-weight: 500;
+}
+.black2 {
+  color: #2c333d;
+}
+
+/* ─────────────────────────── хлебные крошки ─────────────────────────── */
+
+.breadcrumbs {
+  padding: 1.125em 0;
+  margin-bottom: 1.19em;
+}
+.breadcrumbItem {
+  position: relative;
+  display: inline;
+  color: #2c333d;
+  font-size: 0.9375em;
+  line-height: 133%;
+}
+.breadcrumbItem:last-child {
+  color: #91969d;
+}
+.breadcrumbItem:not(:first-child)::before {
+  content: "/";
+  margin: 0 0.75em;
+  font-size: 1em;
+  line-height: 133%;
+}
+.breadcrumbItem a {
+  color: inherit;
+  transition: color 0.3s;
+}
+.breadcrumbItem a:hover {
+  color: #186fd4;
+}
+@media screen and (max-width: 992px) {
+  .breadcrumbs {
+    padding: 0.75em 0;
+    margin-bottom: 1.25em;
+  }
+  .breadcrumbItem {
+    font-size: 0.8125em;
+  }
+  .breadcrumbItem:not(:first-child)::before {
+    line-height: 153%;
+    margin: 0 0.625em;
+  }
+}
+
+/* ── секция шаблона (`.blog._section._first._last` оригинала) ── */
+
+.blog {
+  padding: 0 0 6.875em;
+}
+@media screen and (max-width: 992px) {
+  .blog {
+    padding-bottom: 5em;
+  }
+}
+
+/* `.blog .text48 { max-width: 27em }` — 27em считается от кегля самого H1 (3em). */
+.blogTitle {
+  max-width: 27em;
+}
+
+/* ─────────────────────────── сетка «контент + сайдбар» ─────────────────────────── */
+
+.grid {
+  display: grid;
+  grid-template-columns: calc(100% - 21.9375em) 20.6875em;
+  gap: 3.125em 1.25em;
+  margin-top: 1.875em;
+}
+@media screen and (max-width: 992px) {
+  .grid {
+    margin-top: 1.25em;
+    grid-template-columns: 100%;
+  }
+}
+
+/* На планшете сайдбар уходит под текст (в оригинале — `order: 3`). */
+@media screen and (max-width: 992px) {
+  .sidebar {
+    order: 3;
+  }
+}
+
+/* ─────────────────────────── промо-карточки ─────────────────────────── */
+
+.catalogPromo {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 2.5em;
+  margin-bottom: 1.25em;
+}
+.catalogPromo:last-child {
+  margin-bottom: 0;
+}
+@media screen and (max-width: 992px) {
+  .catalogPromo {
+    grid-template-columns: repeat(2, calc(50% - 0.625em));
+    gap: 1.25em;
+    margin-bottom: 1.25em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .catalogPromo {
+    grid-template-columns: 100%;
+    gap: 1.875em;
+    margin-bottom: 1.875em;
+  }
+}
+
+.promoCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5em;
+  display: block;
+}
+.promoCardImg {
+  border-radius: 0.5em;
+  position: relative;
+  /* В сайдбаре карточка выше, чем на главной: `.catalog-promo .promo-card__img`. */
+  padding-bottom: 82.4%;
+  background: #f3f4f5;
+  transition: 0.3s ease-in-out;
+}
+.promoCardImg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s ease-in-out;
+  border-radius: inherit;
+}
+.promoCard:hover img {
+  transform: scale(1.1);
+}
+.promoCardContent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* `.catalog-promo .promo-card__content` перебивает базовые 1em 2.25em. */
+  padding: 1.56em;
+  max-width: 13em;
+  z-index: 2;
+}
+.promoCardTitle {
+  color: #2c333d;
+  font-weight: 500;
+}
+@media screen and (max-width: 992px) {
+  .promoCardContent {
+    max-width: 8.5em;
+  }
+}
+
+.badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5em;
+  height: 1.9375em;
+  border-radius: 0.375em;
+  background-color: #011120;
+  color: #fff;
+  font-weight: 700;
+  margin-top: 0.44em;
+}
+.badge span {
+  font-size: 0.875em;
+  line-height: 135%;
+}
+@media screen and (max-width: 992px) {
+  .badge {
+    padding: 0 0.375em;
+    height: 1.5625em;
+  }
+  .badge span {
+    font-size: 0.75em;
+  }
+}
+
+/* ─────────────────────────── подписка на рассылку ─────────────────────────── */
+
+.subscribe {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 0.81em;
+  padding: 1.875em 1.56em;
+  border-radius: 0.5em;
+  background: #f9fafb;
+  text-align: center;
+  margin-top: 20px;
+}
+@media screen and (max-width: 992px) {
+  .subscribe {
+    margin-top: 0;
+    margin-bottom: 80px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .subscribe {
+    padding: 1.25em 0.94em;
+  }
+}
+
+.subscribeTop,
+.subscribeWrap {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 0.81em;
+}
+/* На планшете поле и кнопка встают в строку. */
+@media screen and (max-width: 992px) and (min-width: 577px) {
+  .subscribeWrap {
+    display: flex;
+  }
+}
+
+.subscribeTitle {
+  color: #1d1d27;
+  line-height: 144%;
+}
+.subscribeDesc {
+  color: #6a6f75;
+  line-height: 135%;
+}
+
+.subscribeBtn {
+  width: 100%;
+  margin: 0;
+}
+@media screen and (max-width: 992px) and (min-width: 577px) {
+  .subscribeBtn {
+    width: 14.9375em;
+    flex-shrink: 0;
+    margin: 0 0 0 0.81em;
+  }
+}
+
+/* ── поле ввода (`.fg` оригинала) ── */
+
+.fg {
+  position: relative;
+  margin: 0;
+  min-width: 0;
+}
+@media screen and (max-width: 992px) and (min-width: 577px) {
+  .fg {
+    flex-grow: 1;
+  }
+}
+.fg input {
+  border: 1px solid #ebeef0;
+  padding: 0 1.25em;
+  height: 3.8125em;
+  width: 100%;
+  font-size: 1em;
+  font-family: inherit;
+  border-radius: 0.4375em;
+  background-color: #fff;
+  color: #2c333d;
+  transition: border-color 0.2s;
+}
+.fg input::placeholder {
+  color: #adb1b7;
+}
+.fg input:focus {
+  outline: none;
+  border-color: #186fd4;
+}
+.fg input:disabled {
+  background: #f6f6f6;
+  opacity: 0.5;
+}
+.fgError input {
+  border-color: #e52b0e;
+}
+.fgError input::placeholder {
+  color: #e52b0e;
+}
+.errorText {
+  display: block;
+  margin-top: 0.5em;
+  color: #e52b0e;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 0.875em;
+  line-height: 140%;
+  text-align: left;
+}
+
+/* ── чекбокс согласия (`.m-check` оригинала) ── */
+
+.mCheck {
+  position: relative;
+  text-align: left;
+  margin-top: 1em;
+}
+/* В этой полосе оригинал обнуляет и верхний отступ (`margin: 0 auto`). */
+@media screen and (max-width: 992px) and (min-width: 577px) {
+  .mCheck {
+    display: inline-block;
+    margin: 0 auto;
+  }
+}
+.mCheck input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  cursor: pointer;
+  margin: 0;
+}
+.mCheck label {
+  position: relative;
+  cursor: pointer;
+  display: block;
+  padding-left: 2.44em;
+  min-height: 1.6875em;
+  color: #696d70;
+}
+.mCheck label span {
+  font-size: 0.8125em;
+  line-height: 160%;
+}
+.mCheck label a {
+  text-decoration: underline;
+  font-size: 0.9375em;
+  color: #186fd4;
+  position: relative;
+  z-index: 2;
+}
+.mCheck label::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  transition: 0.1s;
+  pointer-events: none;
+  border-radius: 0.25em;
+  border: 1px solid #dfe0e2;
+  width: 1.625em;
+  height: 1.625em;
+  background-color: #fff;
+  background-size: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("/contacts/check.svg");
+}
+.mCheck input:checked + label::before {
+  background-color: #186fd4;
+  border-color: #186fd4;
+  background-size: 0.75em;
+}
+.mCheck input:focus-visible + label::before {
+  outline: 2px solid #186fd4;
+  outline-offset: 2px;
+}
+.mCheckError input:not(:checked) + label::before {
+  border-color: #e52b0e;
+}
+
+/* ─────────────────────────── кнопка ─────────────────────────── */
+
+.btnBlue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.225s ease-out;
+  height: 3.875em;
+  padding: 0 1.81em;
+  border-radius: 0.5em;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #186fd4;
+  border: 1px solid #186fd4;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btnBlue span {
+  font-size: 0.8125em;
+  line-height: 139%;
+}
+.btnBlue:hover {
+  color: #fff;
+  background: #011120;
+  border-color: #011120;
+}
+.btnBlue:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.btnBlue:disabled:hover {
+  background: #186fd4;
+  border-color: #186fd4;
+}
+
+/* ───────────────────── состояния загрузки / ошибки ───────────────────── */
+
+.stateBox {
+  margin-top: 1.875em;
+  padding: 1.56em;
+  border: 1px solid #edf0f2;
+  border-radius: 0.5em;
+  color: #6b6c72;
+  font-size: 0.9375em;
+  line-height: 160%;
+}
+.stateError {
+  border-color: #f6d5d4;
+  background: #fdf3f3;
+  color: #b3201d;
+}
+.stateSuccess {
+  border-color: #cfe8db;
+  background: #f2faf6;
+  color: #1b6b4a;
+}
+/* Ответ формы подписки — компактнее общего состояния и по левому краю. */
+.formResponse {
+  margin-top: 0;
+  padding: 0.75em 0.94em;
+  font-size: 0.8125em;
+  line-height: 150%;
+  text-align: left;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #eef1f4 25%, #f7f9fb 37%, #eef1f4 63%);
+  background-size: 400% 100%;
+  animation: referenceSkeleton 1.4s ease infinite;
+  border-radius: 0.5em;
+}
+@keyframes referenceSkeleton {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+  .promoCardImg,
+  .promoCardImg img,
+  .btnBlue,
+  .breadcrumbItem a,
+  .fg input {
+    transition: none !important;
+  }
+  .promoCard:hover img {
+    transform: none;
+  }
+}

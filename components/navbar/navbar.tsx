@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { Suspense, useState, type FormEvent, type KeyboardEvent, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { Search, Gift, User, BarChart3, Heart, ShoppingCart, Menu } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Search, Gift, User, BarChart3, Heart, ShoppingCart, Menu, X } from "lucide-react";
 import Logo1 from "@/src/svg/logo1.svg";
 import { styles } from "@/styles/index.styles";
 import { useShop } from "@/context/ShopContext";
@@ -50,18 +50,59 @@ function CatalogButton() {
 }
 
 /**
- * Поиск по каталогу. У бэкенда нет параметра `?search=` (проверено живыми запросами —
- * ответ не меняется), поэтому строка поиска ведёт на /products?q=..., а сам отбор
- * идёт по реальным товарам из API на стороне сервера страницы.
+ * Поиск по каталогу.
+ *
+ * Отправляет пользователя на /search?q=..., где результаты грузит хук
+ * useProductSearch (React Query → lib/api/products.ts → backend). Сам навбар в
+ * сеть не ходит — он только хранит введённый текст и меняет URL.
+ *
+ * Запрос живёт в URL, поэтому строка восстанавливается при переходе по прямой
+ * ссылке и после перезагрузки страницы результатов.
  */
-function SearchBar({ placeholder }: { placeholder: string }) {
+function SearchBarInner({ placeholder }: { placeholder: string }) {
   const router = useRouter();
-  const [query, setQuery] = useState("");
+  const searchParams = useSearchParams();
+  const queryFromUrl = searchParams.get("q") ?? "";
+  const [query, setQuery] = useState(queryFromUrl);
+
+  /**
+   * Синхронизация с адресной строкой: прямая ссылка, «назад/вперёд», перезагрузка.
+   * Правим состояние прямо во время рендера (рекомендованный React способ вместо
+   * setState в useEffect — тот вызывает лишний каскадный ререндер).
+   */
+  const [syncedUrlQuery, setSyncedUrlQuery] = useState(queryFromUrl);
+  if (syncedUrlQuery !== queryFromUrl) {
+    setSyncedUrlQuery(queryFromUrl);
+    setQuery(queryFromUrl);
+  }
+
+  function submitSearch() {
+    const trimmed = query.trim();
+    if (!trimmed) return;
+    router.push(`/search?q=${encodeURIComponent(trimmed)}`);
+  }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const trimmed = query.trim();
-    router.push(trimmed ? `/products?q=${encodeURIComponent(trimmed)}` : "/products");
+    submitSearch();
+  }
+
+  /**
+   * Enter обрабатываем явно, а не полагаемся только на неявную отправку формы:
+   * в некоторых окружениях (встроенные webview, автоматизация) неявная отправка
+   * не срабатывает, и поиск бы «молчал».
+   */
+  function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      submitSearch();
+    }
+  }
+
+  function handleClear() {
+    setQuery("");
+    // Если сейчас открыты результаты — возвращаем страницу в пустое состояние.
+    if (queryFromUrl) router.push("/search");
   }
 
   return (
@@ -72,11 +113,24 @@ function SearchBar({ placeholder }: { placeholder: string }) {
     >
       <input
         type="text"
+        name="q"
         placeholder={placeholder}
         value={query}
         onChange={(event) => setQuery(event.target.value)}
-        className="w-full bg-transparent px-4 py-2 text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none"
+        onKeyDown={handleKeyDown}
+        aria-label="Поиск товаров"
+        className="w-full min-w-0 bg-transparent px-4 py-2 text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none"
       />
+      {query ? (
+        <button
+          type="button"
+          onClick={handleClear}
+          aria-label="Очистить поиск"
+          className="flex shrink-0 items-center justify-center px-2 text-neutral-400 transition-colors hover:text-neutral-700"
+        >
+          <X size={16} />
+        </button>
+      ) : null}
       <button
         type="submit"
         aria-label="Искать"
@@ -85,6 +139,46 @@ function SearchBar({ placeholder }: { placeholder: string }) {
         <Search size={18} />
       </button>
     </form>
+  );
+}
+
+/** Оболочка формы поиска — используется и как fallback Suspense, чтобы не было скачка вёрстки. */
+function SearchBarShell({ placeholder, children }: { placeholder: string; children?: ReactNode }) {
+  return (
+    <form
+      role="search"
+      className="flex flex-1 items-stretch overflow-hidden rounded-lg border-2 border-blue-600 bg-white"
+    >
+      {children ?? (
+        <>
+          <input
+            type="text"
+            name="q"
+            placeholder={placeholder}
+            aria-label="Поиск товаров"
+            readOnly
+            className="w-full min-w-0 bg-transparent px-4 py-2 text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none"
+          />
+          <span className="flex shrink-0 items-center justify-center bg-blue-600 px-5 text-white">
+            <Search size={18} />
+          </span>
+        </>
+      )}
+    </form>
+  );
+}
+
+/**
+ * Форма поиска. `useSearchParams` внутри требует Suspense-границы, иначе
+ * production-сборка статических страниц падает (Next.js: "Missing Suspense boundary
+ * with useSearchParams") — навбар лежит в корневом layout и рендерится на всех
+ * страницах, поэтому граница здесь обязательна.
+ */
+function SearchBar({ placeholder }: { placeholder: string }) {
+  return (
+    <Suspense fallback={<SearchBarShell placeholder={placeholder} />}>
+      <SearchBarInner placeholder={placeholder} />
+    </Suspense>
   );
 }
 

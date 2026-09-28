@@ -1,0 +1,730 @@
+/*
+ * Страница «Контакты» — точный порт вёрстки https://www.stroiopttorg.ru/kontakty/
+ * (тема Astra95).
+ *
+ * Приём тот же, что и в app/about/about.module.css: оригинал построен на
+ * «плавающем» em-масштабе — у корневого блока font-size задан во vw и ступенчато
+ * меняется на 1700 / 992 / 576px, а все размеры внутри записаны в em. Поэтому
+ * .fluidRoot задаёт базовый font-size, а всё остальное — в em, ровно теми же
+ * числами, что и в оригинале. Всё заскоплено CSS-модулем, поэтому общий
+ * Tailwind-масштаб навбара, футера и остальных страниц не затрагивается.
+ */
+
+.fluidRoot {
+  composes: fluidRoot from "../../styles/reference-page.module.css";
+  font-family: HelveticaNeueCyr, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  color: #000;
+}
+
+/*
+ * Сброс из оригинала. Обёрнут в :where(), чтобы у правила была нулевая
+ * специфичность — как у сброса по тегам в оригинале. Иначе `.fluidRoot div`
+ * перебивал бы одноклассовые правила ниже (.container, .placeCard) и обнулял
+ * их padding/border.
+ */
+:where(.fluidRoot) :where(h1, h2, h3, h4, h6, p, ul, li, div, a, figure, button, fieldset, label) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  line-height: 1;
+}
+:where(.fluidRoot) :where(ul) {
+  list-style: none;
+}
+
+.container {
+  composes: container from "../../styles/reference-page.module.css";
+}
+
+/* ─────────────────────────── типографика ─────────────────────────── */
+
+.text48 {
+  font-size: 3em;
+  line-height: 112.5%;
+}
+.text33 {
+  font-size: 2.0625em;
+  line-height: 112.5%;
+}
+.text20 {
+  font-size: 1.25em;
+  line-height: 130%;
+}
+.text18 {
+  font-size: 1.125em;
+  line-height: 144%;
+}
+.text17 {
+  font-size: 1.0625em;
+  line-height: 159%;
+}
+.text16 {
+  font-size: 1em;
+  line-height: 120%;
+}
+.text15 {
+  font-size: 0.9375em;
+  line-height: 120%;
+}
+.text12 {
+  font-size: 0.75em;
+  line-height: 175%;
+}
+@media screen and (max-width: 992px) {
+  .text48 {
+    font-size: 2.375em;
+    line-height: 126%;
+  }
+  .text33 {
+    font-size: 1.625em;
+    line-height: 120%;
+  }
+}
+@media screen and (max-width: 576px) {
+  .text48 {
+    font-size: 1.7em;
+    line-height: 110%;
+  }
+}
+
+.bold {
+  font-weight: 700;
+}
+.medium {
+  font-weight: 500;
+}
+.black2 {
+  color: #2c333d;
+}
+
+/* ─────────────────────────── хлебные крошки ─────────────────────────── */
+
+.breadcrumbs {
+  padding: 1.125em 0;
+  margin-bottom: 1.19em;
+}
+.breadcrumbItem {
+  position: relative;
+  display: inline;
+  color: #2c333d;
+  font-size: 0.9375em;
+  line-height: 133%;
+}
+.breadcrumbItem:last-child {
+  color: #91969d;
+}
+.breadcrumbItem:not(:first-child)::before {
+  content: "/";
+  margin: 0 0.75em;
+  font-size: 1em;
+  line-height: 133%;
+}
+.breadcrumbItem a {
+  color: inherit;
+  transition: color 0.3s;
+}
+.breadcrumbItem a:hover {
+  color: #186fd4;
+}
+@media screen and (max-width: 992px) {
+  .breadcrumbs {
+    padding: 0.75em 0;
+    margin-bottom: 1.25em;
+  }
+  .breadcrumbItem {
+    font-size: 0.8125em;
+  }
+  .breadcrumbItem:not(:first-child)::before {
+    line-height: 153%;
+    margin: 0 0.625em;
+  }
+}
+
+/* ── секция контактов (в оригинале `.contacts._section._first`) ── */
+
+.contacts {
+  padding: 0 0 2.8125em;
+}
+@media screen and (max-width: 992px) {
+  .contacts {
+    padding-bottom: 1.5625em;
+  }
+}
+
+/* ─────────────────────────── карта + карточка ─────────────────────────── */
+
+.contactsGrid {
+  margin-top: 1.875em;
+  position: relative;
+}
+@media screen and (max-width: 992px) {
+  .contactsGrid {
+    margin-top: 1.25em;
+    overflow: hidden;
+    width: calc(100% + 3.125em);
+    margin-left: -1.5625em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .contactsGrid {
+    width: calc(100% + 1.875em);
+    margin-left: -0.9375em;
+  }
+}
+
+.map {
+  height: 38.1875em;
+  width: 87.0625em;
+  max-width: 100%;
+  border-radius: 0.625em;
+  border: 1px solid #e9ecef;
+  overflow: hidden;
+}
+.map iframe {
+  display: block;
+  border: 0;
+  width: 100%;
+  height: 100%;
+}
+@media screen and (max-width: 992px) {
+  .map {
+    width: 120%;
+    max-width: unset;
+    margin-left: -20%;
+    height: 32.875em;
+    border-radius: 0;
+  }
+}
+@media screen and (max-width: 576px) {
+  .map {
+    height: 38.1875em;
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* Заглушка на месте карты, когда её адрес не пришёл из API. */
+.mapFallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5em;
+  text-align: center;
+  background: #f7f9fc;
+  color: #6b6c72;
+  font-size: 0.9375em;
+  line-height: 160%;
+}
+
+.contactsCard {
+  width: 21.9375em;
+  border-radius: 0.375em;
+  background: #fff;
+  box-shadow: 0 4px 19px 0 rgba(23, 27, 32, 0.07);
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  z-index: 3;
+  padding: 1.875em;
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 1.4375em;
+}
+@media screen and (max-width: 992px) {
+  .contactsCard {
+    right: 1.56em;
+    width: 20.625em;
+    padding: 0.94em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .contactsCard {
+    position: relative;
+    transform: unset;
+    right: unset;
+    margin: -5.6875em auto 0;
+    width: calc(100% - 1.875em);
+  }
+}
+
+.contactsCardInner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.contactsCardTitle {
+  text-align: center;
+}
+.contactsCardBtn {
+  height: 3.875em;
+}
+
+.contactItem {
+  display: grid;
+  grid-template-columns: 1.6875em calc(100% - 2.3125em);
+  gap: 0.625em;
+}
+.contactItemImg img {
+  width: 100%;
+  display: block;
+}
+.contactItemContent {
+  grid-column: 2 / 3;
+}
+.contactItemTitle {
+  min-height: 1.6875em;
+  display: flex;
+  align-items: center;
+  color: #2f3134;
+}
+.contactItemDesc {
+  margin-top: 0.625em;
+  color: #494d52;
+}
+.contactItemDesc .text15 {
+  line-height: 140%;
+}
+.contactItemPhone {
+  color: #3b3c3f;
+  line-height: 123%;
+  font-weight: 500;
+}
+.contactItemEmail {
+  color: #186fd4;
+  text-decoration: underline;
+}
+
+/* ───────────────────── отделы + реквизиты ───────────────────── */
+
+.contactPlaces {
+  display: grid;
+  grid-template-columns: calc(100% - 22em) 20.5em;
+  gap: 1.5em;
+  margin-top: 3.125em;
+}
+@media screen and (max-width: 992px) {
+  .contactPlaces {
+    grid-template-columns: 100%;
+    gap: 0.94em;
+    margin-top: 1.875em;
+  }
+}
+
+/* `_grid-column4 _grid-column2-tablet _grid-column1-mob` из оригинала. */
+.contactPlacesItems {
+  display: grid;
+  gap: 1.25em;
+  grid-template-columns: repeat(4, calc(25% - 0.9375em));
+}
+@media screen and (max-width: 992px) {
+  .contactPlacesItems {
+    grid-template-columns: repeat(2, calc(50% - 0.47em));
+    gap: 0.94em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .contactPlacesItems {
+    grid-template-columns: 100%;
+  }
+}
+
+.placeCard {
+  border-radius: 0.5em;
+  border: 1px solid #f2f4f6;
+  padding: 1.625em 1.5em;
+}
+.placeCard .text15 {
+  color: #494d52;
+  line-height: 140%;
+}
+.placeCardDesc {
+  margin-top: 0.94em;
+}
+.placeCardLink {
+  color: #2f3134;
+  line-height: 116%;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.225s ease-out;
+}
+.placeCardLink:hover {
+  color: #186fd4;
+}
+
+.requisites {
+  padding: 1.875em 1.69em 1.25em 1.25em;
+  background: #f7f9fc;
+  color: #2b2e31;
+}
+.requisites .text16 {
+  line-height: 131%;
+  margin-bottom: 0.3125em;
+}
+
+/* ─────────────────────────── регионы ─────────────────────────── */
+
+.regions {
+  margin-top: 3.125em;
+}
+@media screen and (max-width: 992px) {
+  .regions {
+    margin-top: 2.5em;
+  }
+}
+
+.regionsGrid {
+  display: grid;
+  grid-template-columns: repeat(6, calc(16.6667% - 3.7em));
+  gap: 4.44em;
+  margin-top: 1.56em;
+}
+@media screen and (max-width: 992px) {
+  .regionsGrid {
+    grid-template-columns: repeat(3, calc(33.3333% - 2.96em));
+  }
+}
+@media screen and (max-width: 576px) {
+  .regionsGrid {
+    margin-top: 1.25em;
+    grid-template-columns: 100%;
+    gap: 1.25em;
+  }
+}
+
+.regionCard {
+  border-right: 1px solid #e5e9ed;
+}
+/*
+ * В оригинале правило для планшета записано как
+ * `@media (max-width:992px) and (min-width:993px)` — такой запрос не выполняется
+ * никогда, поэтому на планшете правые границы остаются у всех шести карточек.
+ * Повторяем фактическое поведение: границу снимаем только у 6-й на десктопе.
+ */
+@media screen and (min-width: 993px) {
+  .regionCard:nth-child(6n) {
+    border-right: none;
+  }
+}
+@media screen and (max-width: 576px) {
+  .regionCard {
+    border-right: none;
+  }
+}
+.regionCard .text15 {
+  color: #494d52;
+  line-height: 140%;
+}
+.regionCardItem {
+  margin-top: 0.44em;
+}
+.regionCardLink {
+  color: #2f3134;
+  line-height: 116%;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.225s ease-out;
+}
+.regionCardLink:hover {
+  color: #186fd4;
+}
+.regionCardMail {
+  color: #186fd4;
+  line-height: 140%;
+  text-decoration: underline;
+}
+
+/* ───────────────────── форма «У вас есть вопросы?» ───────────────────── */
+
+.consult {
+  margin-top: 2.5em;
+  padding: 3.75em 0;
+  background: #f9fafb;
+}
+.consultTitle {
+  text-align: center;
+}
+/* На десктопе заголовок в одну строку, на планшете/мобильном — в две. */
+.consultTitle br {
+  display: none;
+}
+@media screen and (max-width: 992px) {
+  .consult {
+    margin-top: 1em;
+    padding: 2.5em 0;
+  }
+  .consultTitle br {
+    display: unset;
+  }
+}
+
+.consultForm {
+  max-width: 100%;
+  width: 46em;
+  margin: 3.3125em auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, calc(50% - 0.9375em));
+  gap: 1.875em;
+}
+@media screen and (max-width: 576px) {
+  .consultForm {
+    grid-template-columns: 100%;
+  }
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.consultFormNav {
+  display: flex;
+  align-items: center;
+}
+@media screen and (max-width: 576px) {
+  .consultFormNav {
+    flex-direction: column;
+  }
+}
+
+.consultFormBtn {
+  height: 3.875em;
+  width: 13.0625em;
+  flex-shrink: 0;
+  margin-right: 1.875em;
+}
+@media screen and (max-width: 576px) {
+  .consultFormBtn {
+    margin: 0 auto 1.25em;
+  }
+}
+
+/* ── поля формы (`.fg` из оригинала) ── */
+
+.fg {
+  position: relative;
+  margin: 0;
+  min-width: 0;
+}
+.fg input,
+.fg textarea {
+  border: 1px solid #ebeef0;
+  padding: 0 1.25em;
+  height: 3.8125em;
+  width: 100%;
+  font-size: 1em;
+  font-family: inherit;
+  border-radius: 0.4375em;
+  background-color: #fff;
+  color: #2c333d;
+  transition: border-color 0.2s;
+}
+.fg input::placeholder,
+.fg textarea::placeholder {
+  color: #adb1b7;
+}
+.fg input:focus,
+.fg textarea:focus {
+  outline: none;
+  border-color: #186fd4;
+}
+.fg textarea {
+  height: 5.5625em;
+  resize: vertical;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  line-height: 157%;
+}
+.fg label {
+  transition: 0.2s;
+  font-size: 0.875em;
+  line-height: 157%;
+  display: block;
+  margin-bottom: 0.71em;
+}
+.fg label .required {
+  color: #e52b0e;
+}
+.fg input:disabled,
+.fg textarea:disabled {
+  background: #f6f6f6;
+  opacity: 0.5;
+}
+
+.fgError input,
+.fgError textarea {
+  border-color: #e52b0e;
+}
+.fgError input::placeholder,
+.fgError textarea::placeholder {
+  color: #e52b0e;
+}
+.errorText {
+  display: block;
+  margin-top: 0.5em;
+  color: #e52b0e;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 0.875em;
+  line-height: 140%;
+}
+
+/* ── чекбокс согласия (`.m-check` из оригинала) ── */
+
+.mCheck {
+  position: relative;
+}
+.mCheck input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  cursor: pointer;
+  margin: 0;
+}
+.mCheck label {
+  position: relative;
+  cursor: pointer;
+  display: block;
+  padding-left: 2.44em;
+  min-height: 1.6875em;
+  color: #363839;
+}
+.mCheck label span {
+  font-size: 0.9375em;
+  line-height: 180%;
+}
+.mCheck label a {
+  text-decoration: underline;
+  font-size: 0.9375em;
+  color: #186fd4;
+  position: relative;
+  z-index: 2;
+}
+.mCheck label::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  transition: 0.1s;
+  pointer-events: none;
+  border-radius: 0.25em;
+  border: 1px solid #dfe0e2;
+  width: 1.625em;
+  height: 1.625em;
+  background-color: #fff;
+  background-size: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("/contacts/check.svg");
+}
+.mCheck input:checked + label::before {
+  background-color: #186fd4;
+  border-color: #186fd4;
+  background-size: 0.75em;
+}
+.mCheck input:focus-visible + label::before {
+  outline: 2px solid #186fd4;
+  outline-offset: 2px;
+}
+.mCheckError input:not(:checked) + label::before {
+  border-color: #e52b0e;
+}
+
+/* ─────────────────────────── кнопка ─────────────────────────── */
+
+.btnBlue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.225s ease-out;
+  height: 3.25em;
+  padding: 0 1.81em;
+  border-radius: 0.5em;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #186fd4;
+  border: 1px solid #186fd4;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btnBlue span {
+  font-size: 0.8125em;
+  line-height: 139%;
+}
+.btnBlue:hover {
+  color: #fff;
+  background: #011120;
+  border-color: #011120;
+}
+.btnBlue:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.btnBlue:disabled:hover {
+  background: #186fd4;
+  border-color: #186fd4;
+}
+
+/* ───────────────────── состояния загрузки / ошибки ───────────────────── */
+
+.stateBox {
+  margin-top: 1.875em;
+  padding: 1.56em;
+  border: 1px solid #edf0f2;
+  border-radius: 0.5em;
+  color: #6b6c72;
+  font-size: 0.9375em;
+  line-height: 160%;
+}
+.stateError {
+  border-color: #f6d5d4;
+  background: #fdf3f3;
+  color: #b3201d;
+}
+.stateSuccess {
+  border-color: #cfe8db;
+  background: #f2faf6;
+  color: #1b6b4a;
+}
+
+/* Ответ формы: центрируем на всю ширину сетки, как `.wpcf7-response-output`. */
+.formResponse {
+  grid-column: 1 / -1;
+  margin-top: 0;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #eef1f4 25%, #f7f9fb 37%, #eef1f4 63%);
+  background-size: 400% 100%;
+  animation: contactsSkeleton 1.4s ease infinite;
+  border-radius: 0.5em;
+}
+@keyframes contactsSkeleton {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+  .placeCardLink,
+  .regionCardLink,
+  .btnBlue,
+  .breadcrumbItem a {
+    transition: none !important;
+  }
+}
