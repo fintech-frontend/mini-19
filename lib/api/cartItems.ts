@@ -13,10 +13,13 @@ export async function listCartItems(cartId: number): Promise<ApiCartItem[]> {
   return items.filter((item) => item.cart === cartId);
 }
 
+/**
+ * Тело — { cart, product_id, quantity? } (Postman + OPTIONS /cart-items/).
+ * `price` у позиции read-only: сервер сам берёт цену товара, поэтому не шлём её.
+ */
 export async function addCartItem(input: {
   cart: number;
   product_id: number;
-  price: number;
   quantity?: number;
 }): Promise<ApiCartItem> {
   return api.post<ApiCartItem>("/cart-items/", input, { auth: false });

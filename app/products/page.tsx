@@ -6,6 +6,7 @@ import { ApiError } from "@/lib/api/errors";
 import ProductGrid from "@/components/products/ProductGrid";
 import CategoryFilter from "@/components/products/CategoryFilter";
 import type { ApiCategory, ApiProduct } from "@/types/api";
+import { styles } from "@/styles/index.styles";
 
 interface ProductsPageProps {
   searchParams: Promise<{ category?: string; q?: string }>;
@@ -51,7 +52,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   const resolvedVisibleProducts = visibleApiProducts.map(toResolvedProduct);
 
   return (
-    <main className="min-w-0 max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+    <main className={`${styles.container} min-w-0 py-8`}>
       <div className="mb-8 border-b border-gray-200 pb-5">
         <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
           {query ? `Поиск: «${query}»` : activeCategory ? activeCategory.name : "Каталог товаров"}

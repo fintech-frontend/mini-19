@@ -48,6 +48,25 @@ export function isAuthenticated(): boolean {
   return getAccessToken() !== null;
 }
 
+/**
+ * Id текущего пользователя из payload access-токена (claim `user_id` — стандарт
+ * SimpleJWT). Отдельного эндпоинта "текущий пользователь" у бэкенда нет, а id
+ * нужен, чтобы привязывать заказы к пользователю и отбирать их в кабинете.
+ * Подпись не проверяем — это делает сервер; здесь только чтение claim'а.
+ */
+export function getCurrentUserId(): number | null {
+  const token = getAccessToken();
+  const payload = token?.split(".")[1];
+  if (!payload) return null;
+  try {
+    const json = atob(payload.replace(/-/g, "+").replace(/_/g, "/"));
+    const userId = Number((JSON.parse(json) as Record<string, unknown>).user_id);
+    return Number.isInteger(userId) ? userId : null;
+  } catch {
+    return null;
+  }
+}
+
 export function clearAuthTokens(): void {
   setAccessToken(null);
   setRefreshToken(null);

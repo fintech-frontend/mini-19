@@ -1,6 +1,6 @@
 import { API_BASE_URL } from "./config";
 import { ApiError } from "./errors";
-import { getAccessToken } from "./token";
+import { clearAuthTokens, getAccessToken } from "./token";
 
 export interface ApiRequestOptions extends Omit<RequestInit, "body" | "headers"> {
   /** Тело запроса — сериализуется в JSON автоматически. */
@@ -50,10 +50,8 @@ export async function apiFetch<T = unknown>(path: string, options: ApiRequestOpt
     finalHeaders["Content-Type"] = "application/json";
     payload = JSON.stringify(body);
   }
-  if (auth) {
-    const token = getAccessToken();
-    if (token) finalHeaders.Authorization = `Bearer ${token}`;
-  }
+  const token = auth ? getAccessToken() : null;
+  if (token) finalHeaders.Authorization = `Bearer ${token}`;
 
   let response: Response;
   try {
@@ -67,6 +65,13 @@ export async function apiFetch<T = unknown>(path: string, options: ApiRequestOpt
   let data: unknown = null;
   if (response.status !== 204) {
     data = isJson ? await response.json().catch(() => null) : await response.text().catch(() => null);
+  }
+
+  // SimpleJWT отвечает 401 на просроченный/битый токен даже для публичных
+  // эндпоинтов, а refresh-эндпоинта у бэкенда нет — сбрасываем токен, чтобы
+  // пользователь заново вошёл, а не получал 401 на каждом запросе.
+  if (response.status === 401 && token) {
+    clearAuthTokens();
   }
 
   if (!response.ok) {

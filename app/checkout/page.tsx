@@ -12,9 +12,11 @@ import { CustomerInfoForm } from "@/components/checkout/CustomerInfoForm";
 import { OrderSummarySidebar, type CartLine } from "@/components/checkout/OrderSummarySidebar";
 import { resolveProductsByIds, type ResolvedProduct } from "@/lib/resolveProduct";
 import { createOrder } from "@/lib/api/orders";
+import { getCurrentUserId } from "@/lib/api/token";
 import { ApiError } from "@/lib/api/errors";
 import { deliveryCosts, pickupAddress, mockPvzAddresses } from "@/data/checkout-data";
 import { useShop } from "@/context/ShopContext";
+import { styles } from "@/styles/index.styles";
 import type {
   DeliveryMethod,
   OrderCustomer,
@@ -220,7 +222,9 @@ export default function CheckoutPage() {
     const discountAmount = Math.round((subtotal * discountPercent) / 100);
     const total = subtotal - discountAmount + deliveryCost;
     const order: SubmittedOrder = {
-      number: String(Math.floor(10000 + Math.random() * 90000)),
+      // Один номер и для страницы подтверждения, и для сервера (поле number на
+      // бэкенде уникально — повтор даёт 400), чтобы в кабинете был тот же номер.
+      number: Date.now().toString(36).toUpperCase(),
       date: new Date().toISOString(),
       items: items.map((item) => ({ id: item.id, name: item.name, price: item.price, qty: item.qty })),
       subtotal,
@@ -246,7 +250,7 @@ export default function CheckoutPage() {
     // Ждём ответа перед очисткой корзины, но неудача здесь не должна мешать
     // пользователю дойти до страницы подтверждения — заказ уже сохранён локально.
     try {
-      await createOrder({ number: `mini19-${Date.now()}`, subtotal, total });
+      await createOrder({ number: order.number, subtotal, total, user: getCurrentUserId() ?? undefined });
     } catch (err) {
       const message = err instanceof ApiError ? err.message : "неизвестная ошибка";
       console.error("Не удалось сохранить сводку заказа на сервере:", message, err);
@@ -257,7 +261,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:py-12">
+    <div className={`${styles.container} py-8 sm:py-12`}>
       <Breadcrumbs items={[{ label: "Главная", href: "/" }, { label: "Оформление заказа" }]} />
       <h1 className="text-2xl font-bold text-neutral-900 sm:text-3xl">Оформление заказа</h1>
 

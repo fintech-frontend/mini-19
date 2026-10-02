@@ -2,11 +2,11 @@ import { api } from "./client";
 import type { AuthResponse } from "@/types/api";
 
 /**
- * Пример ответа login/register в Postman-документации не сохранён ("No response
- * body"), поэтому точное имя поля с токеном неизвестно. В коллекции переменная
- * авторизации называется {{access_token}}, а бэкенд похож на Django REST —
- * поэтому перебираем самые вероятные имена полей вместо того, чтобы гадать один
- * конкретный формат.
+ * Пример ответа login в Postman-коллекции не сохранён, поэтому точное имя поля с
+ * токеном из документации неизвестно. Сервер подтверждённо использует SimpleJWT
+ * (ошибка 401 "token_not_valid" / "AccessToken"), у которого стандартные поля
+ * `access`/`refresh`; в коллекции переменная называется {{access_token}}. Поэтому
+ * проверяем оба варианта имён.
  */
 const ACCESS_TOKEN_KEYS = ["access_token", "access", "token", "key"];
 const REFRESH_TOKEN_KEYS = ["refresh_token", "refresh"];
@@ -48,9 +48,12 @@ export interface RegisterInput {
   otp_type?: "otp" | "link";
 }
 
-/** Путь совпадает с документацией дословно — да, там действительно "/auth/auth/register/". */
+/**
+ * Актуальная Postman-коллекция и живой сервер: POST /api/user/auth/register/.
+ * Старый путь "/auth/auth/register/" на сервере отвечает 404.
+ */
 export async function register(input: RegisterInput): Promise<AuthResponse> {
-  return api.post<AuthResponse>("/auth/auth/register/", { otp_type: "otp", ...input }, { auth: false });
+  return api.post<AuthResponse>("/user/auth/register/", { otp_type: "otp", ...input }, { auth: false });
 }
 
 export async function verifyRegisterOtp(email: string, code: string): Promise<AuthResponse> {

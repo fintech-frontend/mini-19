@@ -52,6 +52,8 @@ export interface ApiCartItem {
   product: ApiProduct;
   quantity: number;
   price: string;
+  /** price × quantity, число (поле есть в живом API, в примерах Postman — нет). */
+  total_price: number;
 }
 
 export interface ApiCart {
@@ -59,6 +61,8 @@ export interface ApiCart {
   user: number | null;
   session_key: string | null;
   items: ApiCartItem[];
+  /** Сумма корзины, число (поле есть в живом API, в примерах Postman — нет). */
+  total_price: number;
   updated_at: string;
 }
 

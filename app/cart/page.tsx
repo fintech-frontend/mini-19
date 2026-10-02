@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Minus, Plus, Trash2, ShoppingCart, Package } from "lucide-react";
 import { useShop } from "@/context/ShopContext";
 import { resolveProductsByIds, type ResolvedProduct } from "@/lib/resolveProduct";
+import { styles } from "@/styles/index.styles";
 
 /**
  * Вёрстка корзины (шаги количества, удаление, блок "Ваш заказ", пустое состояние)
@@ -228,7 +229,7 @@ export default function CartPage() {
   );
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:py-12">
+    <div className={`${styles.container} py-8 sm:py-12`}>
       <h1 className="text-2xl font-bold text-neutral-900 sm:text-3xl">Корзина</h1>
 
       {loading ? (

@@ -10,9 +10,8 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { createCart, deleteCart } from "@/lib/api/carts";
-import { addCartItem, listCartItems, removeCartItem, updateCartItemQuantity } from "@/lib/api/cartItems";
-import { getProduct } from "@/lib/api/products";
+import { createCart, deleteCart, getCart } from "@/lib/api/carts";
+import { addCartItem, removeCartItem, updateCartItemQuantity } from "@/lib/api/cartItems";
 import { ApiError } from "@/lib/api/errors";
 
 /**
@@ -193,9 +192,9 @@ export function ShopProvider({ children }: { children: ReactNode }) {
       const storedId = readStoredCartId();
       if (storedId == null) return;
       try {
-        // Позиции корзины читаем документированным списком GET /cart-items с отбором
-        // по id корзины — отдельного эндпоинта "получить корзину по id" в документации нет.
-        const items = await listCartItems(storedId);
+        // GET /carts/:id/ отдаёт корзину с вложенными позициями; удалённая на
+        // сервере корзина даёт 404 и попадает в catch — тогда начинаем с пустой.
+        const { items } = await getCart(storedId);
         const nextItems: CartItemsState = {};
         for (const item of items) {
           nextItems[String(item.product.id)] = { cartItemId: item.id, quantity: item.quantity };
@@ -267,14 +266,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
             return;
           }
 
-          const product = await getProduct(Number(productId));
-          const price = Number.parseFloat(product.price);
-          const created = await addCartItem({
-            cart: id,
-            product_id: Number(productId),
-            price: Number.isFinite(price) ? price : 0,
-            quantity: 1,
-          });
+          const created = await addCartItem({ cart: id, product_id: Number(productId), quantity: 1 });
           applyCartItems({
             ...cartItemsRef.current,
             [productId]: { cartItemId: created.id, quantity: created.quantity },

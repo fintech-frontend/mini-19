@@ -10,11 +10,12 @@ const PAGE_SIZE = 5;
 
 interface OrdersPanelProps {
   orders: Order[];
+  emptyText?: string;
   onSelect: (tab: AccountTab) => void;
   onLogout: () => void;
 }
 
-export function OrdersPanel({ orders, onSelect, onLogout }: OrdersPanelProps) {
+export function OrdersPanel({ orders, emptyText, onSelect, onLogout }: OrdersPanelProps) {
   const [page, setPage] = useState(1);
   const totalPages = Math.max(1, Math.ceil(orders.length / PAGE_SIZE));
   const pageOrders = orders.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -23,7 +24,7 @@ export function OrdersPanel({ orders, onSelect, onLogout }: OrdersPanelProps) {
     <div>
       <QuickNavRow active="orders" onSelect={onSelect} onLogout={onLogout} />
       <h3 className="mb-3 text-lg font-semibold text-neutral-900">История заказов</h3>
-      <OrdersTable orders={pageOrders} />
+      <OrdersTable orders={pageOrders} emptyText={emptyText} />
 
       {totalPages > 1 && (
         <nav className="mt-4 flex items-center justify-center gap-2" aria-label="Пагинация">

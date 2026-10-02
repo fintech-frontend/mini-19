@@ -8,6 +8,7 @@ import TabbedProductShelf from "@/components/home/TabbedProductShelf";
 import BrandStrip from "@/components/home/BrandStrip";
 import AboutStore from "@/components/home/AboutStore";
 import LatestNews from "@/components/home/LatestNews";
+import { styles } from "@/styles/index.styles";
 
 /** Сколько товаров показываем в шапке "Новинки" — backend не отдаёт флагов
  *  "хит продаж"/"акция" (см. types/api.ts), поэтому единственный честный признак
@@ -31,7 +32,9 @@ export default async function HomePage() {
   }
 
   return (
-    <main className="min-w-0 max-w-7xl mx-auto divide-y divide-gray-100 px-4 py-6 sm:px-6 lg:px-8">
+    // Тот же контейнер, что у навбара и футера (styles.container), — чтобы края
+    // контента совпадали с шапкой.
+    <main className={`${styles.container} min-w-0 divide-y divide-gray-100 py-6`}>
       <div className="pb-8">
         <HeroCarousel />
       </div>

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import ProductCard from "@/components/ui/ProductCard";
 import { useShop } from "@/context/ShopContext";
 import { resolveProductsByIds, type ResolvedProduct } from "@/lib/resolveProduct";
+import { styles } from "@/styles/index.styles";
 
 export default function ComparePage() {
   const { compareIds } = useShop();
@@ -43,7 +44,7 @@ export default function ComparePage() {
   const loading = !error && result?.key !== idsKey;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className={`${styles.container} py-8`}>
       <h1 className="mb-6 text-2xl font-bold text-gray-900 sm:text-3xl">Сравнение товаров</h1>
       {loading ? (
         <p className="text-sm text-gray-500">Загрузка...</p>
