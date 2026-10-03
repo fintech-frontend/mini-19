@@ -1,35 +1,49 @@
 "use client";
 
 import { useState } from "react";
-import { Product } from "@/types/product";
-
-interface ProductTabsProps {
-  product: Product;
-}
+import { CatalogProductSpec } from "@/types/catalog-listing";
 
 type TabKey = "specs" | "about" | "delivery";
 
-const TABS: { key: TabKey; label: string }[] = [
-  { key: "specs", label: "Характеристики" },
-  { key: "about", label: "О товаре" },
-  { key: "delivery", label: "Доставка и оплата" },
-];
+/**
+ * Вкладки страницы товара. Намеренно НЕ принимает объект товара (Product/FanProduct/
+ * CatalogListingProduct) — только те поля, что реально рисует, поэтому один и тот же
+ * компонент обслуживает и /products/[id], и любую категорию каталога. Вкладка
+ * скрывается, если для неё нет данных: у большинства товаров каталога ещё нет ни
+ * specs, ни description (см. data/listings), и рисовать пустую вкладку нельзя.
+ */
+export default function ProductTabs({
+  title,
+  specs,
+  description,
+}: {
+  title: string;
+  specs?: CatalogProductSpec[];
+  description?: string;
+}) {
+  const hasSpecs = Boolean(specs && specs.length > 0);
+  const hasAbout = Boolean(description);
 
-export default function ProductTabs({ product }: ProductTabsProps) {
-  const [activeTab, setActiveTab] = useState<TabKey>("specs");
+  const tabs: { key: TabKey; label: string }[] = [
+    ...(hasSpecs ? [{ key: "specs" as const, label: "Характеристики" }] : []),
+    ...(hasAbout ? [{ key: "about" as const, label: "О товаре" }] : []),
+    { key: "delivery", label: "Доставка и оплата" },
+  ];
+
+  const [activeTab, setActiveTab] = useState<TabKey>(tabs[0].key);
 
   return (
     <div id="full-specs">
-      <div className="border-b border-gray-200 mb-6 flex gap-6 text-sm font-semibold text-gray-500 overflow-x-auto whitespace-nowrap">
-        {TABS.map((tab) => (
+      <div className="mb-6 flex gap-6 overflow-x-auto whitespace-nowrap border-b border-neutral-200 text-sm font-semibold text-neutral-500">
+        {tabs.map((tab) => (
           <button
             key={tab.key}
             type="button"
             onClick={() => setActiveTab(tab.key)}
-            className={`py-2.5 cursor-pointer transition-colors ${
+            className={`cursor-pointer py-2.5 transition-colors ${
               activeTab === tab.key
                 ? "border-b-2 border-blue-600 text-blue-600"
-                : "hover:text-gray-800"
+                : "hover:text-neutral-800"
             }`}
           >
             {tab.label}
@@ -37,44 +51,51 @@ export default function ProductTabs({ product }: ProductTabsProps) {
         ))}
       </div>
 
-      {activeTab === "specs" && (
+      {activeTab === "specs" && hasSpecs && (
         <div className="mb-16">
-          <h3 className="text-base font-bold mb-4 text-gray-800">
-            Характеристики товара «{product.title}»
+          <h3 className="mb-4 text-base font-bold text-neutral-800">
+            Характеристики товара «{title}»
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 text-sm">
-            {product.specs.map((spec, index) => (
-              <div key={index} className="flex justify-between py-2 border-b border-gray-100 items-center">
-                <span className="text-gray-500">{spec.label}</span>
-                <span className="font-medium text-gray-900 text-right">{spec.value}</span>
+          <div className="grid grid-cols-1 gap-x-12 text-sm md:grid-cols-2">
+            {specs!.map((spec, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-between border-b border-neutral-100 py-2"
+              >
+                <span className="text-neutral-500">{spec.label}</span>
+                <span className="text-right font-medium text-neutral-900">{spec.value}</span>
               </div>
             ))}
           </div>
-          <p className="text-[11px] text-gray-400 mt-4 leading-normal">
-            Производитель оставляет за собой право без уведомления продавца менять характеристики, внешний вид, комплектацию товара и место его производства. Указанная информация не является публичной офертой.
+          <p className="mt-4 text-[11px] leading-normal text-neutral-400">
+            Производитель оставляет за собой право без уведомления продавца менять характеристики,
+            внешний вид, комплектацию товара и место его производства. Указанная информация не
+            является публичной офертой.
           </p>
         </div>
       )}
 
-      {activeTab === "about" && (
+      {activeTab === "about" && hasAbout && (
         <div className="mb-16">
-          <h3 className="text-base font-bold mb-3 text-gray-800">О товаре «{product.title}»</h3>
-          <p className="text-sm text-gray-600 leading-relaxed max-w-4xl">{product.description}</p>
+          <h3 className="mb-3 text-base font-bold text-neutral-800">О товаре «{title}»</h3>
+          <p className="max-w-4xl text-sm leading-relaxed text-neutral-600">{description}</p>
         </div>
       )}
 
       {activeTab === "delivery" && (
-        <div className="mb-16 max-w-4xl text-sm text-gray-600 leading-relaxed">
+        <div className="mb-16 max-w-4xl text-sm leading-relaxed text-neutral-600">
           <div className="mb-8">
-            <h3 className="text-base font-bold mb-3 text-gray-800">Доставка</h3>
+            <h3 className="mb-3 text-base font-bold text-neutral-800">Доставка</h3>
             <p className="mb-3">
               Мы всегда готовы доставить приобретенный Вам товар в удобное для Вас время.{" "}
-              <span className="font-semibold text-gray-800">Стоимость доставки</span> товаров определяется исходя из{" "}
-              <span className="font-semibold text-gray-800">веса, габаритов</span> и{" "}
-              <span className="font-semibold text-gray-800">удаленности</span> до места назначения. Доставка осуществляется до подъезда дома, офиса.
+              <span className="font-semibold text-neutral-800">Стоимость доставки</span> товаров
+              определяется исходя из{" "}
+              <span className="font-semibold text-neutral-800">веса, габаритов</span> и{" "}
+              <span className="font-semibold text-neutral-800">удаленности</span> до места
+              назначения. Доставка осуществляется до подъезда дома, офиса.
             </p>
             <p className="mb-2">Наш интернет-магазин предлагает несколько вариантов получения товара:</p>
-            <ul className="list-disc pl-5 space-y-1">
+            <ul className="list-disc space-y-1 pl-5">
               <li>Самовывоз с территории компании.</li>
               <li>Быстрая доставка по региону.</li>
               <li>Доставка транспортной компанией.</li>
@@ -83,11 +104,11 @@ export default function ProductTabs({ product }: ProductTabsProps) {
           </div>
 
           <div>
-            <h3 className="text-base font-bold mb-3 text-gray-800">Оплата</h3>
+            <h3 className="mb-3 text-base font-bold text-neutral-800">Оплата</h3>
             <p className="mb-2">Оплатить свои покупки вы можете:</p>
-            <p className="font-semibold text-gray-800 mb-1">При заказе доставки:</p>
+            <p className="mb-1 font-semibold text-neutral-800">При заказе доставки:</p>
             <p className="mb-1">1. Банковской картой с помощью платежной системы на сайте</p>
-            <ul className="list-disc pl-5 space-y-1 mb-2">
+            <ul className="mb-2 list-disc space-y-1 pl-5">
               <li>МИР</li>
               <li>VISA International</li>
               <li>Mastercard Worldwide</li>
@@ -95,13 +116,11 @@ export default function ProductTabs({ product }: ProductTabsProps) {
             </ul>
             <p className="mb-3">2. Наличными водителю при получении заказа</p>
 
-            <p className="font-semibold text-gray-800 mb-1">При самовывозе:</p>
-            <ul className="list-disc pl-5 space-y-1 mb-3">
+            <p className="mb-1 font-semibold text-neutral-800">При самовывозе:</p>
+            <ul className="mb-3 list-disc space-y-1 pl-5">
               <li>Банковской картой с помощью платежной системы на сайте или на кассе при получении заказа.</li>
               <li>Наличными на кассе при получении заказа.</li>
             </ul>
-
-            <p className="font-semibold text-gray-800">Сервис «Покупай со сбором»</p>
           </div>
         </div>
       )}

@@ -8,6 +8,9 @@ interface ShopContextValue {
   favoritesCount: number;
   compareCount: number;
   addToCart: (productId: string) => void;
+  /** Меняет количество на delta; при значении <= 0 товар удаляется из корзины. */
+  changeCartQty: (productId: string, delta: number) => void;
+  removeFromCart: (productId: string) => void;
   isFavorite: (productId: string) => boolean;
   toggleFavorite: (productId: string) => void;
   isInCompare: (productId: string) => boolean;
@@ -23,6 +26,27 @@ export function ShopProvider({ children }: { children: ReactNode }) {
 
   const addToCart = useCallback((productId: string) => {
     setCart((prev) => ({ ...prev, [productId]: (prev[productId] ?? 0) + 1 }));
+  }, []);
+
+  const changeCartQty = useCallback((productId: string, delta: number) => {
+    setCart((prev) => {
+      const next = { ...prev };
+      const qty = (next[productId] ?? 0) + delta;
+      if (qty <= 0) {
+        delete next[productId];
+      } else {
+        next[productId] = qty;
+      }
+      return next;
+    });
+  }, []);
+
+  const removeFromCart = useCallback((productId: string) => {
+    setCart((prev) => {
+      const next = { ...prev };
+      delete next[productId];
+      return next;
+    });
   }, []);
 
   const toggleFavorite = useCallback((productId: string) => {
@@ -56,12 +80,14 @@ export function ShopProvider({ children }: { children: ReactNode }) {
       favoritesCount: favorites.size,
       compareCount: compare.size,
       addToCart,
+      changeCartQty,
+      removeFromCart,
       isFavorite: (productId: string) => favorites.has(productId),
       toggleFavorite,
       isInCompare: (productId: string) => compare.has(productId),
       toggleCompare,
     }),
-    [cart, favorites, compare, addToCart, toggleFavorite, toggleCompare]
+    [cart, favorites, compare, addToCart, changeCartQty, removeFromCart, toggleFavorite, toggleCompare]
   );
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

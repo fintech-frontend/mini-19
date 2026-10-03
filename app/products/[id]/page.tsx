@@ -126,7 +126,7 @@ export default async function ProductDetailPage({ params }: ProductDetailProps) 
       </div>
 
       {/* Табы */}
-      <ProductTabs product={product} />
+      <ProductTabs title={product.title} specs={product.specs} description={product.description} />
 
       {/* Похожие товары (.map) */}
       <div className="border-t border-gray-200 pt-10">

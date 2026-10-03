@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { X } from "lucide-react";
-import { Product } from "@/types/product";
 
 interface BuyOneClickButtonProps {
-  product: Product;
+  /** Достаточно заголовка — модалка больше ничего о товаре не показывает, поэтому
+   *  сюда одинаково подходит и Product, и CatalogListingProduct. */
+  product: { title: string };
   disabled?: boolean;
 }
 

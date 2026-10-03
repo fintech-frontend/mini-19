@@ -1,0 +1,165 @@
+/*
+ * Scoped clone of the fluid type scale used on https://www.stroiopttorg.ru/catalog/
+ * (theme Astra95, rule `.m-page { font-size: calc(16px) }` stepping down via vw at
+ * 1700 / 992 / 576px breakpoints). Scoped to .fluidRoot so it never touches the
+ * shared Tailwind scale used by the navbar/footer/rest of the app.
+ */
+.fluidRoot {
+  font-size: 16px;
+}
+@media screen and (max-width: 1700px) {
+  .fluidRoot {
+    font-size: 0.941176vw;
+  }
+}
+@media screen and (max-width: 992px) {
+  .fluidRoot {
+    font-size: 2.08333vw;
+  }
+}
+@media screen and (max-width: 576px) {
+  .fluidRoot {
+    font-size: 4.44444vw;
+  }
+}
+
+.container {
+  max-width: 1700px;
+  margin: 0 auto;
+  padding: 0 2.5em;
+}
+@media screen and (max-width: 992px) {
+  .container {
+    padding: 0 1.5625em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .container {
+    padding: 0 0.9375em;
+  }
+}
+
+.pageTitle {
+  font-size: 3em;
+  line-height: 1.12;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+}
+
+/* ---- top-level catalog grid (/catalog) ---- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.25em;
+  margin-top: 3.75em;
+  margin-bottom: 3.75em;
+}
+@media screen and (max-width: 991px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 576px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25em;
+  border-radius: 8px;
+  border: 1px solid #edf0f2;
+}
+@media screen and (max-width: 991px) {
+  .card {
+    padding: 20px 15px;
+  }
+}
+
+.cardImageLink {
+  display: block;
+}
+
+.cardImage {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 128px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.cardTitle {
+  display: flex;
+  min-height: 72px;
+  align-items: center;
+  color: #2c333d;
+  font-size: 1em;
+  line-height: 21px;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.subList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.subItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  color: #2c333d;
+}
+
+.subLink {
+  font-size: 0.9375em;
+  line-height: 130%;
+  color: #2c333d;
+  text-decoration: none;
+}
+
+.bullet {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* ---- category landing grid (/catalog/[category]) ---- */
+
+.cardLink {
+  display: block;
+  padding: 1.25em;
+  border-radius: 8px;
+  border: 1px solid #edf0f2;
+}
+@media screen and (max-width: 991px) {
+  .cardLink {
+    padding: 20px 15px;
+  }
+}
+
+.title2 {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #2c333d;
+  font-size: 1em;
+  line-height: 21px;
+  margin-top: 10px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.cardLink:hover .title2 {
+  color: #186fd4;
+}

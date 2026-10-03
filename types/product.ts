@@ -5,7 +5,8 @@ export interface ProductSpec {
 
 export interface Product {
   id: string;
-  article: string;
+  /** Артикул в товарах из staticProducts (каталог «Продукты») */
+  article?: string;
   title: string;
   price: number;
   oldPrice?: number;
@@ -18,4 +19,6 @@ export interface Product {
   isBestSeller?: boolean;
   isFeatured?: boolean;
   isSeasonal?: boolean;
+  /** Артикул в товарах из каталога Create-Blog (ventilyatory-data и др.) */
+  articul?: string;
 }
