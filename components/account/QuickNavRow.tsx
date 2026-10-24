@@ -2,20 +2,20 @@
 
 import { ClipboardList, UserPen, Send, Heart, ShieldCheck, LogOut, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useShop } from "@/context/ShopContext";
 import { AccountTab } from "@/types/account";
 
 interface QuickNavItem {
   tab: AccountTab;
   label: string;
   icon: LucideIcon;
-  badge?: number;
 }
 
 const items: QuickNavItem[] = [
   { tab: "orders", label: "Мои заказы", icon: ClipboardList },
   { tab: "profile", label: "Изменить профиль", icon: UserPen },
   { tab: "address", label: "Адрес доставки", icon: Send },
-  { tab: "favorites", label: "Избранное", icon: Heart, badge: 3 },
+  { tab: "favorites", label: "Избранное", icon: Heart },
   { tab: "password", label: "Сменить пароль", icon: ShieldCheck },
 ];
 
@@ -27,10 +27,12 @@ interface QuickNavRowProps {
 
 // Secondary quick-nav shown above the orders lists (overview + full history), mirrors AccountSidebar.
 export function QuickNavRow({ active, onSelect, onLogout }: QuickNavRowProps) {
+  const { favoritesCount } = useShop();
   return (
     <div className="mb-6 grid grid-cols-3 gap-3 sm:grid-cols-6">
-      {items.map(({ tab, label, icon: Icon, badge }) => {
+      {items.map(({ tab, label, icon: Icon }) => {
         const isActive = tab === active;
+        const badge = tab === "favorites" ? favoritesCount : 0;
         return (
           <button
             key={tab}
@@ -43,7 +45,7 @@ export function QuickNavRow({ active, onSelect, onLogout }: QuickNavRowProps) {
                 : "border-neutral-200 text-neutral-600 hover:border-neutral-300"
             )}
           >
-            {badge && (
+            {badge > 0 && (
               <span className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
                 {badge}
               </span>

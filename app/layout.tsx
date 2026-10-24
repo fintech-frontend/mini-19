@@ -1,26 +1,16 @@
-import type { Metadata } from "next";
-import Header from "@/components/navbar/navbar";
-import Footer from "@/components/footer/footer";
-import { ShopProvider } from "@/context/ShopContext";
 import { Providers } from "./providers";
-import "./globals.css";
 
-export const metadata: Metadata = {
-  title: "Стройоптторг",
-  description: "Интернет-магазин товаров для строительства и ремонта",
-};
-
+/**
+ * Корневой layout общий для витрины (app/(site)) и админ-панели (app/(admin)).
+ * Здесь только то, что нужно обеим частям: документ и Redux (RTK Query) —
+ * стили и оформление каждая группа подключает в своём layout.
+ * suppressHydrationWarning: админка выставляет data-theme на <html> до гидрации.
+ */
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ru" className="h-full antialiased">
-      <body className="flex min-h-full flex-col">
-        <Providers>
-          <ShopProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </ShopProvider>
-        </Providers>
+    <html lang="ru" suppressHydrationWarning>
+      <body>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

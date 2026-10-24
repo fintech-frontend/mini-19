@@ -1,4 +1,4 @@
-import styles from "@/app/contacts/contacts.module.css";
+import styles from "@/app/(site)/contacts/contacts.module.css";
 import type { ContactDepartment, ContactRequisites } from "@/types/contacts";
 
 /**

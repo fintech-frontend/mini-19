@@ -5,14 +5,11 @@ import { useRouter } from "next/navigation";
 import { FormField } from "./FormField";
 import { PasswordField } from "./PasswordField";
 import {
-  register,
-  verifyRegisterOtp,
-  resendRegisterOtp,
-  extractAccessToken,
-  extractRefreshToken,
-} from "@/lib/api/auth";
-import { setAccessToken, setRefreshToken } from "@/lib/api/token";
-import { ApiError } from "@/lib/api/errors";
+  useRegisterMutation,
+  useResendRegisterOtpMutation,
+  useVerifyRegisterOtpMutation,
+} from "@/lib/store/api";
+import { getErrorMessage } from "@/lib/store/api";
 
 interface RegisterFields {
   firstName: string;
@@ -38,17 +35,17 @@ export function RegisterForm() {
   const [terms, setTerms] = useState(false);
   const [privacy, setPrivacy] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
 
   const [otpCode, setOtpCode] = useState("");
   const [otpSubmitted, setOtpSubmitted] = useState(false);
   const [otpError, setOtpError] = useState<string | null>(null);
-  const [otpLoading, setOtpLoading] = useState(false);
   const [resendMessage, setResendMessage] = useState<string | null>(null);
-  const [resending, setResending] = useState(false);
 
   const router = useRouter();
+  const [register, { isLoading: loading }] = useRegisterMutation();
+  const [verifyRegisterOtp, { isLoading: otpLoading }] = useVerifyRegisterOtpMutation();
+  const [resendRegisterOtp, { isLoading: resending }] = useResendRegisterOtpMutation();
 
   function updateField(field: keyof RegisterFields) {
     return (e: ChangeEvent<HTMLInputElement>) =>
@@ -74,7 +71,6 @@ export function RegisterForm() {
     setApiError(null);
     if (errors.length > 0) return;
 
-    setLoading(true);
     try {
       await register({
         first_name: fields.firstName,
@@ -82,12 +78,10 @@ export function RegisterForm() {
         email: fields.email,
         password: fields.password,
         password2: fields.confirmPassword,
-      });
+      }).unwrap();
       setStep("otp");
     } catch (err) {
-      setApiError(err instanceof ApiError ? err.message : "Не удалось подключиться к серверу.");
-    } finally {
-      setLoading(false);
+      setApiError(getErrorMessage(err, "Не удалось подключиться к серверу."));
     }
   }
 
@@ -98,21 +92,12 @@ export function RegisterForm() {
     setOtpError(null);
     if (!otpCode) return;
 
-    setOtpLoading(true);
     try {
-      const response = await verifyRegisterOtp(fields.email, otpCode);
-      const accessToken = extractAccessToken(response);
-      if (accessToken) {
-        setAccessToken(accessToken);
-        setRefreshToken(extractRefreshToken(response));
-        router.push("/account");
-        return;
-      }
-      router.push("/my-account?notice=registered");
+      // Если сервер сразу выдал токены, эндпоинт их уже сохранил (lib/store/api/authApi.ts).
+      const { accessToken } = await verifyRegisterOtp({ email: fields.email, code: otpCode }).unwrap();
+      router.push(accessToken ? "/account" : "/my-account?notice=registered");
     } catch (err) {
-      setOtpError(err instanceof ApiError ? err.message : "Не удалось подключиться к серверу.");
-    } finally {
-      setOtpLoading(false);
+      setOtpError(getErrorMessage(err, "Не удалось подключиться к серверу."));
     }
   }
 
@@ -120,14 +105,11 @@ export function RegisterForm() {
     if (resending) return;
     setResendMessage(null);
     setOtpError(null);
-    setResending(true);
     try {
-      await resendRegisterOtp(fields.email);
+      await resendRegisterOtp({ email: fields.email }).unwrap();
       setResendMessage("Код отправлен повторно");
     } catch (err) {
-      setOtpError(err instanceof ApiError ? err.message : "Не удалось отправить код повторно.");
-    } finally {
-      setResending(false);
+      setOtpError(getErrorMessage(err, "Не удалось отправить код повторно."));
     }
   }
 

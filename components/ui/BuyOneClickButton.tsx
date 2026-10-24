@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { X } from "lucide-react";
+import { phoneInputProps, sanitizePhone } from "@/lib/input";
 
 interface BuyOneClickButtonProps {
   /** Достаточно заголовка — модалка больше ничего о товаре не показывает, поэтому
@@ -13,13 +14,15 @@ interface BuyOneClickButtonProps {
 export default function BuyOneClickButton({ product, disabled }: BuyOneClickButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [phone, setPhone] = useState("");
 
   const closeModal = () => {
     setIsOpen(false);
     setSubmitted(false);
+    setPhone("");
   };
 
-  // Намеренно не вызываем createOrder (lib/api/orders.ts) отсюда: в документации
+  // Намеренно не вызываем createOrder (lib/store/api/ordersApi.ts) отсюда: в документации
   // Postman нет отдельного эндпоинта "быстрый заказ в 1 клик", который принимал бы
   // имя/email/телефон одного товара, а придумывать несуществующий API мы не должны.
   // POST /orders/ тоже не подходит один в один — он создаёт сводку по subtotal/total
@@ -96,8 +99,10 @@ export default function BuyOneClickButton({ product, disabled }: BuyOneClickButt
                   className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <input
-                  type="tel"
+                  {...phoneInputProps}
                   required
+                  value={phone}
+                  onChange={(e) => setPhone(sanitizePhone(e.target.value))}
                   placeholder="Номер телефона"
                   className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />

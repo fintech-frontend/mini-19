@@ -3,19 +3,23 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Heart, BarChart3, ImageOff } from "lucide-react";
+import { Heart, BarChart3 } from "lucide-react";
 import { ResolvedProduct } from "@/lib/resolveProduct";
+import { PRODUCT_PLACEHOLDER_IMAGE } from "@/data/product-images";
 import { useShop } from "@/context/ShopContext";
+import QuantityStepper from "@/components/ui/QuantityStepper";
 
 export default function CatalogProductCard({ product }: { product: ResolvedProduct }) {
   const { addToCart, isFavorite, toggleFavorite, isInCompare, toggleCompare } = useShop();
   const [justAdded, setJustAdded] = useState(false);
+  const [quantity, setQuantity] = useState(1);
   const favorited = isFavorite(product.id);
   const compared = isInCompare(product.id);
   const href = product.href;
 
   function handleAddToCart() {
-    addToCart(product.id);
+    addToCart(product.id, quantity);
+    setQuantity(1);
     setJustAdded(true);
     setTimeout(() => setJustAdded(false), 1500);
   }
@@ -28,17 +32,13 @@ export default function CatalogProductCard({ product }: { product: ResolvedProdu
         href={href}
         className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-lg border border-neutral-100 bg-neutral-50"
       >
-        {product.image ? (
-          <Image
-            src={product.image}
-            alt={product.title}
-            fill
-            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 20vw"
-            className="object-contain p-6 transition-transform duration-300 group-hover:scale-105"
-          />
-        ) : (
-          <ImageOff className="h-10 w-10 text-neutral-300" />
-        )}
+        <Image
+          src={product.image ?? PRODUCT_PLACEHOLDER_IMAGE}
+          alt={product.title}
+          fill
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 20vw"
+          className="object-contain p-6 transition-transform duration-300 group-hover:scale-105"
+        />
         {!product.inStock && (
           <span className="absolute left-2 top-2 rounded bg-neutral-900/80 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
             Нет в наличии
@@ -62,7 +62,11 @@ export default function CatalogProductCard({ product }: { product: ResolvedProdu
           )}
         </div>
 
-        <div className="mt-3 flex items-center gap-2">
+        {product.inStock && (
+          <QuantityStepper value={quantity} onChange={setQuantity} className="mt-3 w-full [&>input]:flex-1 [&>button]:w-10" />
+        )}
+
+        <div className="mt-2 flex items-center gap-2">
           <button
             type="button"
             disabled={!product.inStock}

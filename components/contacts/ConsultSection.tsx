@@ -2,9 +2,10 @@
 
 import { useId, useState, type FormEvent } from "react";
 import Link from "next/link";
-import styles from "@/app/contacts/contacts.module.css";
-import { submitConsultRequest } from "@/lib/api/contacts";
-import { ApiError } from "@/lib/api/errors";
+import styles from "@/app/(site)/contacts/contacts.module.css";
+import { phoneInputProps, sanitizePhone } from "@/lib/input";
+import { useSubmitConsultRequestMutation } from "@/lib/store/api";
+import { getErrorMessage } from "@/lib/store/api";
 import type { ConsultFormConfig, ConsultFormField } from "@/types/contacts";
 
 type FieldName = ConsultFormField["name"];
@@ -19,7 +20,7 @@ const EMPTY: Values = { name: "", phone: "", message: "" };
  * панель отправки на всю ширину. На мобильном форма схлопывается в одну колонку,
  * а кнопка встаёт над чекбоксом.
  *
- * Отправка идёт через lib/api/contacts.ts — компонент не знает ни адреса бэкенда,
+ * Отправка идёт через lib/store/api/contentApi.ts — компонент не знает ни адреса бэкенда,
  * ни формата запроса.
  */
 export function ConsultSection({ config }: { config: ConsultFormConfig }) {
@@ -27,8 +28,8 @@ export function ConsultSection({ config }: { config: ConsultFormConfig }) {
   const [values, setValues] = useState<Values>(EMPTY);
   const [consent, setConsent] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<"idle" | "submitting">("idle");
   const [result, setResult] = useState<{ ok: boolean; message: string } | null>(null);
+  const [submitConsultRequest, { isLoading: submitting }] = useSubmitConsultRequestMutation();
 
   function setField(name: FieldName, value: string) {
     setValues((prev) => ({ ...prev, [name]: value }));
@@ -57,14 +58,13 @@ export function ConsultSection({ config }: { config: ConsultFormConfig }) {
       return;
     }
 
-    setStatus("submitting");
     setResult(null);
     try {
       const response = await submitConsultRequest({
         name: values.name.trim(),
         phone: values.phone.trim(),
         message: values.message.trim(),
-      });
+      }).unwrap();
       setResult(response);
       if (response.ok) {
         setValues(EMPTY);
@@ -73,22 +73,16 @@ export function ConsultSection({ config }: { config: ConsultFormConfig }) {
     } catch (error) {
       setResult({
         ok: false,
-        message:
-          error instanceof ApiError
-            ? error.message
-            : "Не удалось отправить сообщение. Попробуйте ещё раз.",
+        message: getErrorMessage(error, "Не удалось отправить сообщение. Попробуйте ещё раз."),
       });
-    } finally {
-      setStatus("idle");
     }
   }
 
-  const submitting = status === "submitting";
   const textFields = config.fields.filter((field) => field.name !== "message");
   const messageField = config.fields.find((field) => field.name === "message");
 
   return (
-    <section className={styles.consult}>
+    <section id="consult" className={`${styles.consult} scroll-mt-24`}>
       <div className={styles.container}>
         <h2 className={`${styles.text33} ${styles.bold} ${styles.black2} ${styles.consultTitle}`}>
           {config.titleLine1} <br /> {config.titleLine2}
@@ -201,7 +195,8 @@ function Field({
     "aria-required": field.required,
     "aria-invalid": Boolean(error),
     "aria-describedby": error ? errorId : undefined,
-    onChange: (event: { target: { value: string } }) => onChange(event.target.value),
+    onChange: (event: { target: { value: string } }) =>
+      onChange(field.name === "phone" ? sanitizePhone(event.target.value) : event.target.value),
   };
 
   return (
@@ -213,8 +208,7 @@ function Field({
         <textarea rows={10} maxLength={2000} {...shared} />
       ) : (
         <input
-          type={field.name === "phone" ? "tel" : "text"}
-          maxLength={400}
+          {...(field.name === "phone" ? phoneInputProps : { type: "text", maxLength: 400 })}
           {...shared}
         />
       )}

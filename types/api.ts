@@ -2,7 +2,7 @@
  * Типы, повторяющие форму реальных ответов backend API (см. Postman-документацию:
  * https://documenter.getpostman.com/view/53941942/2sBYAvwAyV). Держим их отдельно от
  * "UI-типов" в других файлах types/*, потому что backend отдаёт не совсем то же самое
- * (например, у товара нет полей image/gallery/specs — см. lib/api/products.ts).
+ * (например, у товара нет полей image/gallery/specs — см. lib/store/api/catalogApi.ts).
  */
 
 export interface PaginatedResponse<T> {
@@ -79,7 +79,7 @@ export interface ApiOrder {
 /**
  * Ответ на login/register в документации не сохранён (пример "No response body"),
  * поэтому точные имена полей токена неизвестны. Держим сигнатуру открытой и
- * извлекаем токен через extractAccessToken/extractRefreshToken (lib/api/auth.ts),
+ * извлекаем токен через toAuthTokens (lib/store/api/authApi.ts),
  * которые перебирают несколько вероятных имён полей.
  */
 export interface AuthResponse {

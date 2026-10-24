@@ -21,7 +21,7 @@ function CardSkeleton() {
 }
 
 /**
- * Результаты поиска. Данные берутся из useProductSearch (React Query → API layer),
+ * Результаты поиска. Данные берутся из useProductSearch (RTK Query → API layer),
  * запросов к бэкенду здесь нет. Карточки — существующий ProductGrid/ProductCard,
  * поэтому поведение «в корзину / в избранное / в сравнение» работает как везде.
  */

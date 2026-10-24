@@ -1,4 +1,4 @@
-import styles from "@/app/about/about.module.css";
+import styles from "@/app/(site)/about/about.module.css";
 import type { CompanyAdvantage } from "@/types/company";
 
 /** Блок «Почему именно мы» — четыре карточки с иконками. */

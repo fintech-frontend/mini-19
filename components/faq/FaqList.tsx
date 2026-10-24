@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import styles from "@/app/vopros-otvet/vopros-otvet.module.css";
+import styles from "@/app/(site)/vopros-otvet/vopros-otvet.module.css";
 import { FaqCard } from "@/components/faq/FaqCard";
 import type { FAQItem } from "@/types/faq";
 

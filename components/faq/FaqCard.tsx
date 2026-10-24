@@ -1,7 +1,7 @@
 "use client";
 
 import { useId } from "react";
-import styles from "@/app/vopros-otvet/vopros-otvet.module.css";
+import styles from "@/app/(site)/vopros-otvet/vopros-otvet.module.css";
 import type { FAQItem } from "@/types/faq";
 
 /**

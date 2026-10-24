@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight, Loader2, Menu, X } from "lucide-react";
 import { styles } from "@/styles/index.styles";
 import { useCategoryTree } from "@/hooks/useCategoryTree";
-import type { CategoryTreeNode } from "@/lib/api/categoryTree";
+import type { CategoryTreeNode } from "@/lib/catalog/categoryTree";
 
 /**
  * Кнопка «Каталог» как на stroiopttorg.ru: не ссылка, а переключатель выпадающего

@@ -3,8 +3,8 @@
 import { useId, useState, type FormEvent } from "react";
 import Link from "next/link";
 import styles from "@/styles/reference-page.module.css";
-import { subscribeToNewsletter } from "@/lib/api/newsletter";
-import { ApiError } from "@/lib/api/errors";
+import { useSubscribeToNewsletterMutation } from "@/lib/store/api";
+import { getErrorMessage } from "@/lib/store/api";
 import type { ReferenceSubscribeConfig } from "@/types/reference";
 
 /** Минимальная проверка адреса — того же уровня, что и `type="email"` в оригинале. */
@@ -15,7 +15,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * заголовок, описание, поле email и кнопка, ниже — чекбокс согласия.
  *
  * На планшете (577–992px) поле и кнопка встают в строку, на десктопе и мобильном
- * — друг под другом. Отправка идёт через lib/api/newsletter.ts: компонент не знает
+ * — друг под другом. Отправка идёт через RTK Query (lib/store/api/contentApi.ts): компонент не знает
  * ни адреса бэкенда, ни формата запроса.
  */
 export function ReferenceSubscribe({ config }: { config: ReferenceSubscribeConfig }) {
@@ -24,7 +24,7 @@ export function ReferenceSubscribe({ config }: { config: ReferenceSubscribeConfi
   const [consent, setConsent] = useState(false);
   const [emailError, setEmailError] = useState<string | null>(null);
   const [consentError, setConsentError] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+  const [subscribeToNewsletter, { isLoading: submitting }] = useSubscribeToNewsletterMutation();
   const [result, setResult] = useState<{ ok: boolean; message: string } | null>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -44,10 +44,9 @@ export function ReferenceSubscribe({ config }: { config: ReferenceSubscribeConfi
       return;
     }
 
-    setSubmitting(true);
     setResult(null);
     try {
-      const response = await subscribeToNewsletter({ email: value });
+      const response = await subscribeToNewsletter({ email: value }).unwrap();
       setResult(response);
       if (response.ok) {
         setEmail("");
@@ -56,13 +55,8 @@ export function ReferenceSubscribe({ config }: { config: ReferenceSubscribeConfi
     } catch (error) {
       setResult({
         ok: false,
-        message:
-          error instanceof ApiError
-            ? error.message
-            : "Не удалось оформить подписку. Попробуйте ещё раз.",
+        message: getErrorMessage(error, "Не удалось оформить подписку. Попробуйте ещё раз."),
       });
-    } finally {
-      setSubmitting(false);
     }
   }
 

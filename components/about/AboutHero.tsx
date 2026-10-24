@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "@/app/about/about.module.css";
+import styles from "@/app/(site)/about/about.module.css";
 import type { CompanyIntro } from "@/types/company";
 
 /** Первый экран: хлебные крошки, заголовок, лид, текст и фото, уходящее вправо. */

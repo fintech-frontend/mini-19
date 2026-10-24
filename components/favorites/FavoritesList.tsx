@@ -56,7 +56,7 @@ function EmptyState() {
  * Список избранного.
  *
  * Состояние берётся из существующего ShopContext (favoriteIds), товары — из хука
- * useFavoriteProducts (React Query → API layer). Карточки — тот же ProductCard,
+ * useFavoriteProducts (RTK Query → API layer). Карточки — тот же ProductCard,
  * что в каталоге и поиске, поэтому «Купить», «в избранное» и «сравнить» работают
  * одинаково везде, а снятие сердечка тут же убирает товар из этого списка.
  */

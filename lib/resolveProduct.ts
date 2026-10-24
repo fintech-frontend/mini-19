@@ -1,17 +1,16 @@
-import { getProduct } from "@/lib/api/products";
 import type { ApiProduct } from "@/types/api";
+import { findProductImage } from "@/data/product-images";
 
 /**
  * Общая нормализованная форма товара для всего UI (карточки, корзина, избранное,
  * сравнение, чекаут). Раньше товар резолвился синхронно из двух статических
  * каталогов (`data/staticProducts.ts` и `data/listings/*`) — теперь единственный
- * источник данных это реальный backend (`GET /products/:id/`), поэтому резолвинг
- * стал асинхронным.
+ * источник данных это реальный backend: на клиенте товары по id берутся из кэша
+ * каталога RTK Query (hooks/useProductsByIds.ts).
  *
  * ВАЖНО: у backend-товара нет полей image/gallery/specs (см. ApiProduct в
- * types/api.ts) — `image` намеренно всегда `null`. Компоненты, использующие
- * ResolvedProduct (ProductCard и т.д.), уже умеют красиво показывать товар без
- * картинки — ломать вёрстку это не должно.
+ * types/api.ts) — `image` подбирается по названию (data/product-images.ts), а
+ * без совпадения равен `null`, и карточка показывает заглушку.
  */
 export interface ResolvedProduct {
   id: string;
@@ -42,7 +41,7 @@ export function toResolvedProduct(product: ApiProduct): ResolvedProduct {
     title: product.name,
     price: toNumber(product.price) ?? 0,
     oldPrice: toNumber(product.old_price ?? undefined),
-    image: null,
+    image: findProductImage(product.name),
     article: product.article,
     inStock: product.is_active,
     href: `/products/${product.id}`,
@@ -50,21 +49,4 @@ export function toResolvedProduct(product: ApiProduct): ResolvedProduct {
     categoryId: product.category?.id,
     categoryName: product.category?.name,
   };
-}
-
-export async function resolveProductById(id: string): Promise<ResolvedProduct | undefined> {
-  const numericId = Number(id);
-  if (!Number.isFinite(numericId)) return undefined;
-  try {
-    const product = await getProduct(numericId);
-    return toResolvedProduct(product);
-  } catch {
-    return undefined;
-  }
-}
-
-/** Резолвит сразу несколько id параллельно — для корзины/избранного/сравнения. */
-export async function resolveProductsByIds(ids: string[]): Promise<ResolvedProduct[]> {
-  const results = await Promise.all(ids.map((id) => resolveProductById(id)));
-  return results.filter((product): product is ResolvedProduct => product !== undefined);
 }

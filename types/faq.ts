@@ -7,7 +7,7 @@ import type { ReferencePromoCard, ReferenceSubscribeConfig } from "@/types/refer
  * реального backend хранится отдельно в types/api.ts — так же, как это уже сделано
  * для каталога и остальных страниц шаблона. Когда появится документация по
  * эндпоинту FAQ, маппинг "ответ backend → тип отсюда" пишется один раз в
- * lib/api/faq.ts, а разметку трогать не придётся.
+ * lib/store/api/contentApi.ts, а разметку трогать не придётся.
  */
 
 /** Один вопрос-ответ аккордеона. */

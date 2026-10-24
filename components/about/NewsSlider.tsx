@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import styles from "@/app/about/about.module.css";
+import styles from "@/app/(site)/about/about.module.css";
 import { AboutSlider } from "@/components/about/AboutSlider";
 import type { CompanyNewsItem } from "@/types/company";
 

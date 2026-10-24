@@ -3,14 +3,16 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PasswordField } from "@/components/auth/PasswordField";
-import { changePassword, openChangePasswordWindow } from "@/lib/api/auth";
-import { isAuthenticated } from "@/lib/api/token";
-import { ApiError } from "@/lib/api/errors";
+import { useChangePasswordMutation, useOpenChangePasswordWindowMutation } from "@/lib/store/api";
+import { isAuthenticated } from "@/lib/store/api";
+import { getErrorMessage } from "@/lib/store/api";
 
 type WindowState = "checking" | "open" | "error";
 
 export function ChangePasswordForm() {
   const router = useRouter();
+  const [openChangePasswordWindow] = useOpenChangePasswordWindowMutation();
+  const [changePassword, { isLoading: saving }] = useChangePasswordMutation();
   const [windowState, setWindowState] = useState<WindowState>("checking");
   const [windowError, setWindowError] = useState<string | null>(null);
 
@@ -18,7 +20,6 @@ export function ChangePasswordForm() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,14 +30,13 @@ export function ChangePasswordForm() {
     }
 
     openChangePasswordWindow()
+      .unwrap()
       .then(() => setWindowState("open"))
       .catch((err: unknown) => {
         setWindowState("error");
-        setWindowError(
-          err instanceof ApiError ? err.message : "Не удалось открыть окно смены пароля."
-        );
+        setWindowError(getErrorMessage(err, "Не удалось открыть окно смены пароля."));
       });
-  }, [router]);
+  }, [openChangePasswordWindow, router]);
 
   const mismatch = Boolean(newPassword) && newPassword !== confirmPassword;
   const isValid = Boolean(currentPassword) && Boolean(newPassword) && !mismatch;
@@ -54,18 +54,19 @@ export function ChangePasswordForm() {
       return;
     }
 
-    setSaving(true);
     try {
-      await changePassword(currentPassword, newPassword, confirmPassword);
+      await changePassword({
+        old_password: currentPassword,
+        new_password: newPassword,
+        new_password2: confirmPassword,
+      }).unwrap();
       setSaved(true);
       setSubmitted(false);
       setCurrentPassword("");
       setNewPassword("");
       setConfirmPassword("");
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Не удалось сменить пароль.");
-    } finally {
-      setSaving(false);
+      setError(getErrorMessage(err, "Не удалось сменить пароль."));
     }
   }
 

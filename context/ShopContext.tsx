@@ -10,9 +10,16 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { createCart, deleteCart, getCart } from "@/lib/api/carts";
-import { addCartItem, removeCartItem, updateCartItemQuantity } from "@/lib/api/cartItems";
-import { ApiError } from "@/lib/api/errors";
+import {
+  useAddCartItemMutation,
+  useCreateCartMutation,
+  useDeleteCartMutation,
+  useGetProductsQuery,
+  useLazyGetCartQuery,
+  useRemoveCartItemMutation,
+  useUpdateCartItemQuantityMutation,
+} from "@/lib/store/api";
+import { getErrorMessage, getErrorStatus } from "@/lib/store/api";
 
 /**
  * Корзина теперь backed настоящим backend (`/carts/` + `/cart-items/`) вместо
@@ -56,7 +63,8 @@ interface ShopContextValue {
   compareCount: number;
   favoriteIds: string[];
   compareIds: string[];
-  addToCart: (productId: string) => void;
+  /** Добавляет `quantity` штук (по умолчанию 1) к позиции в корзине. */
+  addToCart: (productId: string, quantity?: number) => void;
   /** Меняет количество; qty <= 0 убирает позицию из корзины. */
   setCartQty: (productId: string, qty: number) => void;
   removeFromCart: (productId: string) => void;
@@ -72,9 +80,7 @@ interface ShopContextValue {
 const ShopContext = createContext<ShopContextValue | null>(null);
 
 function describeError(err: unknown): string {
-  if (err instanceof ApiError) return err.message;
-  if (err instanceof Error) return err.message;
-  return String(err);
+  return getErrorMessage(err, err instanceof Error ? err.message : String(err));
 }
 
 function readStoredCartId(): number | null {
@@ -136,6 +142,14 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [compare, setCompare] = useState<Set<string>>(new Set());
 
+  // RTK Query (lib/store/api/cartApi.ts). Триггеры стабильны между рендерами.
+  const [fetchCart] = useLazyGetCartQuery();
+  const [createCart] = useCreateCartMutation();
+  const [deleteCart] = useDeleteCartMutation();
+  const [addCartItem] = useAddCartItemMutation();
+  const [updateCartItemQuantity] = useUpdateCartItemQuantityMutation();
+  const [removeCartItem] = useRemoveCartItemMutation();
+
   // Рефы хранят "последнее известное" состояние, чтобы асинхронные обработчики
   // (addToCart и т.д.), запускаемые из синхронных onClick, всегда читали
   // актуальные значения, а не замкнутые в момент вызова.
@@ -164,6 +178,27 @@ export function ShopProvider({ children }: { children: ReactNode }) {
       cancelled = true;
     };
   }, []);
+
+  /*
+   * Убираем из избранного и сравнения товары, которых уже нет в каталоге (удалены на
+   * бэкенде): иначе счётчик в шапке показывает «3», а на странице пусто. Каталог берём
+   * из того же кэша RTK Query, что и страницы, — отдельного запроса это не добавляет.
+   * Пустой ответ каталога не считаем доказательством — не стираем списки из-за сбоя.
+   */
+  const { data: catalog } = useGetProductsQuery();
+  useEffect(() => {
+    if (!catalog || catalog.length === 0) return;
+    const existing = new Set(catalog.map((product) => String(product.id)));
+    const prune = (prev: Set<string>) => {
+      if (Array.from(prev).every((id) => existing.has(id))) return prev;
+      return new Set(Array.from(prev).filter((id) => existing.has(id)));
+    };
+    void Promise.resolve().then(() => {
+      if (!prefsHydratedRef.current) return;
+      setFavorites(prune);
+      setCompare(prune);
+    });
+  }, [catalog]);
 
   // Сохраняем только после гидратации, иначе первый рендер стёр бы сохранённое.
   useEffect(() => {
@@ -194,7 +229,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
       try {
         // GET /carts/:id/ отдаёт корзину с вложенными позициями; удалённая на
         // сервере корзина даёт 404 и попадает в catch — тогда начинаем с пустой.
-        const { items } = await getCart(storedId);
+        const { items } = await fetchCart(storedId).unwrap();
         const nextItems: CartItemsState = {};
         for (const item of items) {
           nextItems[String(item.product.id)] = { cartItemId: item.id, quantity: item.quantity };
@@ -210,7 +245,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
     };
 
     hydrationRef.current = hydrate().finally(() => setCartLoading(false));
-  }, [applyCartId, applyCartItems]);
+  }, [applyCartId, applyCartItems, fetchCart]);
 
   const waitForHydration = useCallback(async () => {
     if (hydrationRef.current) {
@@ -229,24 +264,25 @@ export function ShopProvider({ children }: { children: ReactNode }) {
         delete next[productId];
         applyCartItems(next);
         try {
-          await removeCartItem(existing.cartItemId);
+          await removeCartItem(existing.cartItemId).unwrap();
         } catch (err) {
           applyCartItems(previous);
           console.error("Не удалось удалить товар из корзины:", describeError(err));
         }
       })();
     },
-    [applyCartItems, waitForHydration]
+    [applyCartItems, removeCartItem, waitForHydration]
   );
 
   const addToCart = useCallback(
-    (productId: string) => {
+    (productId: string, quantity = 1) => {
+      const addedQty = Math.max(1, Math.floor(quantity));
       void (async () => {
         await waitForHydration();
         try {
           let id = cartIdRef.current;
           if (id == null) {
-            const newCart = await createCart();
+            const newCart = await createCart().unwrap();
             id = newCart.id;
             applyCartId(id);
             persistCartId(id);
@@ -255,10 +291,10 @@ export function ShopProvider({ children }: { children: ReactNode }) {
           const existing = cartItemsRef.current[productId];
           if (existing) {
             const previousQty = existing.quantity;
-            const nextQty = previousQty + 1;
+            const nextQty = previousQty + addedQty;
             applyCartItems({ ...cartItemsRef.current, [productId]: { ...existing, quantity: nextQty } });
             try {
-              await updateCartItemQuantity(existing.cartItemId, nextQty);
+              await updateCartItemQuantity({ id: existing.cartItemId, quantity: nextQty }).unwrap();
             } catch (err) {
               applyCartItems({ ...cartItemsRef.current, [productId]: { ...existing, quantity: previousQty } });
               console.error("Не удалось увеличить количество товара в корзине:", describeError(err));
@@ -266,7 +302,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
             return;
           }
 
-          const created = await addCartItem({ cart: id, product_id: Number(productId), quantity: 1 });
+          const created = await addCartItem({ cart: id, product_id: Number(productId), quantity: addedQty }).unwrap();
           applyCartItems({
             ...cartItemsRef.current,
             [productId]: { cartItemId: created.id, quantity: created.quantity },
@@ -275,7 +311,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
           // Сохранённая корзина могла быть удалена на сервере: тогда POST /cart-items/
           // отвечает 400 ("Invalid pk ... object does not exist"). Сбрасываем id, чтобы
           // следующее добавление создало новую корзину.
-          if (err instanceof ApiError && err.status === 400) {
+          if (getErrorStatus(err) === 400) {
             persistCartId(null);
             applyCartId(null);
           }
@@ -283,7 +319,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
         }
       })();
     },
-    [applyCartId, applyCartItems, waitForHydration]
+    [addCartItem, applyCartId, applyCartItems, createCart, updateCartItemQuantity, waitForHydration]
   );
 
   const setCartQty = useCallback(
@@ -299,14 +335,14 @@ export function ShopProvider({ children }: { children: ReactNode }) {
         const previousQty = existing.quantity;
         applyCartItems({ ...cartItemsRef.current, [productId]: { ...existing, quantity: qty } });
         try {
-          await updateCartItemQuantity(existing.cartItemId, qty);
+          await updateCartItemQuantity({ id: existing.cartItemId, quantity: qty }).unwrap();
         } catch (err) {
           applyCartItems({ ...cartItemsRef.current, [productId]: { ...existing, quantity: previousQty } });
           console.error("Не удалось изменить количество товара в корзине:", describeError(err));
         }
       })();
     },
-    [applyCartItems, removeFromCart, waitForHydration]
+    [applyCartItems, removeFromCart, updateCartItemQuantity, waitForHydration]
   );
 
   const clearCart = useCallback(() => {
@@ -318,13 +354,13 @@ export function ShopProvider({ children }: { children: ReactNode }) {
         applyCartId(null);
         persistCartId(null);
         try {
-          await deleteCart(id);
+          await deleteCart(id).unwrap();
         } catch (err) {
           console.error("Не удалось удалить корзину на сервере:", describeError(err));
         }
       }
     })();
-  }, [applyCartId, applyCartItems, waitForHydration]);
+  }, [applyCartId, applyCartItems, deleteCart, waitForHydration]);
 
   const toggleFavorite = useCallback((productId: string) => {
     setFavorites((prev) => {
