@@ -1,0 +1,172 @@
+/*
+ * Страница 404 — точный порт вёрстки блока `.error404` с
+ * https://www.stroiopttorg.ru (тема Astra95).
+ *
+ * Общая обвязка шаблона (контейнер, em-масштаб, хлебные крошки, заголовок,
+ * кнопки) берётся из единственного источника — styles/reference-page.module.css —
+ * через `composes`. Здесь остаётся только то, что уникально для 404.
+ */
+
+.fluidRoot {
+  composes: fluidRoot from "../styles/reference-page.module.css";
+  font-family: HelveticaNeueCyr, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  color: #000;
+}
+
+/* Сброс из оригинала, с нулевой специфичностью — как у сброса по тегам. */
+:where(.fluidRoot) :where(h1, h2, h3, h4, h5, h6, p, ul, li, div, a, figure) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  line-height: 1;
+}
+:where(.fluidRoot) :where(h1, h2, h3, h4, h5, h6) {
+  font-weight: 400;
+}
+
+/* ── общая обвязка шаблона: одно определение на весь проект ── */
+
+.container {
+  composes: container from "../styles/reference-page.module.css";
+}
+.blog {
+  composes: blog from "../styles/reference-page.module.css";
+}
+.breadcrumbs {
+  composes: breadcrumbs from "../styles/reference-page.module.css";
+}
+.breadcrumbItem {
+  composes: breadcrumbItem from "../styles/reference-page.module.css";
+}
+.text48 {
+  composes: text48 from "../styles/reference-page.module.css";
+}
+.text18 {
+  composes: text18 from "../styles/reference-page.module.css";
+}
+.bold {
+  composes: bold from "../styles/reference-page.module.css";
+}
+.black2 {
+  composes: black2 from "../styles/reference-page.module.css";
+}
+.btnBlue {
+  composes: btnBlue from "../styles/reference-page.module.css";
+}
+
+/* ─────────────────────────── блок 404 ─────────────────────────── */
+
+.inner {
+  width: 45em;
+  max-width: 100%;
+  margin: 6.625em auto 0;
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 3.44em;
+}
+@media screen and (max-width: 992px) {
+  .inner {
+    gap: 2.5em;
+    margin-top: 3.75em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .inner {
+    gap: 3.44em;
+    margin-top: 2.5em;
+  }
+}
+
+.img {
+  display: block;
+  width: 38.3571em;
+  max-width: 100%;
+  margin: 0 auto;
+  height: auto;
+}
+@media screen and (max-width: 992px) {
+  .img {
+    width: 20.6251em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .img {
+    width: 100%;
+  }
+}
+
+.desc {
+  text-align: center;
+  color: #535557;
+  line-height: 161%;
+}
+@media screen and (max-width: 992px) {
+  .desc {
+    font-size: 1em;
+    line-height: 150%;
+  }
+}
+
+.nav {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, calc(50% - 0.47em));
+  gap: 0.94em;
+  width: 28.3125em;
+  max-width: 100%;
+}
+@media screen and (max-width: 992px) {
+  .nav {
+    width: 18.125em;
+    grid-template-columns: 100%;
+  }
+}
+@media screen and (max-width: 576px) {
+  .nav {
+    width: 100%;
+  }
+}
+
+/* Кнопки 404 выше базовых и растянуты на всю колонку. */
+.btn {
+  height: 4em;
+  width: 100%;
+}
+
+/*
+ * Светлая кнопка «В каталог» (`.m-btn-light-blue2` оригинала). Вторая кнопка
+ * использует общий .btnBlue, поэтому здесь описана только эта.
+ */
+.btnLight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.225s ease-out;
+  padding: 0 1.25em;
+  border-radius: 0.375em;
+  font-weight: 500;
+  background: #f6f8fb;
+  color: #117fe3;
+  border: 1px solid #f6f8fb;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btnLight span {
+  font-size: 0.9375em;
+  line-height: 120%;
+}
+.btnLight:hover {
+  color: #fff;
+  background: #011120;
+  border-color: #011120;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btnLight,
+  .breadcrumbItem a {
+    transition: none !important;
+  }
+}

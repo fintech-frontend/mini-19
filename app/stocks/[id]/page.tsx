@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { stocks } from "@/data/stocks";
 import { NewsletterForm } from "@/components/blog/NewsletterForm";
+import { styles } from "@/styles/index.styles";
 
 interface StockDetailProps {
   params: Promise<{ id: string }>;
@@ -19,7 +20,7 @@ export default async function StockDetailPage({ params }: StockDetailProps) {
   const otherStocks = stocks.filter((s) => s.id !== id).slice(0, 2);
 
   return (
-    <div className="min-w-0 max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 bg-white font-sans text-gray-900">
+    <div className={`${styles.container} min-w-0 py-6 bg-white font-sans text-gray-900`}>
       {/* Хлебные крошки */}
       <nav className="text-xs text-gray-500 mb-4 flex items-center gap-1.5 overflow-x-auto whitespace-nowrap py-1">
         <Link href="/" className="hover:text-blue-600">Стройоптторг</Link>

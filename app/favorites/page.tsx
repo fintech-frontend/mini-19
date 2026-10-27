@@ -1,25 +1,26 @@
-"use client";
+import type { Metadata } from "next";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
+import { FavoritesList } from "@/components/favorites/FavoritesList";
+import { styles } from "@/styles/index.styles";
 
-import { staticProducts } from "@/data/staticProducts";
-import ProductCard from "@/components/ui/ProductCard";
-import { useShop } from "@/context/ShopContext";
+export const metadata: Metadata = {
+  title: "Избранные товары — Стройоптторг",
+  description: "Список избранных товаров: сохраняйте понравившиеся позиции и добавляйте их в корзину.",
+};
 
 export default function FavoritesPage() {
-  const { isFavorite } = useShop();
-  const products = staticProducts.filter((product) => isFavorite(product.id));
-
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    // Общий контейнер проекта (styles/index.styles.ts) — тот же, что у навбара и футера.
+    <div className={`${styles.container} py-8`}>
+      <Breadcrumbs items={[{ label: "Стройоптторг", href: "/" }, { label: "Избранные товары" }]} />
+
       <h1 className="mb-6 text-2xl font-bold text-gray-900 sm:text-3xl">Избранные товары</h1>
-      {products.length === 0 ? (
-        <p className="text-sm text-gray-500">В избранном пока ничего нет.</p>
-      ) : (
-        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      )}
+
+      {/*
+        Сам список — клиентский компонент: избранное живёт в ShopContext, а товары
+        подтягиваются хуком useFavoriteProducts (React Query → lib/api/products.ts).
+      */}
+      <FavoritesList />
     </div>
   );
 }

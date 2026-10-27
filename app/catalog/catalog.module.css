@@ -5,38 +5,11 @@
  * shared Tailwind scale used by the navbar/footer/rest of the app.
  */
 .fluidRoot {
-  font-size: 16px;
-}
-@media screen and (max-width: 1700px) {
-  .fluidRoot {
-    font-size: 0.941176vw;
-  }
-}
-@media screen and (max-width: 992px) {
-  .fluidRoot {
-    font-size: 2.08333vw;
-  }
-}
-@media screen and (max-width: 576px) {
-  .fluidRoot {
-    font-size: 4.44444vw;
-  }
+  composes: fluidRoot from "../../styles/reference-page.module.css";
 }
 
 .container {
-  max-width: 1700px;
-  margin: 0 auto;
-  padding: 0 2.5em;
-}
-@media screen and (max-width: 992px) {
-  .container {
-    padding: 0 1.5625em;
-  }
-}
-@media screen and (max-width: 576px) {
-  .container {
-    padding: 0 0.9375em;
-  }
+  composes: container from "../../styles/reference-page.module.css";
 }
 
 .pageTitle {

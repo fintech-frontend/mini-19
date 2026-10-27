@@ -1,0 +1,977 @@
+/*
+ * Страница «О компании» — точный порт вёрстки https://www.stroiopttorg.ru/o-kompanii/
+ * (тема Astra95).
+ *
+ * Оригинал целиком построен на «плавающем» em-масштабе: у корневого блока
+ * `.m-page` font-size задан во vw и ступенчато меняется на 1700 / 992 / 576px,
+ * а все размеры внутри записаны в em. Поэтому здесь повторён тот же приём:
+ * .fluidRoot задаёт базовый font-size, а всё остальное — в em, ровно теми же
+ * числами, что и в оригинале. Всё заскоплено CSS-модулем, поэтому общий
+ * Tailwind-масштаб навбара, футера и остальных страниц не затрагивается
+ * (тот же подход уже применён в app/catalog/catalog.module.css).
+ */
+
+/*
+ * Оригинал набран HelveticaNeueCyr (лицензионный шрифт, файлы лежат на самом сайте:
+ * /wp-content/themes/Astra95/fonts/HelveticaNeueCyr-{Roman,Medium,Bold}.woff).
+ * Мы его не копируем — стек ниже повторяет объявление оригинала и падает на
+ * Helvetica Neue / Arial. Из-за разницы в метриках строки переносятся чуть иначе
+ * (первый экран получается примерно на 20px ниже оригинала). Если лицензия на
+ * шрифт есть, положите .woff в public/fonts/ и раскомментируйте блок — вёрстка
+ * станет попиксельно идентичной, менять больше ничего не нужно:
+ *
+ * @font-face { font-family: HelveticaNeueCyr; src: url("/fonts/HelveticaNeueCyr-Roman.woff") format("woff");  font-weight: 400; font-display: swap; }
+ * @font-face { font-family: HelveticaNeueCyr; src: url("/fonts/HelveticaNeueCyr-Medium.woff") format("woff"); font-weight: 500; font-display: swap; }
+ * @font-face { font-family: HelveticaNeueCyr; src: url("/fonts/HelveticaNeueCyr-Bold.woff") format("woff");   font-weight: 700; font-display: swap; }
+ */
+.fluidRoot {
+  composes: fluidRoot from "../../styles/reference-page.module.css";
+  font-family: HelveticaNeueCyr, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  color: #000;
+}
+
+/*
+ * Сброс из оригинала (`a, body, div, form, h1..h5, li, p, ul { margin:0; padding:0;
+ * border:0; text-decoration:none; line-height:1 }`). Обёрнут в :where(), чтобы у
+ * правила была нулевая специфичность — как у сброса по тегам в оригинале. Иначе
+ * `.fluidRoot div` перебивал бы одноклассовые правила ниже (.container, .historyCard)
+ * и обнулял их padding/border.
+ */
+:where(.fluidRoot) :where(h1, h2, h3, h4, h6, p, ul, li, div, a, figure, button) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  line-height: 1;
+}
+:where(.fluidRoot) :where(ul) {
+  list-style: none;
+}
+
+.container {
+  composes: container from "../../styles/reference-page.module.css";
+}
+
+/* ─────────────────────────── типографика ─────────────────────────── */
+
+.text48 {
+  font-size: 3em;
+  line-height: 112.5%;
+}
+.text33 {
+  font-size: 2.0625em;
+  line-height: 112.5%;
+}
+.text24 {
+  font-size: 1.5em;
+  line-height: 112.5%;
+}
+.text20 {
+  font-size: 1.25em;
+  line-height: 130%;
+}
+.text18 {
+  font-size: 1.125em;
+  line-height: 144%;
+}
+.text16 {
+  font-size: 1em;
+  line-height: 120%;
+}
+.text15 {
+  font-size: 0.9375em;
+  line-height: 120%;
+}
+.text13 {
+  font-size: 0.8125em;
+  line-height: 120%;
+}
+@media screen and (max-width: 992px) {
+  .text48 {
+    font-size: 2.375em;
+    line-height: 126%;
+  }
+  .text33 {
+    font-size: 1.625em;
+    line-height: 120%;
+  }
+  .text16Tablet {
+    font-size: 1em;
+    line-height: 138%;
+  }
+  .text14Tablet {
+    font-size: 0.875em;
+    line-height: 135%;
+  }
+}
+@media screen and (max-width: 576px) {
+  .text48 {
+    font-size: 1.7em;
+    line-height: 110%;
+  }
+}
+
+.bold {
+  font-weight: 700;
+}
+.medium {
+  font-weight: 500;
+}
+.black2 {
+  color: #2c333d;
+}
+.blue {
+  color: #186fd4;
+}
+
+/* Текстовый блок с абзацами и маркированными списками (класс `.text` оригинала). */
+.richText {
+  color: #2c333d;
+}
+.richText p,
+.richText li {
+  font-size: 0.9375em;
+  line-height: 173%;
+}
+.richText p:not(:last-child),
+.richText ul:not(:last-child) {
+  margin: 0 0 0.9em;
+}
+.richText ul {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 1em;
+}
+.richText ul li {
+  position: relative;
+  padding-left: 0.93em;
+}
+.richText ul li::before {
+  content: "";
+  position: absolute;
+  top: 0.7em;
+  left: 0;
+  width: 0.33em;
+  height: 0.33em;
+  border-radius: 50%;
+  background-color: #ee0906;
+}
+@media screen and (max-width: 992px) {
+  .richText p,
+  .richText li {
+    font-size: 0.875em;
+  }
+  .richText ul {
+    gap: 0.625em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .richText ul {
+    gap: 1em;
+  }
+  .richText p:not(:last-child),
+  .richText ul:not(:last-child) {
+    margin: 0 0 1em;
+  }
+}
+
+/* ─────────────────────────── хлебные крошки ─────────────────────────── */
+
+.breadcrumbs {
+  padding: 1.125em 0;
+  margin-bottom: 1.19em;
+}
+.breadcrumbItem {
+  position: relative;
+  display: inline;
+  color: #2c333d;
+  font-size: 0.9375em;
+  line-height: 133%;
+}
+.breadcrumbItem:last-child {
+  color: #91969d;
+}
+.breadcrumbItem:not(:first-child)::before {
+  content: "/";
+  margin: 0 0.75em;
+  font-size: 1em;
+  line-height: 133%;
+}
+.breadcrumbItem a {
+  color: inherit;
+  transition: color 0.3s;
+}
+.breadcrumbItem a:hover {
+  color: #186fd4;
+}
+@media screen and (max-width: 992px) {
+  .breadcrumbs {
+    padding: 0.75em 0;
+    margin-bottom: 1.25em;
+  }
+  .breadcrumbItem {
+    font-size: 0.8125em;
+  }
+  .breadcrumbItem:not(:first-child)::before {
+    line-height: 153%;
+    margin: 0 0.625em;
+  }
+}
+
+/* ─────────────────────────── первый экран ─────────────────────────── */
+
+.about {
+  position: relative;
+  margin: 0;
+  padding: 0 0 3.25em;
+  background: #f9fafb;
+}
+@media screen and (max-width: 576px) {
+  .about {
+    padding-bottom: 0;
+  }
+}
+
+.aboutContent {
+  max-width: 56.1875em;
+  position: relative;
+  z-index: 2;
+}
+@media screen and (max-width: 1825px) {
+  .aboutContent {
+    max-width: 48em;
+  }
+}
+
+.aboutDesc {
+  margin-top: 0.625em;
+  max-width: 45em;
+  color: #2c333d;
+}
+@media screen and (max-width: 992px) {
+  .aboutDesc {
+    margin-top: 1.19em;
+  }
+}
+
+.aboutText {
+  margin-top: 0.625em;
+}
+@media screen and (max-width: 992px) {
+  .aboutText p:nth-last-child(1),
+  .aboutText p:nth-last-child(2) {
+    max-width: 25em;
+  }
+}
+
+.aboutImg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+}
+.aboutImg img {
+  height: 100%;
+  display: block;
+}
+/* Селекторы с двумя классами — чтобы перебивать `.aboutImg img { display: block }`. */
+.aboutImg .viewDesktop {
+  display: block;
+}
+.aboutImg .viewMobile {
+  display: none;
+}
+@media screen and (max-width: 992px) {
+  .aboutImg {
+    height: 18.875em;
+  }
+  .aboutImg .viewDesktop {
+    display: none;
+  }
+  .aboutImg .viewMobile {
+    display: block;
+  }
+}
+@media screen and (max-width: 576px) {
+  .aboutImg {
+    position: static;
+    height: auto;
+    display: block;
+    width: calc(100% + 1.875em);
+    margin-left: -0.9375em;
+    padding: 0;
+  }
+  .aboutImg img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* ─────────────────────────── почему именно мы ─────────────────────────── */
+
+.why {
+  padding: 5em 0 2.8125em;
+}
+@media screen and (max-width: 992px) {
+  .why {
+    padding: 2.31em 0 1.5625em;
+  }
+}
+
+.whyGrid {
+  display: grid;
+  grid-template-columns: repeat(4, calc(25% - 4.5em));
+  gap: 6em;
+  margin-top: 3em;
+}
+@media screen and (max-width: 992px) {
+  .whyGrid {
+    grid-template-columns: repeat(2, calc(50% - 1.69em));
+    gap: 0.94em 3.38em;
+    margin-top: 0.94em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .whyGrid {
+    grid-template-columns: 100%;
+  }
+}
+
+.whyCard {
+  display: flex;
+  align-items: flex-start;
+}
+.whyCardIcon {
+  width: 3.25em;
+  flex-shrink: 0;
+  margin-right: 0.94em;
+}
+.whyCardIcon img {
+  width: 100%;
+  display: block;
+}
+.whyCardContent {
+  padding-top: 0.94em;
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 0.69em;
+}
+.whyCardTitle {
+  color: #3b3c3f;
+  line-height: 120%;
+}
+.whyCardText {
+  color: #6b6c72;
+  line-height: 160%;
+}
+@media screen and (max-width: 992px) {
+  .whyCardContent {
+    padding-top: 0.56em;
+    gap: 0.25em;
+  }
+  .whyCardTitle {
+    font-size: 1.0625em;
+    line-height: 136%;
+  }
+}
+
+/* ─────────────────────────── история компании ─────────────────────────── */
+
+.history {
+  padding: 2.8125em 0;
+}
+@media screen and (max-width: 992px) {
+  .history {
+    padding: 1.5625em 0;
+  }
+}
+@media screen and (max-width: 576px) {
+  .historyTitle {
+    text-align: center;
+  }
+}
+
+.historyGrid {
+  margin-top: 4.12em;
+  display: grid;
+  grid-template-columns: repeat(2, calc(50% - 1.25em));
+  gap: 2.5em;
+}
+@media screen and (max-width: 992px) {
+  .historyGrid {
+    margin-top: 1.625em;
+    grid-template-columns: 100%;
+    gap: 1.56em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .historyGrid {
+    margin-top: 2.5em;
+    gap: 1.88em;
+  }
+}
+
+.historyCard {
+  padding: 2.19em 1.56em;
+  border-radius: 0.5em;
+  border: 3px solid #e6eef6;
+  position: relative;
+  color: #2c333d;
+}
+.historyCardYear {
+  position: absolute;
+  padding: 0 0.94em;
+  left: 0.81em;
+  top: 0;
+  transform: translateY(-50%);
+  background-color: #fff;
+  font-weight: 700;
+  color: #186fd4;
+}
+.historyCardYear span {
+  font-size: 1.6875em;
+}
+.historyCardText {
+  margin-top: 0.94em;
+}
+.historyCardText ul {
+  gap: 0.94em;
+}
+.historyCardText ul b {
+  white-space: nowrap;
+}
+@media screen and (max-width: 576px) {
+  .historyCardYear {
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.todayCard {
+  border-color: #186fd4;
+  padding: 1.56em 7em;
+  background-image: url("/about/today-bg.svg");
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+.todayCardTitle {
+  color: #186fd4;
+  font-size: 1.75em;
+  text-align: center;
+  font-weight: 500;
+}
+.todayCardGrid {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  gap: 1.56em;
+  align-items: flex-start;
+  margin-top: 1.18em;
+}
+.todayCardGroup {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 0.625em;
+}
+@media screen and (max-width: 992px) {
+  .todayCard {
+    padding: 1.38em 4.81em;
+  }
+  .todayCardTitle {
+    font-size: 1.4375em;
+  }
+  .todayCardGrid {
+    gap: 0.94em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .todayCard {
+    padding: 1.56em 1.38em;
+    background-size: auto 18.75em;
+    background-image: url("/about/today-bg-mobile.svg");
+  }
+  .todayCardGrid {
+    grid-template-columns: 100%;
+  }
+}
+
+/* ── сертификаты / отзывы / новости — одна секция `.news _section _last` ── */
+
+.news {
+  padding: 2.8125em 0 6.875em;
+  overflow: hidden;
+}
+@media screen and (max-width: 992px) {
+  .news {
+    padding: 1.5625em 0 5em;
+  }
+}
+
+.newsInner {
+  position: relative;
+}
+@media screen and (max-width: 576px) {
+  .newsInner {
+    padding-bottom: 4.0625em;
+  }
+}
+
+.newsTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* В оригинале второй и третий заголовки отбиты инлайновым margin-top: 80px. */
+.newsTopSpaced {
+  margin-top: 80px;
+}
+
+/* ─────────────────────────── слайдер ─────────────────────────── */
+
+.slider {
+  position: relative;
+  margin-top: 1.875em;
+}
+.sliderTrackClip {
+  overflow: hidden;
+  width: calc(100% + 1.25em);
+}
+/* Слайдер отзывов не обрезает трек — невидимые карточки скрыты visibility. */
+.sliderTrackOpen {
+  width: 100%;
+}
+.sliderWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  z-index: 1;
+  transition-property: transform;
+  transition-timing-function: ease;
+  box-sizing: content-box;
+}
+.slide {
+  flex-shrink: 0;
+  width: 25%;
+  height: auto;
+  position: relative;
+  padding-right: 1.25em;
+}
+.slideHidden {
+  visibility: hidden;
+}
+.reviewsSlider .slide {
+  padding-right: 4em;
+}
+@media screen and (max-width: 992px) {
+  .slider {
+    margin-top: 1.56em;
+  }
+  .sliderTrackClip {
+    overflow: visible;
+    width: 100%;
+  }
+  .slide {
+    width: 18.44em;
+    padding-right: 0.94em;
+  }
+  .reviewsSlider .slide {
+    padding-right: 0.94em;
+  }
+}
+
+.sliderNav {
+  display: block;
+}
+.sliderButton {
+  position: absolute;
+  top: 50%;
+  margin-top: -22px;
+  z-index: 2;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0.25em 1.5625em rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
+}
+.sliderButton svg {
+  width: 0.5em;
+  height: auto;
+}
+.sliderButton path {
+  transition: 0.3s;
+}
+.sliderButton:hover {
+  background: #011120;
+}
+.sliderButton:hover path {
+  fill: #fff;
+}
+.sliderButtonDisabled {
+  opacity: 0.35;
+  cursor: auto;
+  pointer-events: none;
+}
+.sliderButtonPrev {
+  left: -1.25em;
+}
+.sliderButtonNext {
+  right: -1.25em;
+}
+/* Стрелка «вперёд» у слайдера отзывов в оригинале прижата к правому краю трека. */
+.reviewsSlider .sliderButtonNext {
+  right: 10px;
+}
+@media screen and (max-width: 992px) {
+  .sliderNav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.56em;
+  }
+  .sliderButton {
+    position: static;
+    margin: 0 0.47em;
+    transform: none;
+  }
+  .sliderButtonPrev,
+  .sliderButtonNext,
+  .reviewsSlider .sliderButtonNext {
+    left: auto;
+    right: auto;
+  }
+}
+
+.pagination {
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  line-height: 0;
+}
+.bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  margin: 0 4px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #000;
+  opacity: 0.2;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.bulletActive {
+  background: #007aff;
+  opacity: 1;
+}
+@media screen and (max-width: 992px) {
+  .pagination {
+    display: none;
+  }
+}
+
+/* ─────────────────────────── сертификаты ─────────────────────────── */
+
+.certsSlider {
+  margin-bottom: 80px;
+}
+/* display оставлен инлайновым, как в оригинале: слайд получается на ~3.7px выше
+   картинки за счёт базовой линии — это учтено в вертикальном центре стрелок. */
+.certsSlider img {
+  height: 350px;
+  width: 100%;
+  object-fit: contain;
+  /* Tailwind preflight делает картинки block — возвращаем инлайновое поведение. */
+  display: inline;
+  vertical-align: baseline;
+}
+
+/* ─────────────────────────── отзывы ─────────────────────────── */
+
+.ratingInfo {
+  margin: 10px 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ratingValue {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+}
+.ratingStars {
+  margin-bottom: 8px;
+}
+.starsList {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.star {
+  width: 20px;
+  height: 20px;
+  margin-right: 2px;
+  background: url("/about/star.svg") 0 0 / contain no-repeat;
+}
+.star:last-child {
+  margin-right: 0;
+}
+.ratingLink {
+  font-size: 14px;
+  line-height: 1;
+  color: #999;
+  text-decoration: none;
+}
+.ratingLink:hover {
+  text-decoration: underline;
+}
+
+.reviewCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 280px;
+  border-radius: 8px;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.reviewHeader {
+  display: flex;
+  flex-direction: column;
+  column-gap: 16px;
+  margin-bottom: 12px;
+}
+.reviewerInfo {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+.reviewerAvatar {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  margin: 0;
+}
+.reviewerAvatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+.reviewerDetails {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  min-width: 120px;
+}
+.reviewerName {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  margin: 0;
+}
+.reviewDate {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: left;
+  color: #504d74;
+}
+.reviewRating {
+  margin-top: 12px;
+}
+.reviewStars {
+  display: flex;
+  gap: 4px;
+}
+.reviewText {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  line-clamp: 7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 24px;
+  font-size: 16px;
+  color: #504d74;
+  font-weight: 400;
+  margin: 0 0 12px;
+  width: 100%;
+  white-space: pre-line;
+  position: relative;
+}
+.reviewText::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3em;
+  background: linear-gradient(transparent, #fff);
+  pointer-events: none;
+}
+
+.badgeLinks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0;
+}
+@media screen and (max-width: 992px) {
+  .badgeLinks {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+.moreReviewsLink {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+  line-height: 1;
+  transition: 0.225s ease-out;
+}
+.moreReviewsLink:hover {
+  border-color: #011120;
+}
+.btnBlue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.225s ease-out;
+  height: 3.25em;
+  padding: 0 1.81em;
+  border-radius: 0.5em;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #186fd4;
+  border: 1px solid #186fd4;
+  color: #fff;
+}
+.btnBlue:hover {
+  color: #fff;
+  background: #011120;
+  border-color: #011120;
+}
+
+/* ─────────────────────────── карточка новости ─────────────────────────── */
+
+.newsCardImg {
+  display: block;
+  border-radius: 0.5em;
+  position: relative;
+  padding-bottom: 53.6%;
+  overflow: hidden;
+}
+.newsCardImg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  transition: 0.3s ease-in-out;
+}
+.newsCardImg:hover img {
+  transform: scale(1.1);
+}
+.newsCardContent {
+  margin-top: 1.06em;
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 0.75em;
+}
+.newsCardContent a {
+  color: #2c333d;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  transition: color 0.3s;
+}
+.newsCardContent a:hover {
+  color: #186fd4;
+}
+.newsCardExcerpt {
+  color: #393939;
+}
+@media screen and (max-width: 992px) {
+  .newsCardContent {
+    margin-top: 0.625em;
+    gap: 0.5em;
+  }
+}
+
+/* ─────────────────── loading / error / empty состояния ─────────────────── */
+
+.stateBox {
+  margin-top: 1.875em;
+  padding: 1.56em;
+  border: 1px solid #edf0f2;
+  border-radius: 0.5em;
+  color: #6b6c72;
+  font-size: 0.9375em;
+  line-height: 160%;
+}
+.stateError {
+  border-color: #f6d5d4;
+  background: #fdf3f3;
+  color: #b3201d;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #eef1f4 25%, #f7f9fb 37%, #eef1f4 63%);
+  background-size: 400% 100%;
+  animation: aboutSkeleton 1.4s ease infinite;
+  border-radius: 0.5em;
+}
+@keyframes aboutSkeleton {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+  .sliderWrapper,
+  .newsCardImg img,
+  .sliderButton,
+  .bullet {
+    transition: none !important;
+  }
+}

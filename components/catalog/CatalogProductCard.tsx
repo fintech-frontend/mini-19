@@ -4,19 +4,21 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Heart, BarChart3, ImageOff } from "lucide-react";
-import { CatalogListingProduct } from "@/types/catalog-listing";
+import { ResolvedProduct } from "@/lib/resolveProduct";
+import { useShop } from "@/context/ShopContext";
 
-export default function CatalogProductCard({
-  product,
-  basePath,
-}: {
-  product: CatalogListingProduct;
-  basePath: string;
-}) {
-  const [added, setAdded] = useState(false);
-  const [favorited, setFavorited] = useState(false);
-  const [compared, setCompared] = useState(false);
-  const href = `${basePath}/${product.id}`;
+export default function CatalogProductCard({ product }: { product: ResolvedProduct }) {
+  const { addToCart, isFavorite, toggleFavorite, isInCompare, toggleCompare } = useShop();
+  const [justAdded, setJustAdded] = useState(false);
+  const favorited = isFavorite(product.id);
+  const compared = isInCompare(product.id);
+  const href = product.href;
+
+  function handleAddToCart() {
+    addToCart(product.id);
+    setJustAdded(true);
+    setTimeout(() => setJustAdded(false), 1500);
+  }
 
   const formatPrice = (price: number) => price.toLocaleString("ru-RU") + " ₽";
 
@@ -45,7 +47,7 @@ export default function CatalogProductCard({
       </Link>
 
       <div className="flex flex-1 flex-col pt-3">
-        <span className="text-[11px] text-neutral-400">Артикул: {product.articul}</span>
+        <span className="text-[11px] text-neutral-400">Артикул: {product.article || "—"}</span>
 
         <Link href={href} className="mt-1">
           <h3 className="text-sm font-semibold leading-snug text-orange-600 hover:text-orange-700 transition-colors line-clamp-2 min-h-[2.5em]">
@@ -64,23 +66,23 @@ export default function CatalogProductCard({
           <button
             type="button"
             disabled={!product.inStock}
-            onClick={() => setAdded(true)}
+            onClick={handleAddToCart}
             className={`flex-1 rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wide transition-colors ${
               !product.inStock
                 ? "cursor-not-allowed bg-neutral-200 text-neutral-400"
-                : added
+                : justAdded
                   ? "bg-green-600 text-white"
                   : "bg-blue-600 text-white hover:bg-blue-700"
             }`}
           >
-            {!product.inStock ? "Нет в наличии" : added ? "В корзине ✓" : "Купить"}
+            {!product.inStock ? "Нет в наличии" : justAdded ? "В корзине ✓" : "Купить"}
           </button>
 
           <button
             type="button"
             aria-label={favorited ? "Убрать из избранного" : "В избранное"}
             aria-pressed={favorited}
-            onClick={() => setFavorited((v) => !v)}
+            onClick={() => toggleFavorite(product.id)}
             className={`rounded-lg border p-2 transition-colors ${
               favorited
                 ? "border-red-200 bg-red-50 text-red-500"
@@ -93,7 +95,7 @@ export default function CatalogProductCard({
             type="button"
             aria-label={compared ? "Убрать из сравнения" : "Сравнить"}
             aria-pressed={compared}
-            onClick={() => setCompared((v) => !v)}
+            onClick={() => toggleCompare(product.id)}
             className={`rounded-lg border p-2 transition-colors ${
               compared
                 ? "border-blue-200 bg-blue-50 text-blue-600"

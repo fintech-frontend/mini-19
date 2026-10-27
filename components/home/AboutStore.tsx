@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
+import { styles } from "@/styles/index.styles";
 
 const stats = [
   { value: "17 000 м²", label: "Торговых площадей" },
@@ -11,10 +12,12 @@ const stats = [
 
 export default function AboutStore() {
   return (
-    /* Секция выходит из контейнера страницы во всю ширину экрана: отрицательные
-       поля равны расстоянию от края контейнера (max-w-7xl) до края вьюпорта. */
-    <section className="relative -mx-4 bg-[#F2F5F9] sm:-mx-6 lg:mx-[calc(-1*(max(0px,(100vw_-_80rem)/2)_+_2rem))]">
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+    /* Секция выходит из контейнера страницы во всю ширину экрана: поле
+       calc(50% - 50vw) — это расстояние от края центрированного контейнера до края
+       вьюпорта при любой его ширине. Содержимое — в общем контейнере сайта
+       (styles.container), чтобы текст стоял на одной линии с навбаром. */
+    <section className="relative mx-[calc(50%-50vw)] bg-[#F2F5F9]">
+      <div className={`${styles.container} py-10 lg:py-14`}>
         <div className="lg:w-1/2 lg:pr-10">
           <h2 className="text-xl font-bold text-neutral-900 sm:text-2xl">О нашем магазине</h2>
 

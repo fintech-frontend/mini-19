@@ -1,12 +1,11 @@
-import Image from "next/image";
+import { ImageOff } from "lucide-react";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import CatalogProductCard from "@/components/catalog/CatalogProductCard";
 import ProductPerks from "@/components/catalog/ProductPerks";
 import ProductPurchaseCard from "@/components/catalog/ProductPurchaseCard";
 import ProductReviews from "@/components/catalog/ProductReviews";
-import ProductGallery from "@/components/ui/ProductGallery";
 import ProductTabs from "@/components/ui/ProductTabs";
-import { CatalogListingData, CatalogListingProduct } from "@/types/catalog-listing";
+import { ResolvedProduct } from "@/lib/resolveProduct";
 import { styles } from "@/styles/index.styles";
 
 interface CrumbItem {
@@ -17,37 +16,32 @@ interface CrumbItem {
 /** Сколько характеристик показываем в короткой сводке слева до ссылки "Больше характеристик". */
 const SUMMARY_SPECS = 6;
 
+/** attrs_json — единственное поле backend с произвольными данными товара (см. types/api.ts). */
+function attrsToSpecEntries(attrs: Record<string, unknown>): { label: string; value: string }[] {
+  return Object.entries(attrs)
+    .filter(([, value]) => value !== null && value !== undefined && value !== "")
+    .map(([label, value]) => ({ label, value: String(value) }));
+}
+
 /**
- * Страница товара для любого терминального узла дерева каталога. Не привязана к
- * конкретной глубине и категории — basePath и breadcrumbItems приходят от вызывающего
- * маршрута (app/catalog/[...path]).
- *
- * Товары каталога сняты с разной полнотой (см. data/listings): у одних есть галерея,
- * specs и описание, у других — только цена и фото. Поэтому каждый блок здесь
- * скрывается, если для него нет данных, а не рисует пустую рамку.
+ * Страница товара для любой категории каталога. У backend-товара нет
+ * изображений/галереи (см. types/api.ts) — вместо галереи ImageOff-плейсхолдер, как и
+ * в карточке. Характеристики — это attrs_json, рендерится только если непустой.
  */
 export default function CatalogProductDetail({
-  listing,
   product,
-  basePath,
+  attrs,
+  similar,
   breadcrumbItems,
 }: {
-  listing: CatalogListingData;
-  product: CatalogListingProduct;
-  basePath: string;
+  product: ResolvedProduct;
+  attrs: Record<string, unknown>;
+  similar: ResolvedProduct[];
   breadcrumbItems: CrumbItem[];
 }) {
-  // Полные характеристики (product.specs), если они сняты, иначе — то, что уже
-  // есть для фильтров карточек (filterValues), а не пусто.
-  const specEntries =
-    product.specs ??
-    listing.filterFields
-      .map((field) => ({ label: field.title, value: product.filterValues?.[field.id] }))
-      .filter((entry): entry is { label: string; value: string } => Boolean(entry.value));
-
+  const specEntries = attrsToSpecEntries(attrs);
   const summarySpecs = specEntries.slice(0, SUMMARY_SPECS);
   const hasMoreSpecs = specEntries.length > summarySpecs.length;
-  const similar = listing.products.filter((p) => p.id !== product.id).slice(0, 8);
 
   return (
     <div className={`${styles.container} py-6`}>
@@ -59,15 +53,9 @@ export default function CatalogProductDetail({
 
       <div className="mb-12 grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          {product.image && product.gallery && product.gallery.length > 0 ? (
-            <ProductGallery images={[product.image, ...product.gallery]} alt={product.title} />
-          ) : (
-            <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl border border-neutral-100 bg-neutral-50">
-              {product.image && (
-                <Image src={product.image} alt={product.title} fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-contain p-8" />
-              )}
-            </div>
-          )}
+          <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl border border-neutral-100 bg-neutral-50">
+            <ImageOff className="h-12 w-12 text-neutral-300" />
+          </div>
         </div>
 
         <div className="flex flex-col gap-5 text-sm lg:col-span-4">
@@ -94,22 +82,23 @@ export default function CatalogProductDetail({
         </div>
 
         <ProductPurchaseCard
+          productId={product.id}
           title={product.title}
-          articul={product.articul}
+          articul={product.article}
           price={product.price}
           oldPrice={product.oldPrice}
           inStock={product.inStock}
         />
       </div>
 
-      <ProductTabs title={product.title} specs={specEntries} description={product.description} />
+      <ProductTabs title={product.title} specs={specEntries} description={product.description ?? undefined} />
 
       {similar.length > 0 && (
         <div className="border-t border-neutral-200 pt-10">
           <h2 className="mb-6 text-lg font-bold tracking-tight text-neutral-900 sm:text-xl">Похожие товары</h2>
           <div className="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 xl:grid-cols-4">
             {similar.map((p) => (
-              <CatalogProductCard key={p.id} product={p} basePath={basePath} />
+              <CatalogProductCard key={p.id} product={p} />
             ))}
           </div>
         </div>

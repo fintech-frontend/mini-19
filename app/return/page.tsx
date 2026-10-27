@@ -1,5 +1,6 @@
 import { CalendarClock, PhoneCall, PackageCheck, Wallet2, ShieldCheck } from "lucide-react";
 import Faq from "@/components/faq/faq";
+import { styles } from "@/styles/index.styles";
 
 const returnSteps = [
   {
@@ -105,7 +106,7 @@ function StepRow({
 
 export default function ReturnPage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:py-12">
+    <div className={`${styles.container} py-8 sm:py-12`}>
       <h1 className="text-2xl font-bold text-neutral-900 sm:text-3xl">
         Возврат товара и гарантия
       </h1>

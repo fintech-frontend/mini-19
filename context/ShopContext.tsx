@@ -1,53 +1,330 @@
 "use client";
 
-import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+import { createCart, deleteCart, getCart } from "@/lib/api/carts";
+import { addCartItem, removeCartItem, updateCartItemQuantity } from "@/lib/api/cartItems";
+import { ApiError } from "@/lib/api/errors";
+
+/**
+ * Корзина теперь backed настоящим backend (`/carts/` + `/cart-items/`) вместо
+ * объекта в памяти. Публичный интерфейс контекста (cart, addToCart, setCartQty,
+ * removeFromCart, clearCart, favoriteIds/compareIds и т.д.) намеренно НЕ менялся —
+ * им пользуются компоненты, которые параллельно пишет другой агент (ProductCard,
+ * навбар и т.п.), и все они по-прежнему вызывают addToCart(productId) синхронно
+ * из onClick, не дожидаясь промиса.
+ *
+ * Внутри мы храним id серверной корзины (persisted в localStorage под ключом
+ * `mini19:cart_id`) и карту productId -> {cartItemId, quantity}, из которой на
+ * лету собирается публичный `cart: Record<string, number>`, как и раньше.
+ *
+ * Избранное и сравнение остаются чисто клиентским состоянием (Set<string>) — у
+ * backend нет ни одного документированного эндпоинта для wishlist/сравнения.
+ */
+
+const CART_ID_STORAGE_KEY = "mini19:cart_id";
+
+/**
+ * Избранное и сравнение хранятся в localStorage: у backend нет ни одного
+ * документированного эндпоинта для wishlist/сравнения (в API есть только
+ * categories / brands / products / carts / cart-items / orders + auth), поэтому
+ * серверного места для них просто нет. Без этого списки терялись при каждой
+ * перезагрузке страницы.
+ */
+const FAVORITES_STORAGE_KEY = "mini19:favorites";
+const COMPARE_STORAGE_KEY = "mini19:compare";
+
+interface CartItemState {
+  cartItemId: number;
+  quantity: number;
+}
+
+type CartItemsState = Record<string, CartItemState>;
 
 interface ShopContextValue {
   cart: Record<string, number>;
   cartCount: number;
   favoritesCount: number;
   compareCount: number;
+  favoriteIds: string[];
+  compareIds: string[];
   addToCart: (productId: string) => void;
-  /** Меняет количество на delta; при значении <= 0 товар удаляется из корзины. */
-  changeCartQty: (productId: string, delta: number) => void;
+  /** Меняет количество; qty <= 0 убирает позицию из корзины. */
+  setCartQty: (productId: string, qty: number) => void;
   removeFromCart: (productId: string) => void;
+  clearCart: () => void;
   isFavorite: (productId: string) => boolean;
   toggleFavorite: (productId: string) => void;
   isInCompare: (productId: string) => boolean;
   toggleCompare: (productId: string) => void;
+  /** true, пока корзина ещё не гидратирована из localStorage/бэкенда после монтирования. */
+  cartLoading: boolean;
 }
 
 const ShopContext = createContext<ShopContextValue | null>(null);
 
+function describeError(err: unknown): string {
+  if (err instanceof ApiError) return err.message;
+  if (err instanceof Error) return err.message;
+  return String(err);
+}
+
+function readStoredCartId(): number | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(CART_ID_STORAGE_KEY);
+    if (!raw) return null;
+    const id = Number(raw);
+    return Number.isFinite(id) ? id : null;
+  } catch {
+    return null;
+  }
+}
+
+function persistCartId(id: number | null) {
+  if (typeof window === "undefined") return;
+  try {
+    if (id == null) {
+      window.localStorage.removeItem(CART_ID_STORAGE_KEY);
+    } else {
+      window.localStorage.setItem(CART_ID_STORAGE_KEY, String(id));
+    }
+  } catch {
+    // localStorage может быть недоступен (приватный режим и т.п.) — не критично.
+  }
+}
+
+/** Читает сохранённый список id товаров (избранное / сравнение). */
+function readStoredIds(key: string): Set<string> {
+  if (typeof window === "undefined") return new Set();
+  try {
+    const raw = window.localStorage.getItem(key);
+    if (!raw) return new Set();
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return new Set();
+    return new Set(parsed.filter((id): id is string => typeof id === "string"));
+  } catch {
+    // Битые данные или недоступный localStorage — начинаем с пустого списка.
+    return new Set();
+  }
+}
+
+function persistIds(key: string, ids: Set<string>) {
+  if (typeof window === "undefined") return;
+  try {
+    if (ids.size === 0) {
+      window.localStorage.removeItem(key);
+    } else {
+      window.localStorage.setItem(key, JSON.stringify(Array.from(ids)));
+    }
+  } catch {
+    // localStorage может быть недоступен (приватный режим и т.п.) — не критично.
+  }
+}
+
 export function ShopProvider({ children }: { children: ReactNode }) {
-  const [cart, setCart] = useState<Record<string, number>>({});
+  const [cartItems, setCartItems] = useState<CartItemsState>({});
+  const [cartLoading, setCartLoading] = useState(true);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [compare, setCompare] = useState<Set<string>>(new Set());
 
-  const addToCart = useCallback((productId: string) => {
-    setCart((prev) => ({ ...prev, [productId]: (prev[productId] ?? 0) + 1 }));
+  // Рефы хранят "последнее известное" состояние, чтобы асинхронные обработчики
+  // (addToCart и т.д.), запускаемые из синхронных onClick, всегда читали
+  // актуальные значения, а не замкнутые в момент вызова.
+  const cartIdRef = useRef<number | null>(null);
+  const cartItemsRef = useRef<CartItemsState>({});
+  const hydrationRef = useRef<Promise<void> | null>(null);
+  /** Пока избранное/сравнение не поднято из localStorage, записывать туда нельзя. */
+  const prefsHydratedRef = useRef(false);
+
+  /*
+   * Избранное и сравнение поднимаем из localStorage после монтирования, а не в
+   * инициализаторе useState: на сервере localStorage нет, и рендер с уже
+   * заполненными списками разошёлся бы с серверной разметкой (hydration mismatch).
+   * setState вызываем внутри промиса — синхронный вызов в теле эффекта запрещён
+   * правилом react-hooks/set-state-in-effect.
+   */
+  useEffect(() => {
+    let cancelled = false;
+    void Promise.resolve().then(() => {
+      if (cancelled) return;
+      setFavorites(readStoredIds(FAVORITES_STORAGE_KEY));
+      setCompare(readStoredIds(COMPARE_STORAGE_KEY));
+      prefsHydratedRef.current = true;
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  const changeCartQty = useCallback((productId: string, delta: number) => {
-    setCart((prev) => {
-      const next = { ...prev };
-      const qty = (next[productId] ?? 0) + delta;
-      if (qty <= 0) {
-        delete next[productId];
-      } else {
-        next[productId] = qty;
+  // Сохраняем только после гидратации, иначе первый рендер стёр бы сохранённое.
+  useEffect(() => {
+    if (!prefsHydratedRef.current) return;
+    persistIds(FAVORITES_STORAGE_KEY, favorites);
+  }, [favorites]);
+
+  useEffect(() => {
+    if (!prefsHydratedRef.current) return;
+    persistIds(COMPARE_STORAGE_KEY, compare);
+  }, [compare]);
+
+  const applyCartId = useCallback((next: number | null) => {
+    cartIdRef.current = next;
+  }, []);
+
+  const applyCartItems = useCallback((next: CartItemsState) => {
+    cartItemsRef.current = next;
+    setCartItems(next);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const hydrate = async () => {
+      const storedId = readStoredCartId();
+      if (storedId == null) return;
+      try {
+        // GET /carts/:id/ отдаёт корзину с вложенными позициями; удалённая на
+        // сервере корзина даёт 404 и попадает в catch — тогда начинаем с пустой.
+        const { items } = await getCart(storedId);
+        const nextItems: CartItemsState = {};
+        for (const item of items) {
+          nextItems[String(item.product.id)] = { cartItemId: item.id, quantity: item.quantity };
+        }
+        applyCartId(storedId);
+        applyCartItems(nextItems);
+      } catch (err) {
+        console.error("Не удалось загрузить сохранённую корзину, начинаем с пустой:", describeError(err));
+        persistCartId(null);
+        applyCartId(null);
+        applyCartItems({});
       }
-      return next;
-    });
+    };
+
+    hydrationRef.current = hydrate().finally(() => setCartLoading(false));
+  }, [applyCartId, applyCartItems]);
+
+  const waitForHydration = useCallback(async () => {
+    if (hydrationRef.current) {
+      await hydrationRef.current;
+    }
   }, []);
 
-  const removeFromCart = useCallback((productId: string) => {
-    setCart((prev) => {
-      const next = { ...prev };
-      delete next[productId];
-      return next;
-    });
-  }, []);
+  const removeFromCart = useCallback(
+    (productId: string) => {
+      void (async () => {
+        await waitForHydration();
+        const existing = cartItemsRef.current[productId];
+        if (!existing) return;
+        const previous = cartItemsRef.current;
+        const next = { ...previous };
+        delete next[productId];
+        applyCartItems(next);
+        try {
+          await removeCartItem(existing.cartItemId);
+        } catch (err) {
+          applyCartItems(previous);
+          console.error("Не удалось удалить товар из корзины:", describeError(err));
+        }
+      })();
+    },
+    [applyCartItems, waitForHydration]
+  );
+
+  const addToCart = useCallback(
+    (productId: string) => {
+      void (async () => {
+        await waitForHydration();
+        try {
+          let id = cartIdRef.current;
+          if (id == null) {
+            const newCart = await createCart();
+            id = newCart.id;
+            applyCartId(id);
+            persistCartId(id);
+          }
+
+          const existing = cartItemsRef.current[productId];
+          if (existing) {
+            const previousQty = existing.quantity;
+            const nextQty = previousQty + 1;
+            applyCartItems({ ...cartItemsRef.current, [productId]: { ...existing, quantity: nextQty } });
+            try {
+              await updateCartItemQuantity(existing.cartItemId, nextQty);
+            } catch (err) {
+              applyCartItems({ ...cartItemsRef.current, [productId]: { ...existing, quantity: previousQty } });
+              console.error("Не удалось увеличить количество товара в корзине:", describeError(err));
+            }
+            return;
+          }
+
+          const created = await addCartItem({ cart: id, product_id: Number(productId), quantity: 1 });
+          applyCartItems({
+            ...cartItemsRef.current,
+            [productId]: { cartItemId: created.id, quantity: created.quantity },
+          });
+        } catch (err) {
+          // Сохранённая корзина могла быть удалена на сервере: тогда POST /cart-items/
+          // отвечает 400 ("Invalid pk ... object does not exist"). Сбрасываем id, чтобы
+          // следующее добавление создало новую корзину.
+          if (err instanceof ApiError && err.status === 400) {
+            persistCartId(null);
+            applyCartId(null);
+          }
+          console.error("Не удалось добавить товар в корзину:", describeError(err));
+        }
+      })();
+    },
+    [applyCartId, applyCartItems, waitForHydration]
+  );
+
+  const setCartQty = useCallback(
+    (productId: string, qty: number) => {
+      if (qty <= 0) {
+        removeFromCart(productId);
+        return;
+      }
+      void (async () => {
+        await waitForHydration();
+        const existing = cartItemsRef.current[productId];
+        if (!existing) return;
+        const previousQty = existing.quantity;
+        applyCartItems({ ...cartItemsRef.current, [productId]: { ...existing, quantity: qty } });
+        try {
+          await updateCartItemQuantity(existing.cartItemId, qty);
+        } catch (err) {
+          applyCartItems({ ...cartItemsRef.current, [productId]: { ...existing, quantity: previousQty } });
+          console.error("Не удалось изменить количество товара в корзине:", describeError(err));
+        }
+      })();
+    },
+    [applyCartItems, removeFromCart, waitForHydration]
+  );
+
+  const clearCart = useCallback(() => {
+    void (async () => {
+      await waitForHydration();
+      const id = cartIdRef.current;
+      applyCartItems({});
+      if (id != null) {
+        applyCartId(null);
+        persistCartId(null);
+        try {
+          await deleteCart(id);
+        } catch (err) {
+          console.error("Не удалось удалить корзину на сервере:", describeError(err));
+        }
+      }
+    })();
+  }, [applyCartId, applyCartItems, waitForHydration]);
 
   const toggleFavorite = useCallback((productId: string) => {
     setFavorites((prev) => {
@@ -73,21 +350,44 @@ export function ShopProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const cart = useMemo(() => {
+    const result: Record<string, number> = {};
+    for (const [productId, info] of Object.entries(cartItems)) {
+      result[productId] = info.quantity;
+    }
+    return result;
+  }, [cartItems]);
+
   const value = useMemo<ShopContextValue>(
     () => ({
       cart,
       cartCount: Object.values(cart).reduce((sum, qty) => sum + qty, 0),
       favoritesCount: favorites.size,
       compareCount: compare.size,
+      favoriteIds: Array.from(favorites),
+      compareIds: Array.from(compare),
       addToCart,
-      changeCartQty,
+      setCartQty,
       removeFromCart,
+      clearCart,
       isFavorite: (productId: string) => favorites.has(productId),
       toggleFavorite,
       isInCompare: (productId: string) => compare.has(productId),
       toggleCompare,
+      cartLoading,
     }),
-    [cart, favorites, compare, addToCart, changeCartQty, removeFromCart, toggleFavorite, toggleCompare]
+    [
+      cart,
+      favorites,
+      compare,
+      addToCart,
+      setCartQty,
+      removeFromCart,
+      clearCart,
+      toggleFavorite,
+      toggleCompare,
+      cartLoading,
+    ]
   );
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

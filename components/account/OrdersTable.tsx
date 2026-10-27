@@ -6,7 +6,14 @@ function formatPrice(price: number) {
   return price.toLocaleString("ru-RU") + " ₽";
 }
 
-export function OrdersTable({ orders }: { orders: Order[] }) {
+export function OrdersTable({
+  orders,
+  emptyText = "У вас пока нет заказов",
+}: {
+  orders: Order[];
+  /** Текст вместо строк таблицы, когда заказов нет (также для загрузки/ошибки). */
+  emptyText?: string;
+}) {
   return (
     <div className="overflow-x-auto rounded-2xl border border-neutral-200">
       <table className="w-full min-w-[560px] text-left text-sm">
@@ -20,6 +27,13 @@ export function OrdersTable({ orders }: { orders: Order[] }) {
           </tr>
         </thead>
         <tbody>
+          {orders.length === 0 && (
+            <tr>
+              <td colSpan={5} className="px-4 py-8 text-center text-neutral-500">
+                {emptyText}
+              </td>
+            </tr>
+          )}
           {orders.map((order, i) => (
             <tr key={`${order.number}-${i}`} className="border-b border-neutral-100 last:border-0">
               <td className="px-4 py-3.5 font-medium text-neutral-900">{order.number}</td>

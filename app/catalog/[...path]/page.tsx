@@ -2,89 +2,99 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import CategoryLanding from "@/components/catalog/CategoryLanding";
-import CategoryDescription from "@/components/catalog/CategoryDescription";
 import CategoryProductGrid from "@/components/catalog/CategoryProductGrid";
 import CatalogSiblingsSection from "@/components/catalog/CatalogSiblingsSection";
 import CatalogProductDetail from "@/components/catalog/CatalogProductDetail";
-import { CatalogNode, buildCatalogHref, getAllCatalogPaths, resolveCatalogPath } from "@/data/catalog-tree";
-import { catalogListingsByKey, findProductInListingByPath, getCatalogListingByPath } from "@/data/listings";
+import { listCategories } from "@/lib/api/categories";
+import { listProducts } from "@/lib/api/products";
+import { ApiError } from "@/lib/api/errors";
+import { toResolvedProduct } from "@/lib/resolveProduct";
+import {
+  CategoryTreeNode,
+  buildCategoryTree,
+  collectDescendantCategoryIds,
+  matchCategoryPath,
+} from "@/lib/api/categoryTree";
 import { styles } from "@/styles/index.styles";
 import catalogStyles from "../catalog.module.css";
 
 /**
- * Единый рекурсивный маршрут для ВСЕГО каталога (см. data/catalog-tree.ts — 722 узла,
- * глубина до 6 уровней). Никаких маршрутов на отдельную категорию/подкатегорию больше
- * нет: для любой глубины путь резолвится по дереву, и рендерится один из трёх видов:
- *  - branch  → сетка дочерних узлов (CategoryLanding)
- *  - terminal → сетка товаров, если для узла уже сняты реальные данные (data/listings),
- *    иначе — заглушка с описанием и ссылками на соседние разделы (товары по остальным
- *    терминальным узлам ещё не собраны — это отдельный этап наполнения данными)
- *  - товар   → путь на 1 сегмент длиннее terminal-узла с известным id товара
+ * Единый рекурсивный маршрут для ВСЕГО каталога. Раньше путь резолвился по статическому
+ * 722-узловому дереву (data/catalog-tree.ts) — теперь дерево строится на каждый запрос
+ * из реального `GET /categories/` по полю `parent` (см. lib/api/categoryTree.ts), а
+ * товары — из `GET /products/`, поэтому маршрут больше не может быть статически
+ * enumerated заранее (нет generateStaticParams — страница всегда рендерится динамически).
+ *
+ * Сегменты пути сопоставляются с slug'ами категорий сколько получится:
+ *  - все сегменты совпали с категориями → страница раздела: подкатегории (если есть) +
+ *    товары самого раздела и всех его подразделов;
+ *  - совпали все сегменты кроме последнего → последний сегмент пробуем как slug товара
+ *    внутри найденной категории (и её подкатегорий) → страница товара;
+ *  - иначе → 404.
  */
 
 interface CatalogPathPageProps {
   params: Promise<{ path: string[] }>;
 }
 
-export function generateStaticParams() {
-  const treePaths = getAllCatalogPaths();
-  const listingProductPaths = Object.values(catalogListingsByKey).flatMap((listing) =>
-    listing.products.map((product) => [...listing.path.split("/"), product.id])
-  );
-
-  return [...treePaths, ...listingProductPaths].map((path) => ({ path }));
-}
-
 /**
- * Строит хлебные крошки для любого узла дерева на любой глубине.
+ * Строит хлебные крошки для узла дерева категорий на любой глубине.
  * - `linkNode`: дать самому узлу ссылку (нужно, когда после него добавляется товар).
  * - `extra`: добавить последней крошкой название товара (без ссылки).
- * Depth-1 странице категории на эталоне соответствует единственная крошка без ссылок
- * (см. историю app/catalog/[category]/page.tsx) — сохраняем это специально для корня;
- * терминальные узлы (и тем более товары) всегда на глубине ≥2, так что с ними это
- * никогда не пересекается.
  */
 function crumbItems(
-  ancestors: CatalogNode[],
-  node: CatalogNode,
+  ancestors: CategoryTreeNode[],
+  node: CategoryTreeNode,
   opts?: { linkNode?: boolean; extra?: string }
 ): { label: string; href?: string }[] {
-  if (ancestors.length === 0 && !opts) return [{ label: node.title }];
+  if (ancestors.length === 0 && !opts) return [{ label: node.name }];
 
   const items: { label: string; href?: string }[] = [{ label: "Каталог", href: "/catalog" }];
   ancestors.forEach((ancestor, index) => {
-    items.push({ label: ancestor.title, href: buildCatalogHref(ancestors.slice(0, index), ancestor) });
+    items.push({
+      label: ancestor.name,
+      href: `/catalog/${[...ancestors.slice(0, index), ancestor].map((a) => a.slug).join("/")}`,
+    });
   });
-  items.push({ label: node.title, href: opts?.linkNode ? buildCatalogHref(ancestors, node) : undefined });
+  items.push({
+    label: node.name,
+    href: opts?.linkNode ? `/catalog/${[...ancestors, node].map((a) => a.slug).join("/")}` : undefined,
+  });
   if (opts?.extra) items.push({ label: opts.extra });
   return items;
 }
 
 export async function generateMetadata({ params }: CatalogPathPageProps): Promise<Metadata> {
   const { path } = await params;
-  const resolved = resolveCatalogPath(path);
-  if (resolved) {
-    return {
-      title: `${resolved.node.title}: купить в интернет-магазине «Стройоптторг»`,
-      description: `Каталог товаров «${resolved.node.title}» — большой выбор, доставка по всей России.`,
-    };
-  }
 
-  if (path.length >= 2) {
-    const parentPath = path.slice(0, -1);
-    const productId = path[path.length - 1];
-    const parentResolved = resolveCatalogPath(parentPath);
-    if (parentResolved) {
-      const found = findProductInListingByPath(parentPath.join("/"), productId);
+  try {
+    const categories = await listCategories();
+    const tree = buildCategoryTree(categories);
+    const match = matchCategoryPath(tree, path);
+
+    if (match && match.matchedSegments === path.length) {
+      return {
+        title: `${match.node.name}: купить в интернет-магазине «Стройоптторг»`,
+        description: `Каталог товаров «${match.node.name}» — большой выбор, доставка по всей России.`,
+      };
+    }
+
+    if (match && match.matchedSegments === path.length - 1) {
+      const slug = path[path.length - 1];
+      const descendantIds = collectDescendantCategoryIds(categories, match.node.id);
+      const products = await listProducts({ categoryIds: descendantIds });
+      const found = products.find((p) => p.slug === slug);
       if (found) {
         return {
-          title: `${found.product.title}: купить в интернет-магазине «Стройоптторг»`,
+          title: `${found.name}: купить в интернет-магазине «Стройоптторг»`,
           description:
-            found.product.description ??
-            `${found.product.title} — купить в разделе «${found.listing.title}» интернет-магазина «Стройоптторг».`,
+            found.description ??
+            `${found.name} — купить в разделе «${match.node.name}» интернет-магазина «Стройоптторг».`,
         };
       }
     }
+  } catch {
+    // Метаданные не критичны — при сбое просто отдаём дефолтные, страница сама покажет ошибку/404.
   }
 
   return {};
@@ -94,102 +104,111 @@ export default async function CatalogPathPage({ params }: CatalogPathPageProps) 
   const { path } = await params;
   if (!path || path.length === 0) notFound();
 
-  const resolved = resolveCatalogPath(path);
-
-  if (resolved) {
-    const { node, ancestors } = resolved;
-    const basePath = `/catalog/${path.join("/")}`;
-
-    if (node.type === "branch") {
-      // На эталоне раздел с подкатегориями — это тоже выдача товаров (агрегат по всем
-      // вложенным разделам), а не только плитки подкатегорий. Поэтому если для узла
-      // собраны товары, показываем их под навигацией теми же компонентами, что и у
-      // терминальных узлов — иначе листинг существует в data/listings, но не виден.
-      const branchListing = getCatalogListingByPath(path.join("/"));
-      return (
-        <div className={catalogStyles.fluidRoot}>
-          <div className={catalogStyles.container}>
-            <Breadcrumbs items={crumbItems(ancestors, node)} />
-            <CategoryLanding node={node} basePath={basePath} />
-            {branchListing && (
-              <div className="mt-12 border-t border-neutral-200 pt-10">
-                <div className="mb-6 flex flex-wrap items-baseline gap-3">
-                  <h2 className="text-xl font-bold tracking-tight text-neutral-900 sm:text-2xl">
-                    Товары раздела «{node.title}»
-                  </h2>
-                  <span className="text-sm text-neutral-400">{branchListing.totalCountLabel}</span>
-                </div>
-                <CategoryProductGrid data={branchListing} basePath={basePath} showTitle={false} />
-              </div>
-            )}
-          </div>
-        </div>
-      );
-    }
-
-    // terminal: есть ли уже снятые товары для этого узла?
-    const fullPath = path.join("/");
-    const parent = ancestors[ancestors.length - 1];
-    const siblings = parent ? parent.children.filter((c) => c.slug !== node.slug) : [];
-    const parentBasePath = `/catalog/${ancestors.map((a) => a.slug).join("/")}`;
-
-    const listing = getCatalogListingByPath(fullPath);
-
+  let categories: Awaited<ReturnType<typeof listCategories>>;
+  try {
+    categories = await listCategories();
+  } catch (error) {
+    const message =
+      error instanceof ApiError ? error.message : "Не удалось загрузить каталог. Попробуйте позже.";
     return (
-      <div className={`${styles.container} py-6`}>
-        <Breadcrumbs items={crumbItems(ancestors, node)} />
-
-        {listing ? (
-          <CategoryProductGrid data={listing} basePath={basePath} />
-        ) : (
-          <>
-            <h1 className="mb-2 text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl">{node.title}</h1>
-            {parent && (
-              <p className="mb-4 text-sm text-neutral-400">
-                Раздел категории{" "}
-                <a href={parentBasePath} className="text-blue-600 hover:underline">
-                  {parent.title}
-                </a>
-                .
-              </p>
-            )}
-            <CategoryDescription slug={fullPath} paragraphs={node.description} />
-          </>
-        )}
-
-        {siblings.length > 0 && parent && (
-          <CatalogSiblingsSection parentTitle={parent.title} siblings={siblings} basePath={parentBasePath} />
-        )}
+      <div className={catalogStyles.fluidRoot}>
+        <div className={catalogStyles.container}>
+          <Breadcrumbs items={[{ label: "Каталог", href: "/catalog" }]} />
+          <p className="mt-10 text-sm text-red-600">{message}</p>
+        </div>
       </div>
     );
   }
 
-  // Не узел дерева — возможно, это карточка товара внутри узла с товарами. Тип узла
-  // здесь не важен: товары есть и у branch-разделов (см. ветку branch выше), решает
-  // наличие листинга.
-  if (path.length >= 2) {
-    const parentPath = path.slice(0, -1);
-    const productId = path[path.length - 1];
-    const parentResolved = resolveCatalogPath(parentPath);
+  const tree = buildCategoryTree(categories);
+  const match = matchCategoryPath(tree, path);
 
-    if (parentResolved) {
-      const fullParentPath = parentPath.join("/");
-      const found = findProductInListingByPath(fullParentPath, productId);
-      if (found) {
-        const basePath = `/catalog/${fullParentPath}`;
-        return (
-          <CatalogProductDetail
-            listing={found.listing}
-            product={found.product}
-            basePath={basePath}
-            breadcrumbItems={crumbItems(parentResolved.ancestors, parentResolved.node, {
-              linkNode: true,
-              extra: found.product.title,
-            })}
-          />
-        );
-      }
+  if (match && match.matchedSegments === path.length) {
+    const { node, ancestors } = match;
+    const descendantIds = collectDescendantCategoryIds(categories, node.id);
+    const basePath = `/catalog/${path.join("/")}`;
+
+    let products: ReturnType<typeof toResolvedProduct>[] = [];
+    let loadError: string | null = null;
+    try {
+      const apiProducts = await listProducts({ categoryIds: descendantIds });
+      products = apiProducts.map(toResolvedProduct);
+    } catch (error) {
+      loadError = error instanceof ApiError ? error.message : "Не удалось загрузить товары раздела.";
     }
+
+    const parent = ancestors[ancestors.length - 1];
+    const siblings = parent ? parent.children.filter((c) => c.slug !== node.slug) : [];
+    const parentBasePath = ancestors.length > 0 ? `/catalog/${ancestors.map((a) => a.slug).join("/")}` : "/catalog";
+
+    return (
+      <div className={catalogStyles.fluidRoot}>
+        <div className={catalogStyles.container}>
+          <Breadcrumbs items={crumbItems(ancestors, node)} />
+          <CategoryLanding node={node} basePath={basePath} />
+
+          {loadError ? (
+            <p className="mt-10 text-sm text-red-600">{loadError}</p>
+          ) : products.length > 0 ? (
+            <div className="mt-12 border-t border-neutral-200 pt-10">
+              <div className="mb-6 flex flex-wrap items-baseline gap-3">
+                <h2 className="text-xl font-bold tracking-tight text-neutral-900 sm:text-2xl">
+                  Товары раздела «{node.name}»
+                </h2>
+              </div>
+              <CategoryProductGrid key={basePath} products={products} title={node.name} showTitle={false} />
+            </div>
+          ) : node.children.length === 0 ? (
+            <p className="mt-10 text-sm text-neutral-500">В этом разделе пока нет товаров.</p>
+          ) : null}
+
+          {siblings.length > 0 && parent && (
+            <div className="mt-12 border-t border-neutral-200 pt-10">
+              <CatalogSiblingsSection parentTitle={parent.name} siblings={siblings} basePath={parentBasePath} />
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // Ровно один лишний сегмент после найденной категории — пробуем как slug товара.
+  if (match && match.matchedSegments === path.length - 1) {
+    const { node, ancestors } = match;
+    const slug = path[path.length - 1];
+    const descendantIds = collectDescendantCategoryIds(categories, node.id);
+
+    let apiProducts: Awaited<ReturnType<typeof listProducts>>;
+    try {
+      apiProducts = await listProducts({ categoryIds: descendantIds });
+    } catch (error) {
+      const message =
+        error instanceof ApiError ? error.message : "Не удалось загрузить товар. Попробуйте позже.";
+      return (
+        <div className={`${styles.container} py-6`}>
+          <Breadcrumbs items={crumbItems(ancestors, node, { linkNode: true })} />
+          <p className="text-sm text-red-600">{message}</p>
+        </div>
+      );
+    }
+
+    const found = apiProducts.find((p) => p.slug === slug);
+    if (!found) notFound();
+
+    const product = toResolvedProduct(found);
+    const similar = apiProducts
+      .filter((p) => p.id !== found.id)
+      .slice(0, 8)
+      .map(toResolvedProduct);
+
+    return (
+      <CatalogProductDetail
+        product={product}
+        attrs={found.attrs_json}
+        similar={similar}
+        breadcrumbItems={crumbItems(ancestors, node, { linkNode: true, extra: product.title })}
+      />
+    );
   }
 
   notFound();

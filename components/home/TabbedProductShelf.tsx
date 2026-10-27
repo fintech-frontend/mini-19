@@ -4,12 +4,12 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ProductCard from "@/components/ui/ProductCard";
-import { Product } from "@/types/product";
+import { ResolvedProduct } from "@/lib/resolveProduct";
 
 interface TabbedProductShelfProps {
   title: string;
   subtitle?: string;
-  products: Product[];
+  products: ResolvedProduct[];
   viewAllHref?: string;
 }
 
@@ -23,9 +23,10 @@ export default function TabbedProductShelf({
     const seen = new Set<string>();
     const tabs: string[] = [];
     for (const product of products) {
-      if (!seen.has(product.category)) {
-        seen.add(product.category);
-        tabs.push(product.category);
+      const category = product.categoryName;
+      if (category && !seen.has(category)) {
+        seen.add(category);
+        tabs.push(category);
       }
     }
     return tabs;
@@ -38,7 +39,7 @@ export default function TabbedProductShelf({
   }
 
   const visibleProducts = activeTab
-    ? products.filter((product) => product.category === activeTab)
+    ? products.filter((product) => product.categoryName === activeTab)
     : products;
 
   return (

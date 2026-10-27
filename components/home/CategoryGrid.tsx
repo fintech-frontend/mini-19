@@ -1,15 +1,44 @@
 import Link from "next/link";
-import { categories } from "@/data/categories";
+import {
+  Boxes,
+  Drill,
+  Wrench,
+  Package,
+  Droplets,
+  PaintBucket,
+  Nut,
+  Plug,
+  TreePine,
+  type LucideIcon,
+} from "lucide-react";
+import { listCategories } from "@/lib/api/categories";
 
-export default function CategoryGrid() {
+/**
+ * Backend не отдаёт иконку категории (см. types/api.ts — у ApiCategory её нет), поэтому
+ * иконки — чисто декоративные, по кругу из фиксированного набора, а не привязаны к
+ * конкретной категории по смыслу.
+ */
+const ICONS: LucideIcon[] = [Drill, Wrench, Package, Droplets, PaintBucket, Nut, Plug, TreePine, Boxes];
+
+export default async function CategoryGrid() {
+  let categories: { slug: string; name: string }[] = [];
+  try {
+    const all = await listCategories();
+    categories = all.filter((category) => category.parent === null && category.is_active);
+  } catch {
+    categories = [];
+  }
+
+  if (categories.length === 0) return null;
+
   return (
     <section className="py-8">
       <h2 className="mb-5 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
         Популярные категории
       </h2>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
-        {categories.map((category) => {
-          const Icon = category.icon;
+        {categories.map((category, index) => {
+          const Icon = ICONS[index % ICONS.length];
           return (
             <Link
               key={category.slug}

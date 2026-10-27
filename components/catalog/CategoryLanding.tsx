@@ -1,22 +1,19 @@
 import Link from "next/link";
-import Image from "next/image";
-import { CatalogNode } from "@/data/catalog-tree";
+import { ImageOff } from "lucide-react";
+import { CategoryTreeNode } from "@/lib/api/categoryTree";
 import styles from "@/app/catalog/catalog.module.css";
 
-const PLACEHOLDER_IMAGE = "https://www.stroiopttorg.ru/wp-content/uploads/woocommerce-placeholder-300x300.webp";
-
 /**
- * Сетка дочерних узлов каталога (branch или terminal — визуально одинаково, пока не
- * откроешь сам узел). Работает на любой глубине: /catalog/[category], .../[sub],
- * .../[sub]/[subsub] и так далее — компонент не знает и не должен знать, на каком он
- * уровне, он просто рендерит node.children под переданным basePath.
+ * Сетка дочерних категорий (работает на любой глубине — компонент не знает, на каком
+ * он уровне, просто рендерит node.children под переданным basePath). Backend не отдаёт
+ * изображений категорий, поэтому вместо картинки — ImageOff-плейсхолдер.
  */
-export default function CategoryLanding({ node, basePath }: { node: CatalogNode; basePath: string }) {
+export default function CategoryLanding({ node, basePath }: { node: CategoryTreeNode; basePath: string }) {
   return (
     <>
-      <h1 className={styles.pageTitle}>{node.title}</h1>
+      <h1 className={styles.pageTitle}>{node.name}</h1>
 
-      {node.children.length === 0 && (
+      {node.children.length === 0 ? (
         <p className="mt-6 text-sm text-neutral-500">
           В этой категории пока нет подкатегорий. Уточните ассортимент у менеджера по телефону{" "}
           <a href="tel:88004440065" className="font-semibold text-neutral-900 hover:text-blue-600">
@@ -24,22 +21,18 @@ export default function CategoryLanding({ node, basePath }: { node: CatalogNode;
           </a>
           .
         </p>
+      ) : (
+        <div className={styles.grid}>
+          {node.children.map((child) => (
+            <Link key={child.slug} href={`${basePath}/${child.slug}`} className={styles.cardLink}>
+              <div className="flex h-32 w-full items-center justify-center text-neutral-300">
+                <ImageOff className="h-10 w-10" />
+              </div>
+              <p className={styles.title2}>{child.name}</p>
+            </Link>
+          ))}
+        </div>
       )}
-
-      <div className={styles.grid}>
-        {node.children.map((child) => (
-          <Link key={child.slug} href={`${basePath}/${child.slug}`} className={styles.cardLink}>
-            <Image
-              src={child.image ?? PLACEHOLDER_IMAGE}
-              alt={child.title}
-              width={228}
-              height={128}
-              className={styles.cardImage}
-            />
-            <p className={styles.title2}>{child.title}</p>
-          </Link>
-        ))}
-      </div>
     </>
   );
 }

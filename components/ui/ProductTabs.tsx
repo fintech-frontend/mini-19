@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CatalogProductSpec } from "@/types/catalog-listing";
+import { ProductSpec } from "@/types/product";
 
 type TabKey = "specs" | "about" | "delivery";
 
@@ -18,7 +18,7 @@ export default function ProductTabs({
   description,
 }: {
   title: string;
-  specs?: CatalogProductSpec[];
+  specs?: ProductSpec[];
   description?: string;
 }) {
   const hasSpecs = Boolean(specs && specs.length > 0);

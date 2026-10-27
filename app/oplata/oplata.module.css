@@ -1,0 +1,173 @@
+/*
+ * Страница «Способы оплаты» — точный порт вёрстки https://www.stroiopttorg.ru/oplata/
+ * (тема Astra95).
+ *
+ * Общая «обвязка» шаблона (контейнер, em-масштаб, сетка «контент + сайдбар»,
+ * промо-карточки, форма подписки, кнопка, состояния) живёт в одном месте —
+ * styles/reference-page.module.css — и подключается сюда через `composes`.
+ * Благодаря этому в разметке по-прежнему пишется привычный `styles.<class>`,
+ * а дублирующегося CSS в проекте нет.
+ *
+ * Здесь остаётся только то, что уникально для этой страницы: правила текстовой
+ * части (`.delivery .text` оригинала) и локальная типографика корня.
+ */
+
+.fluidRoot {
+  composes: fluidRoot from "../../styles/reference-page.module.css";
+  font-family: HelveticaNeueCyr, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  color: #000;
+}
+
+/*
+ * Сброс из оригинала (`a, body, div, form, h1..h5, li, p, ul { margin:0; padding:0;
+ * border:0; text-decoration:none; line-height:1 }`). Обёрнут в :where(), чтобы у
+ * правила была нулевая специфичность — как у сброса по тегам в оригинале.
+ */
+:where(.fluidRoot) :where(h1, h2, h3, h4, h5, h6, p, ul, li, div, a, form, fieldset, label, button) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  line-height: 1;
+}
+:where(.fluidRoot) :where(ul) {
+  list-style: none;
+}
+:where(.fluidRoot) :where(h1, h2, h3, h4, h5, h6) {
+  font-weight: 400;
+}
+
+/* ── общая обвязка шаблона: одно определение на весь проект ── */
+
+.container {
+  composes: container from "../../styles/reference-page.module.css";
+}
+.blog {
+  composes: blog from "../../styles/reference-page.module.css";
+}
+.blogTitle {
+  composes: blogTitle from "../../styles/reference-page.module.css";
+}
+.grid {
+  composes: grid from "../../styles/reference-page.module.css";
+}
+.sidebar {
+  composes: sidebar from "../../styles/reference-page.module.css";
+}
+.breadcrumbs {
+  composes: breadcrumbs from "../../styles/reference-page.module.css";
+}
+.breadcrumbItem {
+  composes: breadcrumbItem from "../../styles/reference-page.module.css";
+}
+.text48 {
+  composes: text48 from "../../styles/reference-page.module.css";
+}
+.bold {
+  composes: bold from "../../styles/reference-page.module.css";
+}
+.black2 {
+  composes: black2 from "../../styles/reference-page.module.css";
+}
+.btnBlue {
+  composes: btnBlue from "../../styles/reference-page.module.css";
+}
+.catalogPromo {
+  composes: catalogPromo from "../../styles/reference-page.module.css";
+}
+.promoCard {
+  composes: promoCard from "../../styles/reference-page.module.css";
+}
+.promoCardImg {
+  composes: promoCardImg from "../../styles/reference-page.module.css";
+}
+.subscribe {
+  composes: subscribe from "../../styles/reference-page.module.css";
+}
+.subscribeTop {
+  composes: subscribeTop from "../../styles/reference-page.module.css";
+}
+.subscribeWrap {
+  composes: subscribeWrap from "../../styles/reference-page.module.css";
+}
+.stateBox {
+  composes: stateBox from "../../styles/reference-page.module.css";
+}
+.stateError {
+  composes: stateError from "../../styles/reference-page.module.css";
+}
+.skeleton {
+  composes: skeleton from "../../styles/reference-page.module.css";
+}
+
+/* ─────────────────────────── текстовая часть ─────────────────────────── */
+
+/*
+ * База `.text` из оригинала плюс переопределения `.delivery .text`, под которыми
+ * страница «Оплата» и свёрстана: у неё абзацы крупнее (1em вместо 0.9375em),
+ * а списки — с меньшим гэпом и отступом слева.
+ */
+.text {
+  color: #1e1e1e;
+}
+.text p {
+  font-size: 1em;
+  line-height: 168%;
+}
+.text p:not(:last-child) {
+  margin: 0 0 1em;
+}
+.text li {
+  font-size: 0.9375em;
+  line-height: 173%;
+}
+.text ul {
+  display: grid;
+  grid-template-columns: 100%;
+  padding-left: 0.94em;
+  gap: 0.56em;
+}
+.text ul:not(:last-child) {
+  margin: 0 0 0.9em;
+}
+.text ul li {
+  position: relative;
+  padding-left: 0.93em;
+}
+.text ul li::before {
+  content: "";
+  position: absolute;
+  top: 0.7em;
+  left: 0;
+  width: 0.33em;
+  height: 0.33em;
+  border-radius: 50%;
+  background-color: #ee0906;
+}
+.text h3 {
+  font-size: 1.25em;
+  line-height: 130%;
+  font-weight: 500;
+  margin-bottom: 1em;
+}
+.text strong {
+  font-weight: 700;
+}
+.text a {
+  color: #186fd4;
+  text-decoration: underline;
+  /* Длинная ссылка на условия кредитования не должна распирать колонку. */
+  overflow-wrap: anywhere;
+}
+@media screen and (max-width: 992px) {
+  .text li {
+    font-size: 0.875em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .text ul:not(:last-child) {
+    margin: 0 0 1em;
+  }
+}

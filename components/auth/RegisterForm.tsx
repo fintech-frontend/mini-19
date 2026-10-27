@@ -4,30 +4,50 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FormField } from "./FormField";
 import { PasswordField } from "./PasswordField";
+import {
+  register,
+  verifyRegisterOtp,
+  resendRegisterOtp,
+  extractAccessToken,
+  extractRefreshToken,
+} from "@/lib/api/auth";
+import { setAccessToken, setRefreshToken } from "@/lib/api/token";
+import { ApiError } from "@/lib/api/errors";
 
 interface RegisterFields {
+  firstName: string;
+  lastName: string;
   email: string;
-  phone: string;
-  fullName: string;
-  region: string;
   password: string;
   confirmPassword: string;
 }
 
 const initialFields: RegisterFields = {
+  firstName: "",
+  lastName: "",
   email: "",
-  phone: "",
-  fullName: "",
-  region: "",
   password: "",
   confirmPassword: "",
 };
 
+type Step = "form" | "otp";
+
 export function RegisterForm() {
+  const [step, setStep] = useState<Step>("form");
   const [fields, setFields] = useState<RegisterFields>(initialFields);
   const [terms, setTerms] = useState(false);
   const [privacy, setPrivacy] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
+
+  const [otpCode, setOtpCode] = useState("");
+  const [otpSubmitted, setOtpSubmitted] = useState(false);
+  const [otpError, setOtpError] = useState<string | null>(null);
+  const [otpLoading, setOtpLoading] = useState(false);
+  const [resendMessage, setResendMessage] = useState<string | null>(null);
+  const [resending, setResending] = useState(false);
+
   const router = useRouter();
 
   function updateField(field: keyof RegisterFields) {
@@ -39,20 +59,124 @@ export function RegisterForm() {
 
   const errors = [
     !fields.email && "Поле Email не может быть пустым",
-    !fields.fullName && "Заполните поле ФИО",
+    !fields.firstName && "Заполните поле Имя",
+    !fields.lastName && "Заполните поле Фамилия",
     !fields.password && "Введите пароль",
     passwordMismatch && "Пароли не совпадают",
     !terms && "Вы должны согласиться с условиями обслуживания",
     !privacy && "Вы должны согласиться с обработкой персональных данных",
   ].filter((error): error is string => Boolean(error));
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    if (loading) return;
     setSubmitted(true);
-    if (errors.length === 0) {
-      // TODO: wire up to registration API
-      router.push("/account");
+    setApiError(null);
+    if (errors.length > 0) return;
+
+    setLoading(true);
+    try {
+      await register({
+        first_name: fields.firstName,
+        last_name: fields.lastName,
+        email: fields.email,
+        password: fields.password,
+        password2: fields.confirmPassword,
+      });
+      setStep("otp");
+    } catch (err) {
+      setApiError(err instanceof ApiError ? err.message : "Не удалось подключиться к серверу.");
+    } finally {
+      setLoading(false);
     }
+  }
+
+  async function handleOtpSubmit(e: FormEvent) {
+    e.preventDefault();
+    if (otpLoading) return;
+    setOtpSubmitted(true);
+    setOtpError(null);
+    if (!otpCode) return;
+
+    setOtpLoading(true);
+    try {
+      const response = await verifyRegisterOtp(fields.email, otpCode);
+      const accessToken = extractAccessToken(response);
+      if (accessToken) {
+        setAccessToken(accessToken);
+        setRefreshToken(extractRefreshToken(response));
+        router.push("/account");
+        return;
+      }
+      router.push("/my-account?notice=registered");
+    } catch (err) {
+      setOtpError(err instanceof ApiError ? err.message : "Не удалось подключиться к серверу.");
+    } finally {
+      setOtpLoading(false);
+    }
+  }
+
+  async function handleResend() {
+    if (resending) return;
+    setResendMessage(null);
+    setOtpError(null);
+    setResending(true);
+    try {
+      await resendRegisterOtp(fields.email);
+      setResendMessage("Код отправлен повторно");
+    } catch (err) {
+      setOtpError(err instanceof ApiError ? err.message : "Не удалось отправить код повторно.");
+    } finally {
+      setResending(false);
+    }
+  }
+
+  if (step === "otp") {
+    return (
+      <form onSubmit={handleOtpSubmit} className="space-y-4" noValidate>
+        <p className="text-sm leading-relaxed text-neutral-600">
+          Мы отправили код подтверждения на <strong className="font-semibold text-neutral-900">{fields.email}</strong>.
+          Введите его ниже, чтобы завершить регистрацию.
+        </p>
+
+        {otpError && (
+          <div className="rounded-lg border border-dashed border-red-300 bg-red-50 p-3 text-sm text-red-600">
+            {otpError}
+          </div>
+        )}
+        {resendMessage && (
+          <div className="rounded-lg border border-dashed border-blue-300 bg-blue-50 p-3 text-sm text-blue-700">
+            {resendMessage}
+          </div>
+        )}
+
+        <FormField
+          label="Код подтверждения"
+          required
+          placeholder="Введите код из письма"
+          value={otpCode}
+          onChange={(e) => setOtpCode(e.target.value)}
+          error={otpSubmitted && !otpCode}
+        />
+
+        <button
+          type="submit"
+          disabled={otpLoading}
+          className="w-full rounded-lg bg-blue-600 py-2.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-blue-700 disabled:opacity-60"
+        >
+          {otpLoading ? "Проверяем..." : "Подтвердить"}
+        </button>
+
+        <button
+          type="button"
+          onClick={handleResend}
+          disabled={resending}
+          className="w-full rounded-lg bg-blue-50 py-2.5 text-center text-sm font-medium text-blue-600 transition-colors hover:bg-blue-100 disabled:opacity-60"
+        >
+          {resending ? "Отправляем..." : "Отправить код повторно"}
+        </button>
+      </form>
+    );
   }
 
   return (
@@ -65,41 +189,39 @@ export function RegisterForm() {
         </div>
       )}
 
+      {apiError && (
+        <div className="rounded-lg border border-dashed border-red-300 bg-red-50 p-3 text-sm text-red-600">
+          {apiError}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <FormField
-          label="Email"
+          label="Имя"
           required
-          type="email"
-          placeholder="Введите ваш email адрес"
-          value={fields.email}
-          onChange={updateField("email")}
-          error={submitted && !fields.email}
+          placeholder="Ваше имя"
+          value={fields.firstName}
+          onChange={updateField("firstName")}
+          error={submitted && !fields.firstName}
         />
         <FormField
-          label="Номер телефона"
+          label="Фамилия"
           required
-          type="tel"
-          placeholder="+7 (___) ___-__-__"
-          value={fields.phone}
-          onChange={updateField("phone")}
+          placeholder="Ваша фамилия"
+          value={fields.lastName}
+          onChange={updateField("lastName")}
+          error={submitted && !fields.lastName}
         />
       </div>
 
       <FormField
-        label="ФИО"
+        label="Email"
         required
-        placeholder="Ваше полное имя"
-        value={fields.fullName}
-        onChange={updateField("fullName")}
-        error={submitted && !fields.fullName}
-      />
-
-      <FormField
-        label="Регион"
-        required
-        placeholder="Ваш регион"
-        value={fields.region}
-        onChange={updateField("region")}
+        type="email"
+        placeholder="Введите ваш email адрес"
+        value={fields.email}
+        onChange={updateField("email")}
+        error={submitted && !fields.email}
       />
 
       <PasswordField
@@ -147,9 +269,10 @@ export function RegisterForm() {
 
       <button
         type="submit"
-        className="w-full rounded-lg bg-blue-600 py-2.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-blue-700"
+        disabled={loading}
+        className="w-full rounded-lg bg-blue-600 py-2.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-blue-700 disabled:opacity-60"
       >
-        Зарегистрироваться
+        {loading ? "Регистрируем..." : "Зарегистрироваться"}
       </button>
     </form>
   );

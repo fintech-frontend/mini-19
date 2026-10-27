@@ -1,0 +1,102 @@
+/*
+ * Страница «Политика конфиденциальности» — порт блока `.conf` с
+ * https://www.stroiopttorg.ru/privacy-policy/ (тема Astra95).
+ *
+ * Общая обвязка шаблона (контейнер, em-масштаб, хлебные крошки, заголовок)
+ * берётся из единственного источника — styles/reference-page.module.css —
+ * через `composes`. Здесь остаётся только уникальное для этой страницы.
+ */
+
+.fluidRoot {
+  composes: fluidRoot from "../../styles/reference-page.module.css";
+  font-family: HelveticaNeueCyr, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  color: #000;
+}
+
+/* Сброс из оригинала, с нулевой специфичностью — как у сброса по тегам. */
+:where(.fluidRoot) :where(h1, h2, h3, h4, h5, h6, p, ul, li, div, a) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  line-height: 1;
+}
+:where(.fluidRoot) :where(h1, h2, h3, h4, h5, h6) {
+  font-weight: 400;
+}
+
+/* ── общая обвязка шаблона: одно определение на весь проект ── */
+
+.container {
+  composes: container from "../../styles/reference-page.module.css";
+}
+.blog {
+  composes: blog from "../../styles/reference-page.module.css";
+}
+.breadcrumbs {
+  composes: breadcrumbs from "../../styles/reference-page.module.css";
+}
+.breadcrumbItem {
+  composes: breadcrumbItem from "../../styles/reference-page.module.css";
+}
+.text48 {
+  composes: text48 from "../../styles/reference-page.module.css";
+}
+.bold {
+  composes: bold from "../../styles/reference-page.module.css";
+}
+
+/* ─────────────────────────── текст документа ─────────────────────────── */
+
+/* `.conf .text { margin-top: 1.875em }` — внешняя обёртка над плашкой. */
+.text {
+  margin-top: 1.875em;
+  color: #2c333d;
+}
+
+/* Серая плашка, в которой лежит весь документ (`.conf__hint` оригинала). */
+.hint {
+  padding: 1.25em 1.56em;
+  border-radius: 0.5em;
+  background: #f8f8f8;
+  margin-top: 1.875em;
+}
+@media screen and (max-width: 992px) {
+  .hint {
+    padding: 0.94em;
+    margin-top: 0.44em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .hint {
+    margin-top: 1.25em;
+  }
+}
+
+/* Внутренний `.text` внутри плашки отступа сверху не имеет. */
+.hintText {
+  margin: 0;
+  color: #2c333d;
+}
+.hintText p {
+  font-size: 0.9375em;
+  line-height: 173%;
+}
+.hintText p:not(:last-child) {
+  margin: 0 0 0.9em;
+}
+.hintText strong {
+  font-weight: 700;
+}
+@media screen and (max-width: 992px) {
+  .hintText p {
+    font-size: 0.875em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .hintText p:not(:last-child) {
+    margin: 0 0 1em;
+  }
+}
