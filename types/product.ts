@@ -1,16 +1,9 @@
+/**
+ * Характеристика товара в UI (таблица «Характеристики» на странице товара).
+ * Сами характеристики приходят с бэкенда в свободной форме — объектом `attrs_json`
+ * (см. ApiProduct в types/api.ts), а страницы товара разворачивают его в этот список.
+ */
 export interface ProductSpec {
   label: string;
   value: string;
-}
-
-export interface Product {
-  id: string;
-  title: string;
-  price: number;
-  image: string;
-  gallery: string[];
-  category: string;
-  description: string;
-  inStock: boolean;
-  specs: ProductSpec[];
 }

@@ -2,22 +2,32 @@
 
 import { useState } from "react";
 import { X } from "lucide-react";
-import { Product } from "@/types/product";
+import { phoneInputProps, sanitizePhone } from "@/lib/input";
 
 interface BuyOneClickButtonProps {
-  product: Product;
+  /** Достаточно заголовка — модалка больше ничего о товаре не показывает, поэтому
+   *  сюда одинаково подходит и Product, и CatalogListingProduct. */
+  product: { title: string };
   disabled?: boolean;
 }
 
 export default function BuyOneClickButton({ product, disabled }: BuyOneClickButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [phone, setPhone] = useState("");
 
   const closeModal = () => {
     setIsOpen(false);
     setSubmitted(false);
+    setPhone("");
   };
 
+  // Намеренно не вызываем createOrder (lib/store/api/ordersApi.ts) отсюда: в документации
+  // Postman нет отдельного эндпоинта "быстрый заказ в 1 клик", который принимал бы
+  // имя/email/телефон одного товара, а придумывать несуществующий API мы не должны.
+  // POST /orders/ тоже не подходит один в один — он создаёт сводку по subtotal/total
+  // без знания о заказчике "в 1 клик", так что тут заведомо остаётся локальная
+  // имитация "спасибо, менеджер свяжется с вами".
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted(true);
@@ -89,8 +99,10 @@ export default function BuyOneClickButton({ product, disabled }: BuyOneClickButt
                   className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <input
-                  type="tel"
+                  {...phoneInputProps}
                   required
+                  value={phone}
+                  onChange={(e) => setPhone(sanitizePhone(e.target.value))}
                   placeholder="Номер телефона"
                   className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
