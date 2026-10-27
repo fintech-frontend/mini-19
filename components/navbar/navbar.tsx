@@ -8,6 +8,7 @@ import { Search, Gift, User, BarChart3, Heart, ShoppingCart, Menu, X } from "luc
 import Logo1 from "@/src/svg/logo1.svg";
 import { styles } from "@/styles/index.styles";
 import { useShop } from "@/context/ShopContext";
+import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
 import { CatalogButton, DesktopCatalogMenu, MobileCatalogMenu } from "./CatalogMenu";
 import { MobileNavDrawer } from "./MobileNavDrawer";
 
@@ -81,7 +82,7 @@ function usePopupMenu() {
  * Поиск по каталогу.
  *
  * Отправляет пользователя на /search?q=..., где результаты грузит хук
- * useProductSearch (React Query → lib/api/products.ts → backend). Сам навбар в
+ * useProductSearch (RTK Query → lib/store/api → backend). Сам навбар в
  * сеть не ходит — он только хранит введённый текст и меняет URL.
  *
  * Запрос живёт в URL, поэтому строка восстанавливается при переходе по прямой
@@ -213,7 +214,7 @@ function SearchBar({ placeholder }: { placeholder: string }) {
 function CountBadge({ count }: { count: number }) {
   if (count === 0) return null;
   return (
-    <span className="absolute -right-2 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+    <span className="absolute -right-3 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs font-bold leading-none text-white ring-2 ring-white">
       {count > 9 ? "9+" : count}
     </span>
   );
@@ -229,11 +230,14 @@ function OrderCallButton() {
 
 export default function Header() {
   const { cartCount, favoritesCount, compareCount } = useShop();
+  const loggedIn = useIsLoggedIn();
+  const accountHref = loggedIn ? "/account" : "/my-account";
+  const accountLabel = loggedIn ? "Кабинет" : "Войти";
   const catalog = usePopupMenu();
   const mobileNav = usePopupMenu();
 
   return (
-    <header className="w-full font-sans">
+    <header className="sticky top-0 z-50 w-full bg-white font-sans">
       {/* ================= MOBILE (< md) ================= */}
       <div className="block border-b border-neutral-200 bg-white md:hidden">
         <div className="flex items-center justify-between gap-2 bg-neutral-900 px-3 py-2.5 text-white">
@@ -255,7 +259,7 @@ export default function Header() {
         <div className="flex items-center justify-between gap-2 px-3 py-3">
           <Logo />
           <div className="flex items-center gap-3 text-neutral-700">
-            <Link href="/my-account" aria-label="Войти">
+            <Link href={accountHref} aria-label={accountLabel}>
               <User size={20} />
             </Link>
             <Link href="/compare" aria-label="Сравнение" className="relative">
@@ -338,9 +342,9 @@ export default function Header() {
                 <Gift size={22} className="2xl:size-6" />
                 <span className="hidden lg:inline">Все акции</span>
               </Link>
-              <Link href="/my-account" aria-label="Войти" className="flex flex-col items-center gap-1 hover:text-blue-600 2xl:gap-1.5">
+              <Link href={accountHref} aria-label={accountLabel} className="flex flex-col items-center gap-1 hover:text-blue-600 2xl:gap-1.5">
                 <User size={22} className="2xl:size-6" />
-                <span className="hidden lg:inline">Войти</span>
+                <span className="hidden lg:inline">{accountLabel}</span>
               </Link>
               <Link href="/compare" aria-label="Сравнение" className="relative flex flex-col items-center gap-1 hover:text-blue-600 2xl:gap-1.5">
                 <BarChart3 size={22} className="2xl:size-6" />

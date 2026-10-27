@@ -1,46 +1,38 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
-import { styles } from "@/styles/index.styles";
+import { aboutStats as stats } from "@/data/home-data";
 
-const stats = [
-  { value: "17 000 м²", label: "Торговых площадей" },
-  { value: "30 000+", label: "Товаров в каталоге" },
-  { value: "3 500", label: "Заказов в месяц" },
-  { value: "15 лет", label: "На рынке" },
-];
-
+/** Блок «О магазине»: текст слева, фото справа — в пределах контейнера страницы. */
 export default function AboutStore() {
   return (
-    /* Секция выходит из контейнера страницы во всю ширину экрана: поле
-       calc(50% - 50vw) — это расстояние от края центрированного контейнера до края
-       вьюпорта при любой его ширине. Содержимое — в общем контейнере сайта
-       (styles.container), чтобы текст стоял на одной линии с навбаром. */
-    <section className="relative mx-[calc(50%-50vw)] bg-[#F2F5F9]">
-      <div className={`${styles.container} py-10 lg:py-14`}>
-        <div className="lg:w-1/2 lg:pr-10">
-          <h2 className="text-xl font-bold text-neutral-900 sm:text-2xl">О нашем магазине</h2>
+    <section className="py-8">
+      <div className="grid overflow-hidden rounded-2xl bg-[#F2F5F9] lg:grid-cols-2">
+        <div className="p-6 sm:p-10 lg:p-12">
+          <h2 className="text-xl font-bold text-neutral-900 sm:text-2xl">
+            Строительные материалы в интернет-магазине «Стройоптторг»
+          </h2>
 
           <p className="mt-4 text-sm leading-relaxed text-neutral-600">
-            «Стройоптторг» — крупный оптово-розничный магазин строительных материалов и
-            инструментов. Мы работаем с проверенными поставщиками и известными брендами, чтобы вы
-            могли найти всё необходимое для стройки и ремонта в одном месте, по честным ценам и с
-            быстрой доставкой.
+            Цель и главная задача компании — создать сервис, который не ограничится продажей
+            строительных и отделочных материалов, а будет решать задачи и трудности, с которыми
+            сталкиваются люди во время ремонта.
           </p>
 
           <div className="mt-7 grid grid-cols-2 gap-x-5 gap-y-5 sm:grid-cols-4">
             {stats.map((stat) => (
               <div key={stat.label}>
-                <p className="text-xl font-bold text-blue-600 sm:text-2xl">{stat.value}</p>
+                <p className="whitespace-nowrap text-lg font-bold text-blue-600 sm:text-xl">{stat.value}</p>
                 <p className="mt-1 text-[11px] leading-tight text-neutral-500">{stat.label}</p>
               </div>
             ))}
           </div>
 
           <p className="mt-7 text-[13px] leading-relaxed text-neutral-500">
-            Наши консультанты помогут подобрать материалы под ваш объект и рассчитать нужный объём,
-            а собственный склад и служба доставки избавят от лишнего ожидания. Работаем как с
-            частными покупателями, так и со строительными бригадами и подрядчиками.
+            Уже второе десятилетие мы готовы воплотить в реальность Вашу мечту о красивом,
+            комфортабельном доме, благоустроенном современном офисе, уютной теплой даче, помочь
+            реализовать любые строительные и дизайнерские фантазии с минимальными затратами времени
+            и денежных средств.
           </p>
 
           <Link
@@ -52,14 +44,13 @@ export default function AboutStore() {
           </Link>
         </div>
 
-        {/* На десктопе фото прижато к правому краю экрана и занимает всю высоту
-            секции; ширина ограничена, чтобы кадр не растягивался на широких экранах. */}
-        <div className="relative mt-8 aspect-1047/566 w-full overflow-hidden rounded-xl bg-[#F2F5F9] lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:aspect-auto lg:w-[min(50vw,56rem)] lg:rounded-none">
+        {/* На десктопе фото занимает всю высоту правой колонки, на мобильном — пропорции 1047×566. */}
+        <div className="relative aspect-[1047/566] w-full lg:aspect-auto">
           <Image
-            src="/rasm.png"
+            src="/images/about.png"
             alt="Строительные инструменты в магазине «Стройоптторг»"
             fill
-            sizes="(max-width: 1024px) 100vw, min(50vw, 896px)"
+            sizes="(max-width: 1024px) 100vw, 640px"
             className="object-cover object-center"
           />
         </div>

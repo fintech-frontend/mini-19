@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "@/app/about/about.module.css";
+import styles from "@/app/(site)/about/about.module.css";
 import { AboutSlider } from "@/components/about/AboutSlider";
 import type { CompanyCertificate } from "@/types/company";
 

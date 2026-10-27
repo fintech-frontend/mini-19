@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ApiCategory } from "@/types/api";
 import { ResolvedProduct } from "@/lib/resolveProduct";
-import { collectDescendantCategoryIds } from "@/lib/api/categoryTree";
+import { collectDescendantCategoryIds } from "@/lib/catalog/categoryTree";
 
 interface CategoryFilterProps {
   products: ResolvedProduct[];

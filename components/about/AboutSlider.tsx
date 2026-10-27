@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import styles from "@/app/about/about.module.css";
+import styles from "@/app/(site)/about/about.module.css";
 
 /**
  * Слайдер страницы «О компании».

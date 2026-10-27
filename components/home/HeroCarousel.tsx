@@ -3,46 +3,14 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, HardHat, PercentCircle, Leaf } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { heroSlides as slides } from "@/data/home-data";
 
-interface HeroSlide {
-  title: string;
-  subtitle: string;
-  ctaLabel: string;
-  ctaHref: string;
-  gradient: string;
-  /** Фоновое фото слайда из /public. Без него рисуется иконка-заглушка. */
-  image?: string;
-  icon: React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>;
-}
-
-const slides: HeroSlide[] = [
-  {
-    title: "Электроинструмент для любых нужд",
-    subtitle: "Профессиональные и бытовые инструменты ведущих брендов по доступным ценам",
-    ctaLabel: "Смотреть каталог",
-    ctaHref: "/products?category=elektroinstrument",
-    gradient: "from-blue-950 via-blue-800 to-blue-600",
-    image: "/rasm.png",
-    icon: HardHat,
-  },
-  {
-    title: "Стройматериалы со скидкой до 20%",
-    subtitle: "Сухие смеси, крепёж и отделочные материалы для вашего ремонта",
-    ctaLabel: "Все акции",
-    ctaHref: "/stocks",
-    gradient: "from-emerald-950 via-emerald-800 to-emerald-600",
-    icon: PercentCircle,
-  },
-  {
-    title: "Сезонные товары для дома и сада",
-    subtitle: "Всё для дачи, сада и уличных работ в одном каталоге",
-    ctaLabel: "Смотреть подборку",
-    ctaHref: "/products?category=dom-i-sad",
-    gradient: "from-amber-950 via-amber-700 to-amber-500",
-    icon: Leaf,
-  },
-];
+const FOCUS_CLASS = {
+  left: "object-left",
+  center: "object-center",
+  right: "object-right",
+} as const;
 
 export default function HeroCarousel() {
   const [index, setIndex] = useState(0);
@@ -59,7 +27,7 @@ export default function HeroCarousel() {
 
   return (
     <section
-      className="relative overflow-hidden rounded-2xl shadow-lg"
+      className="relative overflow-hidden rounded-2xl"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -67,70 +35,47 @@ export default function HeroCarousel() {
         className="flex transition-transform duration-700 ease-[cubic-bezier(0.65,0,0.35,1)]"
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
-        {slides.map((slide, i) => {
-          const Icon = slide.icon;
-          return (
+        {slides.map((slide, i) => (
+          // Пропорции баннера эталона — 1620×506; на телефоне выше, чтобы влез текст.
+          <div
+            key={slide.title}
+            className="relative flex min-h-72 w-full shrink-0 items-center bg-[#F2F5F9] px-6 py-10 sm:aspect-[1620/506] sm:min-h-0 sm:px-16"
+          >
+            <Image
+              src={slide.image}
+              alt=""
+              fill
+              priority={i === 0}
+              sizes="(max-width: 1280px) 100vw, 1280px"
+              className={`pointer-events-none object-cover ${FOCUS_CLASS[slide.focus]}`}
+            />
+            {/* Светлая подложка слева, чтобы тёмный текст читался поверх фото. */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/95 via-white/70 to-transparent sm:via-white/40" />
+
             <div
-              key={slide.title}
-              className={`relative flex min-h-70 w-full shrink-0 items-center overflow-hidden bg-linear-to-br px-14 py-12 sm:min-h-95 sm:px-20 ${slide.gradient}`}
+              className={`relative z-10 max-w-md transition-all duration-700 ease-out ${
+                i === index ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
+              }`}
             >
-              {slide.image ? (
-                <Image
-                  src={slide.image}
-                  alt=""
-                  fill
-                  priority={i === 0}
-                  sizes="(max-width: 1280px) 100vw, 1280px"
-                  className="pointer-events-none object-cover"
-                />
-              ) : (
-                <>
-                  {/* soft spotlight to fake photographic lighting */}
-                  <div className="pointer-events-none absolute right-[8%] top-1/2 h-[140%] w-[55%] -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
-
-                  {/* subject silhouette, standing in for a hero photo */}
-                  <div className="pointer-events-none absolute -right-6 bottom-0 flex h-[85%] items-end sm:right-8 sm:h-[95%]">
-                    <Icon
-                      size={220}
-                      strokeWidth={1}
-                      className="h-full w-auto text-white/20 drop-shadow-2xl sm:size-64"
-                      aria-hidden
-                    />
-                  </div>
-                </>
-              )}
-
-              {/* затемнение, чтобы текст читался поверх фото */}
-              <div
-                className={`pointer-events-none absolute inset-0 bg-gradient-to-r ${
-                  slide.image ? "from-black/80 via-black/45 to-black/10" : "from-black/50 via-black/10 to-transparent"
-                }`}
-              />
-
-              <div
-                className={`relative z-10 max-w-lg text-white transition-all duration-700 ease-out ${
-                  i === index ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
-                }`}
+              <h2 className="text-2xl font-bold leading-tight text-neutral-900 sm:text-4xl">{slide.title}</h2>
+              <p className="mt-3 text-sm text-neutral-600 sm:text-base">{slide.subtitle}</p>
+              <Link
+                href={slide.ctaHref}
+                className="mt-6 inline-flex items-center gap-2 rounded-md bg-[#132a44] px-6 py-3 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#1c3b5e]"
               >
-                <h1 className="text-2xl font-bold drop-shadow-md sm:text-4xl">{slide.title}</h1>
-                <p className="mt-3 text-sm text-white/90 drop-shadow sm:text-base">{slide.subtitle}</p>
-                <Link
-                  href={slide.ctaHref}
-                  className="mt-6 inline-flex items-center rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-colors hover:bg-blue-500"
-                >
-                  {slide.ctaLabel}
-                </Link>
-              </div>
+                {slide.ctaLabel}
+                <ChevronRight size={14} strokeWidth={2.5} />
+              </Link>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
 
       <button
         type="button"
         aria-label="Предыдущий слайд"
         onClick={prev}
-        className="absolute left-3 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-gray-800 backdrop-blur transition-colors hover:bg-white sm:left-5"
+        className="absolute left-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-gray-800 shadow-md transition-colors hover:bg-gray-50 sm:flex"
       >
         <ChevronLeft size={20} />
       </button>
@@ -138,7 +83,7 @@ export default function HeroCarousel() {
         type="button"
         aria-label="Следующий слайд"
         onClick={next}
-        className="absolute right-3 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-gray-800 backdrop-blur transition-colors hover:bg-white sm:right-5"
+        className="absolute right-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-gray-800 shadow-md transition-colors hover:bg-gray-50 sm:flex"
       >
         <ChevronRight size={20} />
       </button>
@@ -151,7 +96,7 @@ export default function HeroCarousel() {
             aria-label={`Слайд ${i + 1}`}
             onClick={() => setIndex(i)}
             className={`h-2 rounded-full transition-all duration-300 ${
-              i === index ? "w-6 bg-white" : "w-2 bg-white/50 hover:bg-white/75"
+              i === index ? "w-6 bg-[#132a44]" : "w-2 bg-[#132a44]/30 hover:bg-[#132a44]/50"
             }`}
           />
         ))}

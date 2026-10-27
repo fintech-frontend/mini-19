@@ -2,6 +2,7 @@
 
 import { ChangeEvent } from "react";
 import { FormField } from "@/components/auth/FormField";
+import { phoneInputProps, sanitizePhone } from "@/lib/input";
 import { OrderCustomer } from "@/types/order";
 
 interface CustomerInfoFormProps {
@@ -64,10 +65,10 @@ export function CustomerInfoForm({
         <FormField
           label="Номер телефона"
           required
-          type="tel"
-          placeholder="+7 (___) ___-__-__"
+          {...phoneInputProps}
+          placeholder="+7XXXXXXXXXX"
           value={fields.phone}
-          onChange={handle("phone")}
+          onChange={(e) => onChange("phone", sanitizePhone(e.target.value))}
           error={submitted && !fields.phone}
         />
       </div>

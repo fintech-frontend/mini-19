@@ -1,4 +1,4 @@
-import styles from "@/app/about/about.module.css";
+import styles from "@/app/(site)/about/about.module.css";
 import { CertificatesSlider } from "@/components/about/CertificatesSlider";
 import { NewsSlider } from "@/components/about/NewsSlider";
 import { ReviewsSlider } from "@/components/about/ReviewsSlider";

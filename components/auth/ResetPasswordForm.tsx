@@ -7,14 +7,11 @@ import { useRouter } from "next/navigation";
 import { FormField } from "./FormField";
 import { PasswordField } from "./PasswordField";
 import {
-  sendForgetPasswordOtp,
-  verifyForgetPasswordOtp,
-  setNewPassword,
-  extractAccessToken,
-  extractRefreshToken,
-} from "@/lib/api/auth";
-import { setAccessToken, setRefreshToken } from "@/lib/api/token";
-import { ApiError } from "@/lib/api/errors";
+  useSendForgetPasswordOtpMutation,
+  useSetNewPasswordMutation,
+  useVerifyForgetPasswordOtpMutation,
+} from "@/lib/store/api";
+import { getErrorMessage } from "@/lib/store/api";
 
 type Step = "email" | "code" | "password" | "done";
 
@@ -26,9 +23,13 @@ export function ResetPasswordForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+
+  const [sendForgetPasswordOtp, { isLoading: sending }] = useSendForgetPasswordOtpMutation();
+  const [verifyForgetPasswordOtp, { isLoading: verifying }] = useVerifyForgetPasswordOtpMutation();
+  const [setNewPassword, { isLoading: saving }] = useSetNewPasswordMutation();
+  const loading = sending || verifying || saving;
 
   const mismatch = Boolean(newPassword) && newPassword !== confirmPassword;
 
@@ -39,15 +40,12 @@ export function ResetPasswordForm() {
     setError(null);
     if (!email) return;
 
-    setLoading(true);
     try {
-      await sendForgetPasswordOtp(email);
+      await sendForgetPasswordOtp({ email }).unwrap();
       setSubmitted(false);
       setStep("code");
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Не удалось подключиться к серверу.");
-    } finally {
-      setLoading(false);
+      setError(getErrorMessage(err, "Не удалось подключиться к серверу."));
     }
   }
 
@@ -58,15 +56,12 @@ export function ResetPasswordForm() {
     setError(null);
     if (!code) return;
 
-    setLoading(true);
     try {
-      await verifyForgetPasswordOtp(email, code);
+      await verifyForgetPasswordOtp({ email, code }).unwrap();
       setSubmitted(false);
       setStep("password");
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Не удалось подключиться к серверу.");
-    } finally {
-      setLoading(false);
+      setError(getErrorMessage(err, "Не удалось подключиться к серверу."));
     }
   }
 
@@ -77,22 +72,21 @@ export function ResetPasswordForm() {
     setError(null);
     if (!newPassword || mismatch) return;
 
-    setLoading(true);
     try {
-      const response = await setNewPassword(email, newPassword, confirmPassword);
-      const accessToken = extractAccessToken(response);
+      // Если сервер сразу выдал токены, эндпоинт их уже сохранил (lib/store/api/authApi.ts).
+      const { accessToken } = await setNewPassword({
+        email,
+        new_password: newPassword,
+        new_password_again: confirmPassword,
+      }).unwrap();
       if (accessToken) {
-        setAccessToken(accessToken);
-        setRefreshToken(extractRefreshToken(response));
         router.push("/account");
         return;
       }
       setSubmitted(false);
       setStep("done");
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Не удалось подключиться к серверу.");
-    } finally {
-      setLoading(false);
+      setError(getErrorMessage(err, "Не удалось подключиться к серверу."));
     }
   }
 

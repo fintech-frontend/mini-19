@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AccountTab } from "@/types/account";
-import { useQuery } from "@tanstack/react-query";
 import { currentUser, deliveryAddress } from "@/data/account-data";
-import { listUserOrders, toAccountOrder } from "@/lib/api/orders";
+import { skipToken } from "@reduxjs/toolkit/query";
+import { useGetUserOrdersQuery } from "@/lib/store/api";
 import { AccountSidebar } from "@/components/account/AccountSidebar";
 import { OverviewPanel } from "@/components/account/OverviewPanel";
 import { OrdersPanel } from "@/components/account/OrdersPanel";
@@ -13,7 +13,7 @@ import { ProfileForm } from "@/components/account/ProfileForm";
 import { AddressPanel } from "@/components/account/AddressPanel";
 import { ChangePasswordForm } from "@/components/account/ChangePasswordForm";
 import { FavoritesPanel } from "@/components/account/FavoritesPanel";
-import { clearAuthTokens, getCurrentUserId, isAuthenticated } from "@/lib/api/token";
+import { clearAuthTokens, getCurrentUserId, isAuthenticated } from "@/lib/store/api";
 
 export function AccountDashboard() {
   const [tab, setTab] = useState<AccountTab>("overview");
@@ -25,16 +25,11 @@ export function AccountDashboard() {
   useEffect(() => {
     void Promise.resolve().then(() => setUserId(getCurrentUserId()));
   }, []);
-  const ordersQuery = useQuery({
-    queryKey: ["orders", userId],
-    queryFn: () => listUserOrders(userId as number),
-    enabled: userId != null,
-    select: (data) => data.map(toAccountOrder),
-  });
+  const ordersQuery = useGetUserOrdersQuery(userId ?? skipToken);
   const orders = ordersQuery.data ?? [];
   const ordersEmptyText = ordersQuery.isError
     ? "Не удалось загрузить заказы. Попробуйте обновить страницу."
-    : ordersQuery.isPending && userId != null
+    : ordersQuery.isLoading
       ? "Загрузка заказов..."
       : undefined;
 

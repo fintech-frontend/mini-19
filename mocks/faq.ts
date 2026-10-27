@@ -5,7 +5,7 @@ import type { ReferencePromoCard, ReferenceSubscribeConfig } from "@/types/refer
  * Временные данные страницы «Вопрос-ответ».
  *
  * Лежат отдельно от UI: компоненты в components/faq/* получают их только через
- * API layer (lib/api/faq.ts) и не знают, что источник временный. Когда появится
+ * API layer (lib/store/api/contentApi.ts) и не знают, что источник временный. Когда появится
  * реальный эндпоинт, этот файл можно будет удалить, не трогая разметку.
  *
  * Тексты сняты со страницы https://www.stroiopttorg.ru/vopros-otvet/ дословно,

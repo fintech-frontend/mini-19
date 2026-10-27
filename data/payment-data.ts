@@ -3,7 +3,7 @@ import type { PaymentBlock, PaymentPromoCard, PaymentSubscribeConfig } from "@/t
 /**
  * Контент страницы «Способы оплаты». Держим его здесь, а не в разметке, чтобы
  * компоненты в components/payment/* работали только с данными: когда появятся
- * реальные эндпоинты, lib/api/payment.ts начнёт отдавать те же типы с сервера,
+ * реальные эндпоинты, lib/store/api/contentApi.ts начнёт отдавать те же типы с сервера,
  * а UI останется прежним (тот же приём в data/about-data.ts и data/contacts-data.ts).
  *
  * Тексты сняты со страницы https://www.stroiopttorg.ru/oplata/ дословно, включая

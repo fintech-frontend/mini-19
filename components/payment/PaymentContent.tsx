@@ -1,4 +1,4 @@
-import styles from "@/app/oplata/oplata.module.css";
+import styles from "@/app/(site)/oplata/oplata.module.css";
 import type { PaymentBlock } from "@/types/payment";
 
 /**

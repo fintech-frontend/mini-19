@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ProductCard from "@/components/ui/ProductCard";
+import HorizontalScroller from "@/components/ui/HorizontalScroller";
 import { ResolvedProduct } from "@/lib/resolveProduct";
 
 interface TabbedProductShelfProps {
@@ -70,7 +71,7 @@ export default function TabbedProductShelf({
                 : "border-gray-200 text-gray-500 hover:border-blue-200 hover:text-blue-600"
             }`}
           >
-            Все
+            Все товары
           </button>
           {categoryTabs.map((category) => (
             <button
@@ -89,13 +90,13 @@ export default function TabbedProductShelf({
         </div>
       )}
 
-      <div className="flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <HorizontalScroller className="gap-4 pb-2">
         {visibleProducts.map((product) => (
           <div key={product.id} className="w-[200px] shrink-0 sm:w-[240px]">
             <ProductCard product={product} />
           </div>
         ))}
-      </div>
+      </HorizontalScroller>
     </section>
   );
 }

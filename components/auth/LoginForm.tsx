@@ -5,9 +5,8 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormField } from "./FormField";
 import { PasswordField } from "./PasswordField";
-import { login, extractAccessToken, extractRefreshToken } from "@/lib/api/auth";
-import { setAccessToken, setRefreshToken } from "@/lib/api/token";
-import { ApiError } from "@/lib/api/errors";
+import { useLoginMutation } from "@/lib/store/api";
+import { getErrorMessage } from "@/lib/store/api";
 
 /** Показывает уведомление после успешной регистрации (?notice=registered в URL). */
 function RegisteredNotice() {
@@ -21,13 +20,13 @@ function RegisteredNotice() {
   );
 }
 
-export function LoginForm() {
+export function LoginForm({ redirectTo = "/account" }: { redirectTo?: string }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const [login, { isLoading: loading }] = useLoginMutation();
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -39,21 +38,16 @@ export function LoginForm() {
       return;
     }
 
-    setLoading(true);
     try {
-      const response = await login(email, password);
-      const accessToken = extractAccessToken(response);
+      // Токены сохраняет сам эндпоинт login (lib/store/api/authApi.ts).
+      const { accessToken } = await login({ email, password }).unwrap();
       if (!accessToken) {
         setError("Kirish muvaffaqiyatsiz: token topilmadi");
         return;
       }
-      setAccessToken(accessToken);
-      setRefreshToken(extractRefreshToken(response));
-      router.push("/account");
+      router.push(redirectTo);
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Не удалось подключиться к серверу.");
-    } finally {
-      setLoading(false);
+      setError(getErrorMessage(err, "Не удалось подключиться к серверу."));
     }
   }
 

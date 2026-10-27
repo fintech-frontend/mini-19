@@ -7,7 +7,7 @@ import type { ReferencePromoCard, ReferenceSubscribeConfig } from "@/types/refer
  * реального backend хранится отдельно в types/api.ts — так же, как это уже сделано
  * для каталога, страницы «О компании» (types/company.ts) и «Контакты»
  * (types/contacts.ts). Когда появится документация по эндпоинтам, маппинг
- * "ответ backend → тип отсюда" пишется один раз в lib/api/payment.ts, а разметку
+ * "ответ backend → тип отсюда" пишется один раз в lib/store/api/contentApi.ts, а разметку
  * трогать не придётся.
  */
 

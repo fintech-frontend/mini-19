@@ -4,12 +4,12 @@ import { FormEvent, useState } from "react";
 import { FormField } from "@/components/auth/FormField";
 import { UserProfile } from "@/types/account";
 import {
-  openChangeEmailWindow,
-  requestChangeEmail,
-  verifyChangeEmail,
-  resendChangeEmailOtp,
-} from "@/lib/api/auth";
-import { ApiError } from "@/lib/api/errors";
+  useOpenChangeEmailWindowMutation,
+  useRequestChangeEmailMutation,
+  useResendChangeEmailOtpMutation,
+  useVerifyChangeEmailMutation,
+} from "@/lib/store/api";
+import { getErrorMessage } from "@/lib/store/api";
 
 type EmailStep = "idle" | "opening" | "enterEmail" | "verify";
 
@@ -18,25 +18,26 @@ export function ProfileForm({ user }: { user: UserProfile }) {
   const [emailStep, setEmailStep] = useState<EmailStep>("idle");
   const [newEmail, setNewEmail] = useState("");
   const [otpCode, setOtpCode] = useState("");
-  const [emailLoading, setEmailLoading] = useState(false);
   const [emailError, setEmailError] = useState<string | null>(null);
   const [emailSuccess, setEmailSuccess] = useState<string | null>(null);
-  const [resending, setResending] = useState(false);
+
+  const [openChangeEmailWindow, { isLoading: opening }] = useOpenChangeEmailWindowMutation();
+  const [requestChangeEmail, { isLoading: requesting }] = useRequestChangeEmailMutation();
+  const [verifyChangeEmail, { isLoading: verifying }] = useVerifyChangeEmailMutation();
+  const [resendChangeEmailOtp, { isLoading: resending }] = useResendChangeEmailOtpMutation();
+  const emailLoading = opening || requesting || verifying;
 
   async function handleStartChange() {
     setEmailError(null);
     setEmailSuccess(null);
     setEmailStep("opening");
-    setEmailLoading(true);
     try {
-      await openChangeEmailWindow();
+      await openChangeEmailWindow().unwrap();
       setNewEmail("");
       setEmailStep("enterEmail");
     } catch (err) {
-      setEmailError(err instanceof ApiError ? err.message : "Не удалось открыть окно смены email.");
+      setEmailError(getErrorMessage(err, "Не удалось открыть окно смены email."));
       setEmailStep("idle");
-    } finally {
-      setEmailLoading(false);
     }
   }
 
@@ -56,15 +57,12 @@ export function ProfileForm({ user }: { user: UserProfile }) {
       return;
     }
 
-    setEmailLoading(true);
     try {
-      await requestChangeEmail(newEmail);
+      await requestChangeEmail({ email: newEmail }).unwrap();
       setOtpCode("");
       setEmailStep("verify");
     } catch (err) {
-      setEmailError(err instanceof ApiError ? err.message : "Не удалось отправить запрос на смену email.");
-    } finally {
-      setEmailLoading(false);
+      setEmailError(getErrorMessage(err, "Не удалось отправить запрос на смену email."));
     }
   }
 
@@ -77,30 +75,24 @@ export function ProfileForm({ user }: { user: UserProfile }) {
       return;
     }
 
-    setEmailLoading(true);
     try {
-      await verifyChangeEmail(otpCode);
+      await verifyChangeEmail({ code: otpCode }).unwrap();
       setEmail(newEmail);
       setEmailSuccess("Email успешно изменён");
       setEmailStep("idle");
     } catch (err) {
-      setEmailError(err instanceof ApiError ? err.message : "Не удалось подтвердить код.");
-    } finally {
-      setEmailLoading(false);
+      setEmailError(getErrorMessage(err, "Не удалось подтвердить код."));
     }
   }
 
   async function handleResendOtp() {
     if (resending) return;
     setEmailError(null);
-    setResending(true);
     try {
-      await resendChangeEmailOtp();
+      await resendChangeEmailOtp().unwrap();
       setEmailSuccess("Код отправлен повторно");
     } catch (err) {
-      setEmailError(err instanceof ApiError ? err.message : "Не удалось отправить код повторно.");
-    } finally {
-      setResending(false);
+      setEmailError(getErrorMessage(err, "Не удалось отправить код повторно."));
     }
   }
 

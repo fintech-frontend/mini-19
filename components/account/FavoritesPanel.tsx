@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import ProductCard from "@/components/ui/ProductCard";
 import { useShop } from "@/context/ShopContext";
-import { resolveProductsByIds, type ResolvedProduct } from "@/lib/resolveProduct";
+import { useProductsByIds } from "@/hooks/useProductsByIds";
 
 /**
  * Раньше читал захардкоженный `favoriteProductIds` из data/account-data.ts и
@@ -15,33 +15,11 @@ export function FavoritesPanel() {
   const { favoriteIds } = useShop();
   const idsKey = useMemo(() => favoriteIds.slice().sort().join(","), [favoriteIds]);
 
-  const [result, setResult] = useState<{ key: string; products: ResolvedProduct[] } | null>(null);
-  const [fetchError, setFetchError] = useState<{ key: string; message: string } | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    const ids = idsKey ? idsKey.split(",") : [];
-
-    resolveProductsByIds(ids)
-      .then((resolved) => {
-        if (cancelled) return;
-        setResult({ key: idsKey, products: resolved });
-        setFetchError(null);
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setFetchError({ key: idsKey, message: "Не удалось загрузить избранные товары. Попробуйте обновить страницу." });
-        }
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [idsKey]);
-
-  const products = result?.key === idsKey ? result.products : [];
-  const error = fetchError?.key === idsKey ? fetchError.message : null;
-  const loading = !error && result?.key !== idsKey;
+  const productIds = useMemo(() => (idsKey ? idsKey.split(",") : []), [idsKey]);
+  const { products, isLoading: loading, errorMessage: error } = useProductsByIds(
+    productIds,
+    "Не удалось загрузить избранные товары. Попробуйте обновить страницу."
+  );
 
   return (
     <div>

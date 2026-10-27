@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ImageOff } from "lucide-react";
-import { CategoryTreeNode } from "@/lib/api/categoryTree";
-import styles from "@/app/catalog/catalog.module.css";
+import { CategoryTreeNode } from "@/lib/catalog/categoryTree";
+import styles from "@/app/(site)/catalog/catalog.module.css";
 
 /**
  * Сетка дочерних категорий (работает на любой глубине — компонент не знает, на каком

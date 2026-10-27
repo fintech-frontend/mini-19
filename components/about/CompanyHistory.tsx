@@ -1,4 +1,4 @@
-import styles from "@/app/about/about.module.css";
+import styles from "@/app/(site)/about/about.module.css";
 import type { CompanyHistoryEntry, CompanyToday } from "@/types/company";
 
 interface CompanyHistoryProps {

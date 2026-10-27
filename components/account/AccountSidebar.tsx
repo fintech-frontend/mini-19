@@ -2,13 +2,13 @@
 
 import { User, UserPen, ClipboardList, MapPin, Heart, ShieldCheck, LogOut, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useShop } from "@/context/ShopContext";
 import { AccountTab } from "@/types/account";
 
 interface SidebarItem {
   tab: AccountTab;
   label: string;
   icon: LucideIcon;
-  badge?: number;
 }
 
 const items: SidebarItem[] = [
@@ -16,7 +16,7 @@ const items: SidebarItem[] = [
   { tab: "profile", label: "Изменить профиль", icon: UserPen },
   { tab: "orders", label: "Мои заказы", icon: ClipboardList },
   { tab: "address", label: "Адрес доставки", icon: MapPin },
-  { tab: "favorites", label: "Избранные товары", icon: Heart, badge: 3 },
+  { tab: "favorites", label: "Избранные товары", icon: Heart },
   { tab: "password", label: "Сменить пароль", icon: ShieldCheck },
 ];
 
@@ -28,10 +28,12 @@ interface AccountSidebarProps {
 
 // Left-hand navigation for /account. "Выйти из аккаунта" is an action (redirects to /my-account), not a tab.
 export function AccountSidebar({ active, onSelect, onLogout }: AccountSidebarProps) {
+  const { favoritesCount } = useShop();
   return (
     <nav className="flex flex-col gap-1 rounded-2xl border border-neutral-200 bg-white p-2">
-      {items.map(({ tab, label, icon: Icon, badge }) => {
+      {items.map(({ tab, label, icon: Icon }) => {
         const isActive = tab === active;
+        const badge = tab === "favorites" ? favoritesCount : 0;
         return (
           <button
             key={tab}
@@ -44,7 +46,7 @@ export function AccountSidebar({ active, onSelect, onLogout }: AccountSidebarPro
           >
             <Icon size={18} className={isActive ? "text-white" : "text-neutral-400"} />
             <span className="flex-1">{label}</span>
-            {badge && (
+            {badge > 0 && (
               <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white">
                 {badge}
               </span>

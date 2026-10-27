@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ImageOff } from "lucide-react";
-import { CategoryTreeNode } from "@/lib/api/categoryTree";
+import { CategoryTreeNode } from "@/lib/catalog/categoryTree";
 
 /**
  * "Другие разделы категории «X»" — показывается под товарами/сеткой подкатегорий
