@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import Link from "next/link";
-import { FolderTree, Package, Receipt, ShoppingCart, Users, Wallet } from "lucide-react";
+import { FolderTree, Package, Receipt, ShoppingCart, Users, Wallet, XCircle } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { ErrorState, Kpi, LoadingRows, PageHeader, StatusBadge } from "@/components/admin/ui";
 import { fmtDate, money, orderStatus, shortMoney, toNumber } from "@/lib/admin/format";
@@ -47,6 +47,7 @@ export default function DashboardPage() {
     return {
       revenue,
       count: list.length,
+      cancelled: list.filter((o) => o.status.toLowerCase() === "cancelled").length,
       avg: valid.length ? revenue / valid.length : 0,
       customers: new Set(list.map((o) => o.user).filter((u) => u != null)).size,
       sales: [...byDay].map(([day, value]) => ({ day: day.slice(8, 10) + "." + day.slice(5, 7), value })),
@@ -80,9 +81,10 @@ export default function DashboardPage() {
   return (
     <>
       <PageHeader title="Dashboard" sub="Do'kon backendidan jonli ma'lumotlar" />
-      <div className="grid g-6" style={{ marginBottom: 16 }}>
+      <div className="grid g-7" style={{ marginBottom: 16 }}>
         <Kpi label="Umumiy tushum" value={loading ? "…" : shortMoney(stats.revenue)} icon={<Wallet size={18} />} />
         <Kpi label="Buyurtmalar" value={loading ? "…" : String(stats.count)} icon={<ShoppingCart size={18} />} />
+        <Kpi label="Bekor qilingan buyurtmalar" value={loading ? "…" : String(stats.cancelled)} icon={<XCircle size={18} />} tint="red" />
         <Kpi label="O'rtacha chek" value={loading ? "…" : shortMoney(stats.avg)} icon={<Receipt size={18} />} tint="green" />
         <Kpi label="Mahsulotlar" value={loading ? "…" : String(products.data?.length ?? 0)} icon={<Package size={18} />} />
         <Kpi label="Kategoriyalar" value={loading ? "…" : String(categories.data?.length ?? 0)} icon={<FolderTree size={18} />} />

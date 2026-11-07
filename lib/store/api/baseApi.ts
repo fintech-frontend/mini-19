@@ -83,5 +83,11 @@ export const baseApi = createApi({
   tagTypes: ["Product", "Category", "Brand", "Cart", "CartItem", "Order"],
   // Каталог небольшой и меняется редко — держим данные 5 минут.
   keepUnusedDataFor: 5 * 60,
+  // Админка и сайт — разные вкладки/браузеры с отдельными кэшами: удалённый в админке
+  // товар не должен жить на сайте до перезагрузки. Показываем кэш сразу, но если ему
+  // больше 30 с — перечитываем при монтировании, при возврате на вкладку и при reconnect.
+  refetchOnMountOrArgChange: 30,
+  refetchOnFocus: true,
+  refetchOnReconnect: true,
   endpoints: () => ({}),
 });

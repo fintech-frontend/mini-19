@@ -93,6 +93,7 @@ export const DICT: Record<string, Entry> = {
   "Yo'lda": E('В пути', 'Shipped'),
   'Yetkazilgan': E('Доставлен', 'Delivered'),
   'Bekor qilingan': E('Отменён', 'Cancelled'),
+  'Bekor qilingan buyurtmalar': E('Отменённые заказы', 'Cancelled orders'),
   'Qaytarilgan': E('Возвращён', 'Returned'),
   "To'langan": E('Оплачен', 'Paid'),
   'Yakunlangan': E('Завершён', 'Completed'),
